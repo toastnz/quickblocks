@@ -5,7 +5,7 @@
  *
  * @property string Testimonial
  */
-class TestimonialBlock extends ContentBlock
+class TestimonialBlock extends QuickBlock
 {
     private static $singular_name = 'Testimonial';
     private static $plural_name = 'Testimonials';

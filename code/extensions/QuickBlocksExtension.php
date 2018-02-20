@@ -8,7 +8,7 @@
 class QuickBlocksExtension extends DataExtension
 {
     private static $has_many = [
-        'ContentBlocks' => 'ContentBlock'
+        'ContentBlocks' => 'QuickBlock'
     ];
 
     public function updateCMSFields(FieldList $fields)
@@ -48,7 +48,7 @@ class QuickBlocksExtension extends DataExtension
     public function onAfterPublish()
     {
         // Loop through content blocks and publish
-        /** @var ContentBlock $contentBlock */
+        /** @var QuickBlock $contentBlock */
         foreach ($this->owner->ContentBlocks() as $contentBlock) {
             if ($contentBlock->canPublish()) {
                 $contentBlock->publish('Stage', 'Live');
@@ -65,7 +65,7 @@ class QuickBlocksExtension extends DataExtension
 class QuickBlocksControllerExtension extends Extension
 {
     private static $allowed_actions = [
-        'contentblock',
+        'QuickBlock',
         'statistic',
     ];
 
@@ -80,8 +80,8 @@ class QuickBlocksControllerExtension extends Extension
 
             $id = $this->owner->getRequest()->param('ID');
 
-            /** @var ContentBlock $contentBlock */
-            $contentBlock = ContentBlock::get()->byID($id);
+            /** @var QuickBlock $contentBlock */
+            $contentBlock = QuickBlock::get()->byID($id);
 
             if ($contentBlock && $contentBlock->exists()) {
                 return $contentBlock->forTemplate();

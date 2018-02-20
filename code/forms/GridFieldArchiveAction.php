@@ -54,7 +54,7 @@ class GridFieldArchiveAction implements GridField_ColumnProvider, GridField_Acti
     public function handleAction(GridField $gridField, $actionName, $arguments, $data)
     {
         if ($actionName == 'archive') {
-            /** @var ContentBlock|SiteTree $item */
+            /** @var QuickBlock|SiteTree $item */
             $item = $gridField->getList()->byID($arguments['RecordID']);
             if (!$item) {
                 return;

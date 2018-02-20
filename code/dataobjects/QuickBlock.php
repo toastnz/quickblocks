@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Class ContentBlock
+ * Class QuickBlock
  *
  * @property int    SortOrder
  * @property string Title
  *
  * @method Page Parent()
  */
-class ContentBlock extends DataObject
+class QuickBlock extends DataObject
 {
     private static $singular_name = 'Block';
     private static $plural_name = 'Blocks';
@@ -51,7 +51,7 @@ class ContentBlock extends DataObject
 
     function forTemplate()
     {
-        return $this->renderWith([$this->ClassName, 'ContentBlock']);
+        return $this->renderWith([$this->ClassName, 'QuickBlock']);
     }
 
     public function Link($action = '')
@@ -88,7 +88,7 @@ class ContentBlock extends DataObject
         parent::onBeforeWrite();
 
         if (!$this->SortOrder) {
-            $max = (int)ContentBlock::get()->filter(['ParentID' => $this->ParentID])->max('SortOrder');
+            $max = (int)QuickBlock::get()->filter(['ParentID' => $this->ParentID])->max('SortOrder');
             $this->setField('SortOrder', $max + 1);
         }
     }
@@ -100,7 +100,7 @@ class ContentBlock extends DataObject
      */
     public function getApiURL()
     {
-        return Controller::join_links(Controller::curr()->AbsoluteLink(), 'contentblock', $this->ID);
+        return Controller::join_links(Controller::curr()->AbsoluteLink(), 'QuickBlock', $this->ID);
     }
 
     /* ==========================================

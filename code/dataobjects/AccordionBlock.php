@@ -5,7 +5,7 @@
  *
  * @method HasManyList|AccordionItem[] AccordionItems()
  */
-class AccordionBlock extends ContentBlock
+class AccordionBlock extends QuickBlock
 {
     private static $singular_name = 'Accordion';
     private static $plural_name = 'Accordions';

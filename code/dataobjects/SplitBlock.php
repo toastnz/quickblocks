@@ -8,7 +8,7 @@
  * @property string LeftHeading
  * @property string RightHeading
  */
-class SplitBlock extends ContentBlock
+class SplitBlock extends QuickBlock
 {
     private static $singular_name = 'Split Block';
     private static $plural_name = 'Split Blocks';

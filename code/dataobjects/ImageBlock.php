@@ -7,7 +7,7 @@
  *
  * @method Image Image
  */
-class ImageBlock extends ContentBlock
+class ImageBlock extends QuickBlock
 {
     private static $singular_name = 'Image';
     private static $plural_name = 'Images';

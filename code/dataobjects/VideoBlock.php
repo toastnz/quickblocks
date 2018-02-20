@@ -6,7 +6,7 @@
  * @property string Caption
  * @property string VideoID
  */
-class VideoBlock extends ContentBlock
+class VideoBlock extends QuickBlock
 {
     private static $singular_name = 'Video';
     private static $plural_name = 'Videos';

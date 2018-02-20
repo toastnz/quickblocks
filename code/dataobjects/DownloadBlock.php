@@ -5,7 +5,7 @@
  *
  * @method ManyManyList|File[] Files()
  */
-class DownloadBlock extends ContentBlock
+class DownloadBlock extends QuickBlock
 {
     private static $singular_name = 'Download';
     private static $plural_name = 'Download';

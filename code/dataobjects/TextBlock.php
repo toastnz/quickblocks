@@ -5,7 +5,7 @@
  *
  * @property string Content
  */
-class TextBlock extends ContentBlock
+class TextBlock extends QuickBlock
 {
     private static $singular_name = 'Text';
     private static $plural_name = 'Text';

@@ -8,7 +8,7 @@
  *
  * @method Image Image
  */
-class HeroBlock extends ContentBlock
+class HeroBlock extends QuickBlock
 {
     private static $singular_name = 'Hero Block';
     private static $plural_name = 'Hero Blocks';

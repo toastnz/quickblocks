@@ -3,7 +3,7 @@
 /**
  * Class SplitListBlock
  */
-class SplitListBlock extends ContentBlock
+class SplitListBlock extends QuickBlock
 {
     private static $singular_name = 'Split List';
     private static $plural_name = 'Split Lists';
