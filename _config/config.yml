@@ -1,0 +1,9 @@
+---
+Name: toastquickblocks
+After:
+  - 'framework/*'
+  - 'cms/*'
+---
+QuickBlocksExtension:
+  available_blocks:
+    - TextBlock

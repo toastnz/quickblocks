@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * Class TestimonialBlock
+ *
+ * @property string Testimonial
+ */
+class TestimonialBlock extends ContentBlock
+{
+    private static $singular_name = 'Testimonial';
+    private static $plural_name = 'Testimonials';
+
+    private static $db = [
+        'Testimonial' => 'Text',
+        'Attribution' => 'Varchar(100)',
+        'Location'    => 'Varchar(100)'
+    ];
+
+    /**
+     * @return FieldList
+     */
+    public function getCMSFields()
+    {
+        $fields = FieldList::create([new TabSet('Root')]);
+
+        $fields->addFieldsToTab('Root.Main', [
+            TextField::create('Title', 'Name')
+                ->setAttribute('placeholder', 'This is a helper field only (will not show in templates)'),
+            TextareaField::create('Testimonial', 'Testimonial'),
+            TextField::create('Attribution', 'Name'),
+            TextField::create('Location', 'Location')
+        ]);
+
+        return $fields;
+    }
+
+    public function getContentSummary()
+    {
+        return DBField::create_field('HTMLText', $this->Testimonial);
+    }
+
+    public function getCMSValidator()
+    {
+        return new RequiredFields(['Testimonial']);
+    }
+
+    /* ==========================================
+     * SEARCH
+     * ========================================*/
+
+
+    public function getShowInSearch() {
+        return 1;
+    }
+
+    public function getAbstract()
+    {
+        return $this->getContentSummary()->forTemplate();
+    }
+}

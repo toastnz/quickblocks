@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * Class DownloadBlock
+ *
+ * @method ManyManyList|File[] Files()
+ */
+class DownloadBlock extends ContentBlock
+{
+    private static $singular_name = 'Download';
+    private static $plural_name = 'Download';
+
+    private static $many_many = [
+        'Files' => 'File'
+    ];
+
+    /**
+     * @return FieldList
+     */
+    public function getCMSFields()
+    {
+        $fields = FieldList::create([new TabSet('Root')]);
+
+        $fields->addFieldsToTab('Root.Main', [
+            TextField::create('Title', 'Name')
+                ->setAttribute('placeholder', 'This is a helper field only (will not show in templates)'),
+            UploadField::create('Files', 'File')
+                ->setFolderName('Uploads/downloads')
+        ]);
+
+        return $fields;
+    }
+
+    public function getContentSummary()
+    {
+        if ($this->Files()) {
+            return DBField::create_field('Text', implode(', ', $this->Files()->column('Title')));
+        }
+
+        return DBField::create_field('Text', $this->Title);
+    }
+
+    public function getCMSValidator()
+    {
+        return new RequiredFields(['Files']);
+    }
+
+    /* ==========================================
+     * SEARCH
+     * ========================================*/
+
+    public function getShowInSearch() {
+        return 1;
+    }
+
+    public function getAbstract()
+    {
+        return $this->getContentSummary()->forTemplate();
+    }
+
+}
