@@ -65,8 +65,7 @@ class QuickBlocksExtension extends DataExtension
 class QuickBlocksControllerExtension extends Extension
 {
     private static $allowed_actions = [
-        'QuickBlock',
-        'statistic',
+        'QuickBlock'
     ];
 
     /**
@@ -85,28 +84,6 @@ class QuickBlocksControllerExtension extends Extension
 
             if ($contentBlock && $contentBlock->exists()) {
                 return $contentBlock->forTemplate();
-            }
-        }
-
-        return $this->owner->redirect($this->owner->Link());
-    }
-
-    /**
-     * Returns modal template of statistic
-     *
-     * @return string
-     */
-    public function statistic()
-    {
-        if (Director::is_ajax()) {
-
-            $id = $this->owner->getRequest()->param('ID');
-
-            /** @var Statistic $statistic */
-            $statistic = Statistic::get()->byID($id);
-
-            if ($statistic && $statistic->exists()) {
-                return $statistic->forTemplate();
             }
         }
 

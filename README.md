@@ -10,6 +10,14 @@ Page:
     - QuickBlocksExtension
 ```
 
+Optionally:
+
+```yaml
+Page_Controller:
+  extensions:
+    - QuickBlocksControllerExtension
+```
+
 Use `Page` or other class that extends `SiteTree`.
 
 In your `Layout/Page.ss` template, add the following:
