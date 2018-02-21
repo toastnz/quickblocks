@@ -26,7 +26,7 @@ class QuickBlock extends DataObject
     ];
 
     private static $summary_fields = [
-        'IconForCMS'     => 'Icon',
+        'IconForCMS'     => 'Type',
         'Title'          => 'Title',
         'ContentSummary' => 'Content'
     ];

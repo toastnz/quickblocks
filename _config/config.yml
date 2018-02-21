@@ -7,3 +7,7 @@ After:
 QuickBlocksExtension:
   available_blocks:
     - TextBlock
+
+LeftAndMain:
+  extra_requirements_css:
+    - quickblocks/css/quickblocks.css
