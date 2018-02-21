@@ -177,7 +177,7 @@ class QuickBlock extends DataObject
             return false;
         }
 
-        return (DB::prepared_query("SELECT \"ID\" FROM \"ContentBlock_Live\" WHERE \"ID\" = ?", [$this->ID])->value())
+        return (DB::prepared_query("SELECT \"ID\" FROM \"QuickBlock_Live\" WHERE \"ID\" = ?", [$this->ID])->value())
             ? true
             : false;
     }
@@ -277,7 +277,7 @@ class QuickBlock extends DataObject
 
         // If we're on the draft site, then we can update the status.
         // Otherwise, these lines will resurrect an inappropriate record
-        if(DB::prepared_query("SELECT \"ID\" FROM \"ContentBlock_Live\" WHERE \"ID\" = ?", array($this->ID))->value()
+        if(DB::prepared_query("SELECT \"ID\" FROM \"QuickBlock_Live\" WHERE \"ID\" = ?", array($this->ID))->value()
            && Versioned::current_stage() != 'Live') {
             $this->write();
         }
