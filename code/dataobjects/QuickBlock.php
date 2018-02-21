@@ -39,7 +39,7 @@ class QuickBlock extends DataObject
         // Check if this class has an icon set
         $statIcon = self::config()->get('icon');
 
-        if (file_exists(Director::baseFolder() . '/' . $statIcon)) {
+        if (!empty($statIcon) && file_exists(Director::baseFolder() . '/' . $statIcon)) {
             return DBField::create_field('HTMLText', '<img src="' . $statIcon . '">');
         }
 
