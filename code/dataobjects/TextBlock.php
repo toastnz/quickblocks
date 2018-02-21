@@ -21,11 +21,7 @@ class TextBlock extends QuickBlock
     {
         $fields = parent::getCMSFields();
 
-        $fields->addFieldsToTab('Root.Main', [
-            TextField::create('Title', 'Name')
-                ->setAttribute('placeholder', 'This is a helper field only (will not show in templates)'),
-            HtmlEditorField::create('Content', 'Content')
-        ]);
+        $fields->addFieldToTab('Root.Main', HtmlEditorField::create('Content', 'Content'));
 
         return $fields;
     }

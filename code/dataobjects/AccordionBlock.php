@@ -19,18 +19,13 @@ class AccordionBlock extends QuickBlock
      */
     public function getCMSFields()
     {
-        $fields = FieldList::create([new TabSet('Root')]);
+        $fields = parent::getCMSFields();
 
         $config = GridFieldConfig_RelationEditor::create(50)
             ->removeComponentsByType('GridFieldAddExistingAutoCompleter')
             ->addComponents(GridFieldOrderableRows::create('SortOrder'));
 
         $grid = GridField::create('AccordionItems', 'Accordion Items', $this->AccordionItems(), $config);
-
-        $fields->addFieldsToTab('Root.Main', [
-            TextField::create('Title', 'Name')
-                ->setAttribute('placeholder', 'This is a helper field only (will not show in templates)')
-        ]);
 
         if ($this->ID) {
             $fields->addFieldToTab('Root.Main', $grid);

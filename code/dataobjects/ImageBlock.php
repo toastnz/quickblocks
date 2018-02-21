@@ -21,11 +21,9 @@ class ImageBlock extends QuickBlock
      */
     public function getCMSFields()
     {
-        $fields = FieldList::create([new TabSet('Root')]);
+        $fields = parent::getCMSFields();
 
         $fields->addFieldsToTab('Root.Main', [
-            TextField::create('Title', 'Name')
-                ->setAttribute('placeholder', 'This is a helper field only (will not show in templates)'),
             UploadField::create('Image', 'Image')
                 ->setFolderName('Uploads/page-images')
         ]);

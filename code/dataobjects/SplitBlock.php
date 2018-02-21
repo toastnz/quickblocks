@@ -32,12 +32,7 @@ class SplitBlock extends QuickBlock
      */
     public function getCMSFields()
     {
-        $fields = FieldList::create([new TabSet('Root')]);
-
-        $fields->addFieldsToTab('Root.Main', [
-            TextField::create('Title', 'Name')
-                ->setAttribute('placeholder', 'This is a helper field only (will not show in templates)'),
-        ]);
+        $fields = parent::getCMSFields();
 
         // Left Block
         $fields->addFieldToTab('Root.Main', ToggleCompositeField::create('LeftBlock', 'Left Block', FieldList::create([
