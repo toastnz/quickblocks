@@ -36,6 +36,13 @@ class QuickBlock extends DataObject
 
     public function getIconForCMS()
     {
+        // Check if this class has an icon set
+        $statIcon = self::config()->get('icon');
+
+        if (file_exists(Director::baseFolder() . '/' . $statIcon)) {
+            return DBField::create_field('HTMLText', '<img src="' . $statIcon . '">');
+        }
+
         $path = TOAST_QUICKBLOCKS_DIR . '/images/';
         $icon = $path . strtolower($this->i18n_singular_name()) . '.png';
 
@@ -45,6 +52,7 @@ class QuickBlock extends DataObject
 
         return DBField::create_field('HTMLText', '<img src="' . $icon . '">');
     }
+
 
     function forTemplate()
     {
