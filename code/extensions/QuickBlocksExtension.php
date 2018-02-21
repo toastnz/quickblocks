@@ -70,7 +70,8 @@ class QuickBlocksExtension extends DataExtension
 class QuickBlocksControllerExtension extends Extension
 {
     private static $allowed_actions = [
-        'QuickBlock'
+        'QuickBlock',
+        'download'
     ];
 
     /**
@@ -94,4 +95,127 @@ class QuickBlocksControllerExtension extends Extension
 
         return $this->owner->redirect($this->owner->Link());
     }
+
+
+    /**
+     * @param SS_HTTPRequest $request
+     * @return SS_HTTPResponse
+     */
+    public function download(SS_HTTPRequest $request)
+    {
+        /** =========================================
+         * @var File $file
+        ===========================================*/
+
+        // check if we have an array of IDs
+        if ($request->requestVar('files')) {
+            $ids = explode(',', $request->requestVar('files'));
+
+            return $this->getZipResponse($ids);
+        }
+
+        return null;
+    }
+
+    /**
+     * @param array $ids
+     * @return SS_HTTPResponse
+     */
+    public function getZipResponse($ids)
+    {
+        $files = File::get()->byIDs($ids);
+
+        if ($files && $files->exists()) {
+            if (count($ids) === 1) {
+                $file = $files->first();
+                $path = Director::baseFolder() . '/' . $file->Filename;
+
+                header('Content-Type: ' . _mime_content_type($path));
+                header('Content-disposition: attachment; filename=' . $file->Name);
+                header('Content-Length: ' . filesize($path));
+                readfile($path);
+            } else {
+                $dir = sys_get_temp_dir() . '/archives';
+                if (!file_exists($dir)) {
+                    mkdir($dir);
+                }
+                $path   = tempnam($dir, 'h_');
+                $result = $this->create_zip($files, $path, true);
+
+                header('Content-Type: application/zip');
+                header('Content-disposition: attachment; filename=download.zip');
+                header('Content-Length: ' . filesize($path));
+
+                if ($result === true) {
+                    return SS_HTTPRequest::send_file(
+                        file_get_contents($path),
+                        'download.zip',
+                        'application/zip'
+                    );
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @link http://davidwalsh.name/create-zip-php
+     *
+     * @param DataList   $files
+     * @param string     $destination
+     * @param bool|false $overwrite
+     * @return bool
+     */
+    private function create_zip($files, $destination = '', $overwrite = false)
+    {
+        //if the zip file already exists and overwrite is false, return false
+        if (file_exists($destination) && !$overwrite) {
+            return false;
+        }
+        //vars
+        $valid_files = [];
+        //if files were passed in...
+        //cycle through each file
+        foreach ($files->getIterator() as $file) {
+            //make sure the file exists
+            if (file_exists(Controller::join_links(Director::baseFolder(), $file->Filename))) {
+                $valid_files[] = $file;
+            }
+        }
+
+        //if we have good files...
+        if (count($valid_files)) {
+            //create the archive
+            $zip = new ZipArchive();
+
+            if ($result = $zip->open($destination, ZIPARCHIVE::OVERWRITE) !== true) {
+
+                if (!is_resource($result)) {
+                    return false;
+                }
+            }
+
+            //add the files
+            foreach ($valid_files as $file) {
+                $zip->addFile(Controller::join_links(Director::baseFolder(), $file->Filename), $file->Name);
+            }
+            $zip->close();
+
+            return file_exists($destination);
+        } else {
+            return false;
+        }
+    }
+}
+
+function _mime_content_type($filename)
+{
+    $result = new finfo();
+
+    if (is_resource($result) === true) {
+        return $result->file($filename, FILEINFO_MIME_TYPE);
+    }
+
+    return false;
 }
