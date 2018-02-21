@@ -52,11 +52,6 @@ class QuickBlock extends DataObject
         return $this->renderWith([$this->ClassName, 'QuickBlock']);
     }
 
-    public function Link($action = '')
-    {
-        return$this->Parent()->Link($action);
-    }
-
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
