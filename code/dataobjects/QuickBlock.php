@@ -3,26 +3,25 @@
 /**
  * Class QuickBlock
  *
- * @property int    SortOrder
  * @property string Title
+ *
+ * @method ManyManyList|Page[] ParentPages()
  */
 class QuickBlock extends DataObject
 {
     private static $singular_name = 'Block';
     private static $plural_name = 'Blocks';
-    private static $default_sort = 'SortOrder';
 
     private static $db = [
-        'SortOrder' => 'Int',
-        'Title'     => 'Varchar(255)'
+        'Title' => 'Varchar(255)'
+    ];
+
+    private static $belongs_many_many = [
+        'ParentPages' => 'Page'
     ];
 
     private static $casting = [
         'Icon' => 'HTMLText'
-    ];
-
-    private static $belongs_many_many = [
-        'Parents' => 'Page',
     ];
 
     private static $summary_fields = [
@@ -54,7 +53,35 @@ class QuickBlock extends DataObject
 
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
+        $fields = FieldList::create([new TabSet('Root')]);
+
+        $fields->addFieldToTab('Root.Main', TextField::create('Title', 'Name')
+            ->setAttribute('placeholder', 'This is a helper field only (will not show in templates)'));
+
+        /** -----------------------------------------
+         * Pages
+         * ----------------------------------------*/
+
+        $fields->insertAfter('Main', new Tab('Pages'));
+
+        $config = GridFieldConfig_Base::create(50);
+
+        $config->getComponentByType('GridFieldDataColumns')->setDisplayFields([
+            'Title' => 'Page Name',
+            'Link'  => 'Link'
+        ]);
+
+        $gridField = GridField::create(
+            'ParentPages',
+            'Pages',
+            $this->ParentPages(),
+            $config
+        );
+
+        $fields->addFieldsToTab('Root.Pages', [
+            LiteralField::create('', '<div class="message warning">The following pages will be affected by any changes to this block</div>'),
+            $gridField
+        ]);
 
         return $fields;
     }
@@ -70,19 +97,6 @@ class QuickBlock extends DataObject
             return $this->getField('Title') ?: $this->i18n_singular_name();
         } else {
             return $this->getField('Title');
-        }
-    }
-
-    /**
-     * Force new blocks to the bottom
-     */
-    public function onBeforeWrite()
-    {
-        parent::onBeforeWrite();
-
-        if (!$this->SortOrder) {
-            $max = (int)QuickBlock::get()->filter(['ParentID' => $this->ParentID])->max('SortOrder');
-            $this->setField('SortOrder', $max + 1);
         }
     }
 
@@ -108,7 +122,9 @@ class QuickBlock extends DataObject
 
         $extended = $this->extendedCan('canView', $member);
 
-        if($extended !== null) return $extended;
+        if ($extended !== null) {
+            return $extended;
+        }
 
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
     }
@@ -128,10 +144,14 @@ class QuickBlock extends DataObject
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
     }
 
-    public function canDeleteFromLive($member = null) {
+    public function canDeleteFromLive($member = null)
+    {
         // Standard mechanism for accepting permission changes from extensions
         $extended = $this->extendedCan('canDeleteFromLive', $member);
-        if($extended !==null) return $extended;
+
+        if ($extended !== null) {
+            return $extended;
+        }
 
         return $this->canPublish($member);
     }
@@ -149,14 +169,21 @@ class QuickBlock extends DataObject
      * @param Member $member
      * @return bool True if the current user can publish this page.
      */
-    public function canPublish($member = null) {
-        if(!$member || !(is_a($member, 'Member')) || is_numeric($member)) $member = Member::currentUser();
+    public function canPublish($member = null)
+    {
+        if (!$member || !(is_a($member, 'Member')) || is_numeric($member)) {
+            $member = Member::currentUser();
+        }
 
-        if($member && Permission::checkMember($member, "ADMIN")) return true;
+        if ($member && Permission::checkMember($member, "ADMIN")) {
+            return true;
+        }
 
         // Standard mechanism for accepting permission changes from extensions
         $extended = $this->extendedCan('canPublish', $member);
-        if($extended !== null) return $extended;
+        if ($extended !== null) {
+            return $extended;
+        }
 
         // Normal case - fail over to canEdit()
         return $this->canEdit($member);
@@ -209,10 +236,11 @@ class QuickBlock extends DataObject
      *
      * @return bool Success
      */
-    public function doArchive() {
+    public function doArchive()
+    {
         $this->invokeWithExtensions('onBeforeArchive', $this);
 
-        if($this->doUnpublish()) {
+        if ($this->doUnpublish()) {
             $this->delete();
             $this->invokeWithExtensions('onAfterArchive', $this);
 
@@ -229,24 +257,25 @@ class QuickBlock extends DataObject
      * @param Member $member
      * @return bool
      */
-    public function canArchive($member = null) {
-        if(!$member) {
+    public function canArchive($member = null)
+    {
+        if (!$member) {
             $member = Member::currentUser();
         }
 
         // Standard mechanism for accepting permission changes from extensions
         $extended = $this->extendedCan('canArchive', $member);
-        if($extended !== null) {
+        if ($extended !== null) {
             return $extended;
         }
 
         // Check if this page can be deleted
-        if(!$this->canDelete($member)) {
+        if (!$this->canDelete($member)) {
             return false;
         }
 
         // If published, check if we can delete from live
-        if($this->ExistsOnLive && !$this->canDeleteFromLive($member)) {
+        if ($this->ExistsOnLive && !$this->canDeleteFromLive($member)) {
             return false;
         }
 
@@ -260,9 +289,14 @@ class QuickBlock extends DataObject
      * @uses DocumentExtension->onBeforeUnpublish()
      * @uses DocumentExtension->onAfterUnpublish()
      */
-    public function doUnpublish() {
-        if(!$this->canDeleteFromLive()) return false;
-        if(!$this->ID) return false;
+    public function doUnpublish()
+    {
+        if (!$this->canDeleteFromLive()) {
+            return false;
+        }
+        if (!$this->ID) {
+            return false;
+        }
 
         $this->invokeWithExtensions('onBeforeUnpublish', $this);
 
@@ -277,8 +311,8 @@ class QuickBlock extends DataObject
 
         // If we're on the draft site, then we can update the status.
         // Otherwise, these lines will resurrect an inappropriate record
-        if(DB::prepared_query("SELECT \"ID\" FROM \"QuickBlock_Live\" WHERE \"ID\" = ?", array($this->ID))->value()
-           && Versioned::current_stage() != 'Live') {
+        if (DB::prepared_query("SELECT \"ID\" FROM \"QuickBlock_Live\" WHERE \"ID\" = ?", [$this->ID])->value()
+            && Versioned::current_stage() != 'Live') {
             $this->write();
         }
 

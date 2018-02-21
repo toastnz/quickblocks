@@ -11,6 +11,12 @@ class QuickBlocksExtension extends DataExtension
         'ContentBlocks' => 'QuickBlock'
     ];
 
+    private static $many_many_extraFields = [
+        'ContentBlocks' => [
+            'SortOrder' => 'Int'
+        ]
+    ];
+
     public function updateCMSFields(FieldList $fields)
     {
         /** -----------------------------------------

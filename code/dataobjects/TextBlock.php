@@ -19,7 +19,7 @@ class TextBlock extends QuickBlock
      */
     public function getCMSFields()
     {
-        $fields = FieldList::create([new TabSet('Root')]);
+        $fields = parent::getCMSFields();
 
         $fields->addFieldsToTab('Root.Main', [
             TextField::create('Title', 'Name')
