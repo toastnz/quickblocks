@@ -5,8 +5,6 @@
  *
  * @property int    SortOrder
  * @property string Title
- *
- * @method Page Parent()
  */
 class QuickBlock extends DataObject
 {
@@ -23,8 +21,8 @@ class QuickBlock extends DataObject
         'Icon' => 'HTMLText'
     ];
 
-    private static $has_one = [
-        'Parent' => 'Page',
+    private static $belongs_many_many = [
+        'Parents' => 'Page',
     ];
 
     private static $summary_fields = [
@@ -39,7 +37,7 @@ class QuickBlock extends DataObject
 
     public function getIconForCMS()
     {
-        $path = project() . '/blocks/images/';
+        $path = TOAST_QUICKBLOCKS_DIR . '/images/';
         $icon = $path . strtolower($this->i18n_singular_name()) . '.png';
 
         if (!file_exists(Director::baseFolder() . '/' . $icon)) {
@@ -58,7 +56,7 @@ class QuickBlock extends DataObject
     {
         return$this->Parent()->Link($action);
     }
-    
+
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
@@ -109,33 +107,29 @@ class QuickBlock extends DataObject
 
     public function canView($member = null)
     {
-        if ($this->Parent()) {
-            return $this->Parent()->canView($member);
+        if ($member && Permission::checkMember($member, ["ADMIN", "SITETREE_VIEW_ALL"])) {
+            return true;
         }
+
+        $extended = $this->extendedCan('canView', $member);
+
+        if($extended !== null) return $extended;
+
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
     }
 
     public function canEdit($member = null)
     {
-        if ($this->Parent()) {
-            return $this->Parent()->canEdit($member);
-        }
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
     }
 
     public function canDelete($member = null)
     {
-        if ($this->Parent()) {
-            return $this->Parent()->canDelete($member);
-        }
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
     }
 
     public function canCreate($member = null)
     {
-        if ($this->Parent()) {
-            return $this->Parent()->canCreate($member);
-        }
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
     }
 
