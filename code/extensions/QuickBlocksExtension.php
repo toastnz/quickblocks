@@ -7,7 +7,7 @@
  */
 class QuickBlocksExtension extends DataExtension
 {
-    private static $has_many = [
+    private static $many_many = [
         'ContentBlocks' => 'QuickBlock'
     ];
 
@@ -21,11 +21,10 @@ class QuickBlocksExtension extends DataExtension
 
         $config = GridFieldConfig_RelationEditor::create(50);
         $config->addComponent(GridFieldOrderableRows::create('SortOrder'))
-            ->removeComponentsByType('GridFieldDeleteAction')
+//            ->removeComponentsByType('GridFieldDeleteAction')
             ->removeComponentsByType('GridFieldAddNewButton')
             ->addComponent(new GridFieldContentBlockState())
-            ->addComponent(new GridFieldArchiveAction())
-            ->removeComponentsByType('GridFieldAddExistingAutoCompleter');
+            ->addComponent(new GridFieldArchiveAction());
 
         $multiClass = new GridFieldAddNewMultiClass();
         $multiClass->setClasses(Config::inst()->get('QuickBlocksExtension', 'available_blocks'));
