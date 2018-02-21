@@ -11,3 +11,7 @@ QuickBlocksExtension:
 LeftAndMain:
   extra_requirements_css:
     - quickblocks/css/quickblocks.css
+
+File:
+  extensions:
+    - FileExtension

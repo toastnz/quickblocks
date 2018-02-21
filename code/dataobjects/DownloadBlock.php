@@ -22,7 +22,7 @@ class DownloadBlock extends QuickBlock
         $fields = parent::getCMSFields();
 
         $fields->addFieldsToTab('Root.Main', [
-            UploadField::create('Files', 'File')
+            UploadField::create('Files', 'Files')
                 ->setFolderName('Uploads/downloads')
         ]);
 
