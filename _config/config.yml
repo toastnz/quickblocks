@@ -7,6 +7,9 @@ After:
 QuickBlocksExtension:
   available_blocks:
     - TextBlock
+    - AccordionBlock
+    - VideoBlock
+    - ImageBlock
 
 LeftAndMain:
   extra_requirements_css:
