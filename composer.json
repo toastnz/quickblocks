@@ -13,16 +13,18 @@
       "name": "Jaydn de Graaf",
       "homepage": "http://pinc.nz/",
       "role": "Developer"
-    },{
+    },
+    {
       "name": "Danae Miller-Clendon",
       "homepage": "http://toast.co.nz/",
       "role": "Developer"
     }
   ],
   "require": {
-      "composer/installers": "*",
-      "symbiote/silverstripe-gridfieldextensions": "^2.0.1",
-      "silverstripe/cms": "~3.1",
-      "silverstripe/framework": "~3.1"
+    "composer/installers": "*",
+    "symbiote/silverstripe-gridfieldextensions": "^2.0.1",
+    "silverstripe/cms": "~3.1",
+    "silverstripe/framework": "~3.1",
+    "silverstripe-rebelalliance/youtubefield": "^1.0"
   }
 }

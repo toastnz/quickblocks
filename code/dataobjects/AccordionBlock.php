@@ -23,6 +23,8 @@ class AccordionBlock extends QuickBlock
 
         $config = GridFieldConfig_RelationEditor::create(50)
             ->removeComponentsByType('GridFieldAddExistingAutoCompleter')
+            ->removeComponentsByType('GridFieldDeleteAction')
+            ->addComponents(new GridFieldDeleteAction())
             ->addComponents(GridFieldOrderableRows::create('SortOrder'));
 
         $grid = GridField::create('AccordionItems', 'Accordion Items', $this->AccordionItems(), $config);
