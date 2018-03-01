@@ -28,7 +28,7 @@ class TextBlock extends QuickBlock
 
     public function getContentSummary()
     {
-        return DBField::create_field('HTMLText', $this->Content);
+        return $this->dbObject('Content')->LimitWordCountXML(70);
     }
 
     public function getCMSValidator()
