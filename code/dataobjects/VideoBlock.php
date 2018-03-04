@@ -1,5 +1,11 @@
 <?php
 
+use SilverStripe\Assets\Image;
+use SilverStripe\Forms\TextField;
+use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Forms\RequiredFields;
+use SilverStripe\ORM\FieldType\DBField;
+
 /**
  * Class VideoBlock
  *
@@ -17,7 +23,7 @@ class VideoBlock extends QuickBlock
     ];
 
     private static $has_one = [
-        'Thumbnail' => 'Image'
+        'Thumbnail' => Image::class
     ];
 
     /**

@@ -1,5 +1,22 @@
 <?php
 
+use SilverStripe\Control\Director;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Forms\TabSet;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\Tab;
+use SilverStripe\Forms\GridField\GridFieldConfig_Base;
+use SilverStripe\Forms\GridField\GridFieldDataColumns;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Control\Controller;
+use SilverStripe\Security\Permission;
+use SilverStripe\Security\Member;
+use SilverStripe\ORM\DB;
+use SilverStripe\Versioned\Versioned;
+use SilverStripe\ORM\DataObject;
+
 /**
  * Class QuickBlock
  *
@@ -74,7 +91,7 @@ class QuickBlock extends DataObject
 
         $config = GridFieldConfig_Base::create(50);
 
-        $config->getComponentByType('GridFieldDataColumns')->setDisplayFields([
+        $config->getComponentByType(GridFieldDataColumns::class)->setDisplayFields([
             'Title' => 'Page Name',
             'Link'  => 'Link'
         ]);
@@ -179,7 +196,7 @@ class QuickBlock extends DataObject
      */
     public function canPublish($member = null)
     {
-        if (!$member || !(is_a($member, 'Member')) || is_numeric($member)) {
+        if (!$member || !(is_a($member, Member::class)) || is_numeric($member)) {
             $member = Member::currentUser();
         }
 

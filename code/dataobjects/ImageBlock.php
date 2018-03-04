@@ -1,5 +1,10 @@
 <?php
 
+use SilverStripe\Assets\Image;
+use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Forms\RequiredFields;
+
 /**
  * Class ImageBlock
  *
@@ -13,7 +18,7 @@ class ImageBlock extends QuickBlock
     private static $plural_name = 'Images';
 
     private static $has_one = [
-        'Image' => 'Image'
+        'Image' => Image::class
     ];
 
     /**
@@ -24,7 +29,7 @@ class ImageBlock extends QuickBlock
         $fields = parent::getCMSFields();
 
         $fields->addFieldsToTab('Root.Main', [
-            UploadField::create('Image', 'Image')
+            UploadField::create(Image::class, Image::class)
                 ->setFolderName('Uploads/page-images')
         ]);
 
@@ -43,6 +48,6 @@ class ImageBlock extends QuickBlock
 
     public function getCMSValidator()
     {
-        return new RequiredFields(['Image']);
+        return new RequiredFields([Image::class]);
     }
 }

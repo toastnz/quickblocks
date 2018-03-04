@@ -1,8 +1,5 @@
 ---
 Name: toastquickblocks
-After:
-  - 'framework/*'
-  - 'cms/*'
 ---
 QuickBlocksExtension:
   available_blocks:
@@ -10,11 +7,9 @@ QuickBlocksExtension:
     - AccordionBlock
     - VideoBlock
     - ImageBlock
-
-LeftAndMain:
+SilverStripe\Admin\LeftAndMain:
   extra_requirements_css:
     - quickblocks/css/quickblocks.css
-
-File:
+SilverStripe\Assets\File:
   extensions:
     - FileExtension

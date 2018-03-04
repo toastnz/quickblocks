@@ -1,5 +1,10 @@
 <?php
 
+use SilverStripe\Assets\File;
+use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Forms\RequiredFields;
+
 /**
  * Class DownloadBlock
  *
@@ -11,7 +16,7 @@ class DownloadBlock extends QuickBlock
     private static $plural_name = 'Download';
 
     private static $many_many = [
-        'Files' => 'File'
+        'Files' => File::class
     ];
 
     /**

@@ -13,7 +13,7 @@ Page:
 Optionally:
 
 ```yaml
-Page_Controller:
+PageController:
   extensions:
     - QuickBlocksControllerExtension
 ```

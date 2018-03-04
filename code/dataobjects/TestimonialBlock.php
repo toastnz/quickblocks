@@ -1,5 +1,10 @@
 <?php
 
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Forms\RequiredFields;
+
 /**
  * Class TestimonialBlock
  *

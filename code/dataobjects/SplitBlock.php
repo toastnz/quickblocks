@@ -1,5 +1,14 @@
 <?php
 
+use SilverStripe\Assets\Image;
+use SilverStripe\Forms\HeaderField;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\ToggleCompositeField;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Forms\RequiredFields;
+
 /**
  * Class SplitBlock
  *
@@ -21,8 +30,8 @@ class SplitBlock extends QuickBlock
     ];
 
     private static $has_one = [
-        'LeftImage'  => 'Image',
-        'RightImage' => 'Image',
+        'LeftImage'  => Image::class,
+        'RightImage' => Image::class,
         'LeftLink'   => 'Link',
         'RightLink'  => 'Link'
     ];
@@ -41,7 +50,7 @@ class SplitBlock extends QuickBlock
                 ->setRows(2),
             TextareaField::create('LeftContent', 'Content'),
             LinkField::create('LeftLinkID', 'Link'),
-            UploadField::create('LeftImage', 'Image')
+            UploadField::create('LeftImage', Image::class)
                 ->setDescription('Ideal size: 400x400'),
         ])));
 
@@ -52,7 +61,7 @@ class SplitBlock extends QuickBlock
                 ->setRows(2),
             TextareaField::create('RightContent', 'Content'),
             LinkField::create('RightLinkID', 'Link'),
-            UploadField::create('RightImage', 'Image')
+            UploadField::create('RightImage', Image::class)
                 ->setDescription('Ideal size: 400x400'),
         ])));
 

@@ -1,5 +1,8 @@
 <?php
 
+use SilverStripe\Control\Controller;
+use SilverStripe\ORM\DataExtension;
+
 /**
  * Class FileExtension
  *

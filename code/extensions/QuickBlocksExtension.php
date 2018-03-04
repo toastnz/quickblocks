@@ -1,5 +1,20 @@
 <?php
 
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\Tab;
+use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use SilverStripe\Forms\GridField\GridFieldAddNewButton;
+use Symbiote\GridFieldExtensions\GridFieldAddNewMultiClass;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Control\Director;
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Assets\File;
+use SilverStripe\Control\Controller;
+use SilverStripe\Core\Extension;
+
 /**
  * Class QuickBlocksExtension
  *
@@ -28,7 +43,7 @@ class QuickBlocksExtension extends DataExtension
         $config = GridFieldConfig_RelationEditor::create(50);
         $config->addComponent(GridFieldOrderableRows::create('SortOrder'))
 //            ->removeComponentsByType('GridFieldDeleteAction')
-            ->removeComponentsByType('GridFieldAddNewButton')
+            ->removeComponentsByType(GridFieldAddNewButton::class)
             ->addComponent(new GridFieldContentBlockState())
             ->addComponent(new GridFieldArchiveAction());
 
@@ -65,7 +80,7 @@ class QuickBlocksExtension extends DataExtension
 /**
  * Class QuickBlocksControllerExtension
  *
- * @property Page_Controller $owner
+ * @property PageController $owner
  */
 class QuickBlocksControllerExtension extends Extension
 {
@@ -101,7 +116,7 @@ class QuickBlocksControllerExtension extends Extension
      * @param SS_HTTPRequest $request
      * @return SS_HTTPResponse
      */
-    public function download(SS_HTTPRequest $request)
+    public function download(HTTPRequest $request)
     {
         /** =========================================
          * @var File $file
@@ -147,7 +162,7 @@ class QuickBlocksControllerExtension extends Extension
                 header('Content-Length: ' . filesize($path));
 
                 if ($result === true) {
-                    return SS_HTTPRequest::send_file(
+                    return HTTPRequest::send_file(
                         file_get_contents($path),
                         'download.zip',
                         'application/zip'

@@ -1,5 +1,13 @@
 <?php
 
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Forms\TabSet;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Security\Permission;
+use SilverStripe\ORM\DataObject;
+
 /**
  * Class AccordionItem
  *
