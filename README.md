@@ -58,7 +58,7 @@ class MyBlock extends Toast\QuickBlock
 }
 ```
 
-`/themes/default/templates/blocks/MyBlock.ss`:
+`/themes/default/templates/Toast/QuickBlocks/MyBlock.ss`:
 
 ```silverstripe
 <%-- Your block template here --%>

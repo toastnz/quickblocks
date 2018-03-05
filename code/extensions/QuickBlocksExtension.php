@@ -5,8 +5,10 @@ namespace Toast;
 use finfo;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\GridField\GridFieldDetailForm;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
+use SilverStripe\Versioned\VersionedGridFieldItemRequest;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use SilverStripe\Forms\GridField\GridFieldAddNewButton;
 use Symbiote\GridFieldExtensions\GridFieldAddNewMultiClass;
@@ -51,6 +53,8 @@ class QuickBlocksExtension extends DataExtension
             ->removeComponentsByType(GridFieldAddNewButton::class)
             ->addComponent(new GridFieldContentBlockState())
             ->addComponent(new GridFieldArchiveAction());
+        $config->getComponentByType(GridFieldDetailForm::class)
+            ->setItemRequestClass(VersionedGridFieldItemRequest::class);
 
         $multiClass = new GridFieldAddNewMultiClass();
         $multiClass->setClasses(Config::inst()->get(QuickBlocksExtension::class, 'available_blocks'));

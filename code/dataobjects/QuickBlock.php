@@ -13,6 +13,7 @@ use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Control\Controller;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\Security\Permission;
 use SilverStripe\Security\Member;
 use SilverStripe\ORM\DB;
@@ -51,7 +52,7 @@ class QuickBlock extends DataObject
     ];
 
     private static $extensions = [
-        Versioned::class . '("Stage","Live")'
+        Versioned::class
     ];
 
     public function getIconForCMS()
@@ -76,7 +77,7 @@ class QuickBlock extends DataObject
 
     function forTemplate()
     {
-        return $this->renderWith([$this->ClassName, 'QuickBlock']);
+        return $this->renderWith([self::class, 'Toast\QuickBlocks\QuickBlock']);
     }
 
     public function getCMSFields()
@@ -116,7 +117,7 @@ class QuickBlock extends DataObject
 
     public function getContentSummary()
     {
-        return DBField::create_field('HTMLText', '');
+        return DBField::create_field(DBHTMLText::class, '');
     }
 
     public function getTitle()
