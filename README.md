@@ -2,6 +2,16 @@
 
 Simple content blocks system. Nothing fancy, easy to implement.
 
+## Requirements
+
+* silverstripe/cms 4.0.x
+* silverstripe/framework 4.0.x
+* symbiote/silverstripe-gridfieldextensions 3.1.1
+* edgarindustries/youtubefield 1.1
+* sheadawson/silverstripe-linkable 2.0.x-dev
+
+## Installation
+
 Add the following to your `config.yml`:
 
 ```yaml
@@ -69,7 +79,6 @@ $Content
 
 ## Todo:
 
-* Namespacing
 * Template global providers
 * Zoning
-* SilverStripe 4
+* Duplicate handlers
