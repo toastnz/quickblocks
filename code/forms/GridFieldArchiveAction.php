@@ -1,5 +1,7 @@
 <?php
 
+namespace Toast;
+
 use SilverStripe\Forms\GridField\GridField_FormAction;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\ORM\ValidationException;

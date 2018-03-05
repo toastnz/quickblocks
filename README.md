@@ -7,7 +7,7 @@ Add the following to your `config.yml`:
 ```yaml
 Page:
   extensions:
-    - QuickBlocksExtension
+    - Toast\QuickBlocksExtension
 ```
 
 Optionally:
@@ -15,7 +15,7 @@ Optionally:
 ```yaml
 PageController:
   extensions:
-    - QuickBlocksControllerExtension
+    - Toast\QuickBlocksControllerExtension
 ```
 
 Use `Page` or other class that extends `SiteTree`.
@@ -35,7 +35,7 @@ In your `Layout/Page.ss` template, add the following:
 ```yaml
 QuickBlocksExtension:
   available_blocks:
-    - TextBlock
+    - Toast\TextBlock
 ```
 
 ### Create a custom block
@@ -45,7 +45,7 @@ Extend `QuickBlock` to create a new block type.
 ```php
 <?php
  
-class MyBlock extends QuickBlock
+class MyBlock extends Toast\QuickBlock
 {
     private static $singular_name = 'My Block';
     private static $plural_name = 'My Blocks';

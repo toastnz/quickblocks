@@ -1,5 +1,7 @@
 <?php
 
+namespace Toast;
+
 use SilverStripe\Assets\Image;
 use SilverStripe\Forms\TextField;
 use SilverStripe\AssetAdmin\Forms\UploadField;

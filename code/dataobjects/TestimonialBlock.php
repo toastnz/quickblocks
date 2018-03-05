@@ -1,5 +1,7 @@
 <?php
 
+namespace Toast;
+
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\FieldType\DBField;

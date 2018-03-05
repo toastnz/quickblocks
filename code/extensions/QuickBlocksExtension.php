@@ -1,5 +1,9 @@
 <?php
 
+namespace Toast;
+
+use finfo;
+use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
@@ -14,6 +18,7 @@ use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Assets\File;
 use SilverStripe\Control\Controller;
 use SilverStripe\Core\Extension;
+use ZipArchive;
 
 /**
  * Class QuickBlocksExtension
@@ -23,7 +28,7 @@ use SilverStripe\Core\Extension;
 class QuickBlocksExtension extends DataExtension
 {
     private static $many_many = [
-        'ContentBlocks' => 'QuickBlock'
+        'ContentBlocks' => QuickBlock::class
     ];
 
     private static $many_many_extraFields = [
@@ -48,7 +53,7 @@ class QuickBlocksExtension extends DataExtension
             ->addComponent(new GridFieldArchiveAction());
 
         $multiClass = new GridFieldAddNewMultiClass();
-        $multiClass->setClasses(Config::inst()->get('QuickBlocksExtension', 'available_blocks'));
+        $multiClass->setClasses(Config::inst()->get(QuickBlocksExtension::class, 'available_blocks'));
 
         $config->addComponent($multiClass);
 
@@ -134,7 +139,7 @@ class QuickBlocksControllerExtension extends Extension
 
     /**
      * @param array $ids
-     * @return SS_HTTPResponse
+     * @return HTTPResponse
      */
     public function getZipResponse($ids)
     {

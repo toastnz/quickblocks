@@ -1,5 +1,7 @@
 <?php
 
+namespace Toast;
+
 use SilverStripe\Control\Director;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\Forms\TabSet;
@@ -48,7 +50,7 @@ class QuickBlock extends DataObject
     ];
 
     private static $extensions = [
-        'Versioned("Stage","Live")'
+        'SilverStripe\Versioned\Versioned("Stage","Live")'
     ];
 
     public function getIconForCMS()
@@ -164,7 +166,7 @@ class QuickBlock extends DataObject
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
     }
 
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
     }
@@ -344,21 +346,6 @@ class QuickBlock extends DataObject
         $this->invokeWithExtensions('onAfterUnpublish', $this);
 
         return true;
-    }
-
-
-    /* ==========================================
-     * SEARCH
-     * ========================================*/
-
-    public function getShowInSearch()
-    {
-        return 1;
-    }
-
-    public function getAbstract()
-    {
-        return $this->getContentSummary()->forTemplate();
     }
 }
 

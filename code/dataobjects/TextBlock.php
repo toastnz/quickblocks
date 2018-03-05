@@ -1,5 +1,7 @@
 <?php
 
+namespace Toast;
+
 use SilverStripe\Forms\RequiredFields;
 
 /**

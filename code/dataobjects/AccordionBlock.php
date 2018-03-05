@@ -1,5 +1,7 @@
 <?php
 
+namespace Toast;
+
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
@@ -19,7 +21,7 @@ class AccordionBlock extends QuickBlock
     private static $plural_name = 'Accordions';
 
     private static $has_many = [
-        'AccordionItems' => 'AccordionItem'
+        'AccordionItems' => AccordionItem::class
     ];
 
     /**

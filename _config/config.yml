@@ -12,4 +12,4 @@ SilverStripe\Admin\LeftAndMain:
     - quickblocks/css/quickblocks.css
 SilverStripe\Assets\File:
   extensions:
-    - FileExtension
+    - Toast\FileExtension

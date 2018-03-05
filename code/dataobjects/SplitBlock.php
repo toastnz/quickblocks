@@ -1,5 +1,7 @@
 <?php
 
+namespace Toast;
+
 use SilverStripe\Assets\Image;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\TextareaField;
