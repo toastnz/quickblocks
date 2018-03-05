@@ -2,6 +2,7 @@
 
 namespace Toast;
 
+use Sheadawson\Linkable\Forms\LinkField;
 use SilverStripe\Assets\Image;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\TextareaField;
@@ -10,6 +11,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\Forms\RequiredFields;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 
 /**
  * Class SplitBlock
@@ -53,7 +55,7 @@ class SplitBlock extends QuickBlock
                 ->setRows(2),
             TextareaField::create('LeftContent', 'Content'),
             LinkField::create('LeftLinkID', 'Link'),
-            UploadField::create('LeftImage', Image::class)
+            UploadField::create('LeftImage', 'Image')
                 ->setDescription('Ideal size: 400x400'),
         ])));
 
@@ -64,7 +66,7 @@ class SplitBlock extends QuickBlock
                 ->setRows(2),
             TextareaField::create('RightContent', 'Content'),
             LinkField::create('RightLinkID', 'Link'),
-            UploadField::create('RightImage', Image::class)
+            UploadField::create('RightImage', 'Image')
                 ->setDescription('Ideal size: 400x400'),
         ])));
 
@@ -73,25 +75,11 @@ class SplitBlock extends QuickBlock
 
     public function getContentSummary()
     {
-        return DBField::create_field('HTMLText', $this->LeftContent . ' ' . $this->RightContent);
+        return DBField::create_field(DBHTMLText::class, $this->LeftContent . ' ' . $this->RightContent);
     }
 
     public function getCMSValidator()
     {
         return new RequiredFields(['LeftContent', 'RightContent', 'LeftImage', 'RightImage']);
     }
-
-    /* ==========================================
-     * SEARCH
-     * ========================================*/
-
-    public function getShowInSearch() {
-        return 1;
-    }
-
-    public function getAbstract()
-    {
-        return $this->getContentSummary()->forTemplate();
-    }
-
 }

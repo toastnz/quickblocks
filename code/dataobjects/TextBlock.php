@@ -42,19 +42,4 @@ class TextBlock extends QuickBlock
     {
         return new RequiredFields(['Content']);
     }
-
-    /* ==========================================
-     * SEARCH
-     * ========================================*/
-
-
-    public function getShowInSearch() {
-        return 1;
-    }
-
-    public function getAbstract()
-    {
-        return $this->getContentSummary()->forTemplate();
-    }
-
 }

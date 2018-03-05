@@ -2,11 +2,14 @@
 
 namespace Toast;
 
+use EdgarIndustries\YouTubeField\YouTubeField;
 use SilverStripe\Assets\Image;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 
 /**
  * Class VideoBlock
@@ -54,6 +57,6 @@ class VideoBlock extends QuickBlock
 
     public function getContentSummary()
     {
-        return DBField::create_field('HTMLText', $this->VideoID);
+        return DBField::create_field(DBHTMLText::class, $this->VideoID);
     }
 }

@@ -8,6 +8,7 @@ use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\RequiredFields;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\Security\Permission;
 use SilverStripe\ORM\DataObject;
 
@@ -54,7 +55,7 @@ class AccordionItem extends DataObject
 
         $title = strlen($title) > 20 ? '<span>' . $title . '</span>' : $title;
 
-        return DBField::create_field('HTMLText', $title);
+        return DBField::create_field(DBHTMLText::class, $title);
     }
 
     /**

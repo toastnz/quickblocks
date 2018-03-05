@@ -4,6 +4,7 @@ namespace Toast;
 
 use SilverStripe\Assets\File;
 use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\Forms\RequiredFields;
 
@@ -49,19 +50,6 @@ class DownloadBlock extends QuickBlock
     public function getCMSValidator()
     {
         return new RequiredFields(['Files']);
-    }
-
-    /* ==========================================
-     * SEARCH
-     * ========================================*/
-
-    public function getShowInSearch() {
-        return 1;
-    }
-
-    public function getAbstract()
-    {
-        return $this->getContentSummary()->forTemplate();
     }
 
 }
