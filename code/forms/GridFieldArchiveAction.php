@@ -48,7 +48,8 @@ class GridFieldArchiveAction implements GridField_ColumnProvider, GridField_Acti
             false,
             "archive",
             ['RecordID' => $record->ID]
-        )->setAttribute('data-icon', 'cross-circle')
+        )
+            ->addExtraClass('btn btn--no-text btn--icon-md font-icon-cancel-circled grid-field__icon-action gridfield-button-archive')
             ->setAttribute('title', 'Archive')
             ->addExtraClass('gridfield-button-delete');
 

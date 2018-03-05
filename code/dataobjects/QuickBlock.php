@@ -328,19 +328,19 @@ class QuickBlock extends DataObject
 
         $this->invokeWithExtensions('onBeforeUnpublish', $this);
 
-        $origStage = Versioned::current_stage();
-        Versioned::reading_stage('Live');
+        $origStage = Versioned::get_reading_mode();
+        Versioned::set_reading_mode('Live');
 
         // This way our ID won't be unset
         $clone = clone $this;
         $clone->delete();
 
-        Versioned::reading_stage($origStage);
+        Versioned::set_reading_mode($origStage);
 
         // If we're on the draft site, then we can update the status.
         // Otherwise, these lines will resurrect an inappropriate record
         if (DB::prepared_query("SELECT \"ID\" FROM \"QuickBlock_Live\" WHERE \"ID\" = ?", [$this->ID])->value()
-            && Versioned::current_stage() != 'Live') {
+            && Versioned::get_reading_mode() != 'Live') {
             $this->write();
         }
 
