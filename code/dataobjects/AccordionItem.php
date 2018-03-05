@@ -25,6 +25,7 @@ class AccordionItem extends DataObject
     private static $singular_name = 'Item';
     private static $plural_name = 'Items';
     private static $default_sort = 'SortOrder';
+    private static $table_name = 'AccordionItem';
 
     private static $db = [
         'Heading'   => 'Text',

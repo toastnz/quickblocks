@@ -23,6 +23,7 @@ class SplitBlock extends QuickBlock
 {
     private static $singular_name = 'Split Block';
     private static $plural_name = 'Split Blocks';
+    private static $table_name = 'SplitBlock';
 
     private static $db = [
         'LeftContent'  => 'Text',

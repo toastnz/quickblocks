@@ -30,6 +30,7 @@ class QuickBlock extends DataObject
 {
     private static $singular_name = 'Block';
     private static $plural_name = 'Blocks';
+    private static $table_name = 'QuickBlock';
 
     private static $db = [
         'Title' => 'Varchar(255)'
@@ -50,7 +51,7 @@ class QuickBlock extends DataObject
     ];
 
     private static $extensions = [
-        'SilverStripe\Versioned\Versioned("Stage","Live")'
+        Versioned::class . '("Stage","Live")'
     ];
 
     public function getIconForCMS()

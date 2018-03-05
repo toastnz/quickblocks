@@ -18,6 +18,7 @@ class ImageBlock extends QuickBlock
 {
     private static $singular_name = 'Image';
     private static $plural_name = 'Images';
+    private static $table_name = 'ImageBlock';
 
     private static $has_one = [
         'Image' => Image::class

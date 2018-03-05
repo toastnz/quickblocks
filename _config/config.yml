@@ -1,15 +1,17 @@
 ---
 Name: toastquickblocks
 ---
-QuickBlocksExtension:
+Toast\QuickBlocksExtension:
   available_blocks:
-    - TextBlock
-    - AccordionBlock
-    - VideoBlock
-    - ImageBlock
+    - Toast\TextBlock
+    - Toast\AccordionBlock
+    - Toast\VideoBlock
+    - Toast\ImageBlock
 SilverStripe\Admin\LeftAndMain:
   extra_requirements_css:
     - quickblocks/css/quickblocks.css
 SilverStripe\Assets\File:
   extensions:
     - Toast\FileExtension
+Toast\QuickBlock:
+  better_buttons_enabled: false

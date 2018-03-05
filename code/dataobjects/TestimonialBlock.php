@@ -16,6 +16,7 @@ class TestimonialBlock extends QuickBlock
 {
     private static $singular_name = 'Testimonial';
     private static $plural_name = 'Testimonials';
+    private static $table_name = 'TestimonialBlock';
 
     private static $db = [
         'Testimonial' => 'Text',
