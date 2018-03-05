@@ -1,5 +1,14 @@
 <?php
 
+namespace Toast;
+
+use SilverStripe\Assets\Image;
+use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Forms\RequiredFields;
+use SilverStripe\ORM\FieldType\DBHTMLText;
+
 /**
  * Class ImageBlock
  *
@@ -11,9 +20,10 @@ class ImageBlock extends QuickBlock
 {
     private static $singular_name = 'Image';
     private static $plural_name = 'Images';
+    private static $table_name = 'ImageBlock';
 
     private static $has_one = [
-        'Image' => 'Image'
+        'Image' => Image::class
     ];
 
     /**
@@ -38,11 +48,11 @@ class ImageBlock extends QuickBlock
         if ($this->Image() && $this->Image()->exists()) {
             $content = $this->Image()->Fit(300, 150)->forTemplate();
         }
-        return DBField::create_field('HTMLText', $content);
+        return DBField::create_field(DBHTMLText::class, $content);
     }
 
     public function getCMSValidator()
     {
-        return new RequiredFields(['Image']);
+        return new RequiredFields([Image::class]);
     }
 }

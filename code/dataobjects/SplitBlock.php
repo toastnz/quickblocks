@@ -1,5 +1,18 @@
 <?php
 
+namespace Toast;
+
+use Sheadawson\Linkable\Forms\LinkField;
+use SilverStripe\Assets\Image;
+use SilverStripe\Forms\HeaderField;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\ToggleCompositeField;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Forms\RequiredFields;
+use SilverStripe\ORM\FieldType\DBHTMLText;
+
 /**
  * Class SplitBlock
  *
@@ -12,6 +25,7 @@ class SplitBlock extends QuickBlock
 {
     private static $singular_name = 'Split Block';
     private static $plural_name = 'Split Blocks';
+    private static $table_name = 'SplitBlock';
 
     private static $db = [
         'LeftContent'  => 'Text',
@@ -21,8 +35,8 @@ class SplitBlock extends QuickBlock
     ];
 
     private static $has_one = [
-        'LeftImage'  => 'Image',
-        'RightImage' => 'Image',
+        'LeftImage'  => Image::class,
+        'RightImage' => Image::class,
         'LeftLink'   => 'Link',
         'RightLink'  => 'Link'
     ];
@@ -61,25 +75,11 @@ class SplitBlock extends QuickBlock
 
     public function getContentSummary()
     {
-        return DBField::create_field('HTMLText', $this->LeftContent . ' ' . $this->RightContent);
+        return DBField::create_field(DBHTMLText::class, $this->LeftContent . ' ' . $this->RightContent);
     }
 
     public function getCMSValidator()
     {
         return new RequiredFields(['LeftContent', 'RightContent', 'LeftImage', 'RightImage']);
     }
-
-    /* ==========================================
-     * SEARCH
-     * ========================================*/
-
-    public function getShowInSearch() {
-        return 1;
-    }
-
-    public function getAbstract()
-    {
-        return $this->getContentSummary()->forTemplate();
-    }
-
 }

@@ -1,5 +1,17 @@
 <?php
 
+namespace Toast;
+
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\ORM\FieldType\DBHTMLText;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\ORM\GroupedList;
+
 /**
  * Class AccordionBlock
  *
@@ -9,9 +21,10 @@ class AccordionBlock extends QuickBlock
 {
     private static $singular_name = 'Accordion';
     private static $plural_name = 'Accordions';
+    private static $table_name = 'AccordionBlock';
 
     private static $has_many = [
-        'AccordionItems' => 'AccordionItem'
+        'AccordionItems' => AccordionItem::class
     ];
 
     /**
@@ -23,7 +36,7 @@ class AccordionBlock extends QuickBlock
 
         $config = GridFieldConfig_RelationEditor::create(50)
             ->removeComponentsByType('GridFieldAddExistingAutoCompleter')
-            ->removeComponentsByType('GridFieldDeleteAction')
+            ->removeComponentsByType(GridFieldDeleteAction::class)
             ->addComponents(new GridFieldDeleteAction())
             ->addComponents(GridFieldOrderableRows::create('SortOrder'));
 
@@ -41,26 +54,13 @@ class AccordionBlock extends QuickBlock
     public function getContentSummary()
     {
         if ($this->AccordionItems() && $this->AccordionItems()->exists()) {
-            return DBField::create_field('HTMLText', implode(', ', $this->AccordionItems()->column('Heading')));
+            return DBField::create_field(DBHTMLText::class, implode(', ', $this->AccordionItems()->column('Heading')));
         }
-        return DBField::create_field('HTMLText', '');
+        return DBField::create_field(DBHTMLText::class, '');
     }
 
     public function getGroupedItems()
     {
         return GroupedList::create($this->AccordionItems());
-    }
-
-    /* ==========================================
-     * SEARCH
-     * ========================================*/
-
-    public function getShowInSearch() {
-        return 1;
-    }
-
-    public function getAbstract()
-    {
-        return $this->getContentSummary()->forTemplate();
     }
 }

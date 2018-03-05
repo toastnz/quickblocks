@@ -1,5 +1,9 @@
 <?php
 
+namespace Toast;
+
+use SilverStripe\Forms\GridField\GridField_ColumnProvider;
+
 /**
  * Provides a component to the {@link GridField} which shows the publish status of a page.
  *

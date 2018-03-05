@@ -2,20 +2,30 @@
 
 Simple content blocks system. Nothing fancy, easy to implement.
 
+## Requirements
+
+* silverstripe/cms 4.0.x
+* silverstripe/framework 4.0.x
+* symbiote/silverstripe-gridfieldextensions 3.1.1
+* edgarindustries/youtubefield 1.1
+* sheadawson/silverstripe-linkable 2.0.x-dev
+
+## Installation
+
 Add the following to your `config.yml`:
 
 ```yaml
 Page:
   extensions:
-    - QuickBlocksExtension
+    - Toast\QuickBlocksExtension
 ```
 
 Optionally:
 
 ```yaml
-Page_Controller:
+PageController:
   extensions:
-    - QuickBlocksControllerExtension
+    - Toast\QuickBlocksControllerExtension
 ```
 
 Use `Page` or other class that extends `SiteTree`.
@@ -35,7 +45,7 @@ In your `Layout/Page.ss` template, add the following:
 ```yaml
 QuickBlocksExtension:
   available_blocks:
-    - TextBlock
+    - Toast\TextBlock
 ```
 
 ### Create a custom block
@@ -45,7 +55,7 @@ Extend `QuickBlock` to create a new block type.
 ```php
 <?php
  
-class MyBlock extends QuickBlock
+class MyBlock extends Toast\QuickBlock
 {
     private static $singular_name = 'My Block';
     private static $plural_name = 'My Blocks';
@@ -58,7 +68,7 @@ class MyBlock extends QuickBlock
 }
 ```
 
-`/themes/default/templates/blocks/MyBlock.ss`:
+`/themes/default/templates/Toast/QuickBlocks/MyBlock.ss`:
 
 ```silverstripe
 <%-- Your block template here --%>
@@ -69,7 +79,6 @@ $Content
 
 ## Todo:
 
-* Namespacing
 * Template global providers
 * Zoning
-* SilverStripe 4
+* Duplicate handlers

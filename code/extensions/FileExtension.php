@@ -1,5 +1,10 @@
 <?php
 
+namespace Toast;
+
+use SilverStripe\Control\Controller;
+use SilverStripe\ORM\DataExtension;
+
 /**
  * Class FileExtension
  *

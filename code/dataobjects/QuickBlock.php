@@ -1,5 +1,25 @@
 <?php
 
+namespace Toast;
+
+use SilverStripe\Control\Director;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Forms\TabSet;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\Tab;
+use SilverStripe\Forms\GridField\GridFieldConfig_Base;
+use SilverStripe\Forms\GridField\GridFieldDataColumns;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Control\Controller;
+use SilverStripe\ORM\FieldType\DBHTMLText;
+use SilverStripe\Security\Permission;
+use SilverStripe\Security\Member;
+use SilverStripe\ORM\DB;
+use SilverStripe\Versioned\Versioned;
+use SilverStripe\ORM\DataObject;
+
 /**
  * Class QuickBlock
  *
@@ -11,6 +31,7 @@ class QuickBlock extends DataObject
 {
     private static $singular_name = 'Block';
     private static $plural_name = 'Blocks';
+    private static $table_name = 'QuickBlock';
 
     private static $db = [
         'Title' => 'Varchar(255)'
@@ -31,7 +52,7 @@ class QuickBlock extends DataObject
     ];
 
     private static $extensions = [
-        'Versioned("Stage","Live")'
+        Versioned::class
     ];
 
     public function getIconForCMS()
@@ -56,7 +77,7 @@ class QuickBlock extends DataObject
 
     function forTemplate()
     {
-        return $this->renderWith([$this->ClassName, 'QuickBlock']);
+        return $this->renderWith([self::class, 'Toast\QuickBlocks\QuickBlock']);
     }
 
     public function getCMSFields()
@@ -74,7 +95,7 @@ class QuickBlock extends DataObject
 
         $config = GridFieldConfig_Base::create(50);
 
-        $config->getComponentByType('GridFieldDataColumns')->setDisplayFields([
+        $config->getComponentByType(GridFieldDataColumns::class)->setDisplayFields([
             'Title' => 'Page Name',
             'Link'  => 'Link'
         ]);
@@ -96,7 +117,7 @@ class QuickBlock extends DataObject
 
     public function getContentSummary()
     {
-        return DBField::create_field('HTMLText', '');
+        return DBField::create_field(DBHTMLText::class, '');
     }
 
     public function getTitle()
@@ -147,7 +168,7 @@ class QuickBlock extends DataObject
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
     }
 
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
     }
@@ -179,7 +200,7 @@ class QuickBlock extends DataObject
      */
     public function canPublish($member = null)
     {
-        if (!$member || !(is_a($member, 'Member')) || is_numeric($member)) {
+        if (!$member || !(is_a($member, Member::class)) || is_numeric($member)) {
             $member = Member::currentUser();
         }
 
@@ -308,40 +329,25 @@ class QuickBlock extends DataObject
 
         $this->invokeWithExtensions('onBeforeUnpublish', $this);
 
-        $origStage = Versioned::current_stage();
-        Versioned::reading_stage('Live');
+        $origStage = Versioned::get_reading_mode();
+        Versioned::set_reading_mode('Live');
 
         // This way our ID won't be unset
         $clone = clone $this;
         $clone->delete();
 
-        Versioned::reading_stage($origStage);
+        Versioned::set_reading_mode($origStage);
 
         // If we're on the draft site, then we can update the status.
         // Otherwise, these lines will resurrect an inappropriate record
         if (DB::prepared_query("SELECT \"ID\" FROM \"QuickBlock_Live\" WHERE \"ID\" = ?", [$this->ID])->value()
-            && Versioned::current_stage() != 'Live') {
+            && Versioned::get_reading_mode() != 'Live') {
             $this->write();
         }
 
         $this->invokeWithExtensions('onAfterUnpublish', $this);
 
         return true;
-    }
-
-
-    /* ==========================================
-     * SEARCH
-     * ========================================*/
-
-    public function getShowInSearch()
-    {
-        return 1;
-    }
-
-    public function getAbstract()
-    {
-        return $this->getContentSummary()->forTemplate();
     }
 }
 

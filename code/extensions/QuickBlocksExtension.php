@@ -1,5 +1,27 @@
 <?php
 
+namespace Toast;
+
+use finfo;
+use SilverStripe\Control\HTTPResponse;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\GridField\GridFieldDetailForm;
+use SilverStripe\Forms\Tab;
+use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
+use SilverStripe\Versioned\VersionedGridFieldItemRequest;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use SilverStripe\Forms\GridField\GridFieldAddNewButton;
+use Symbiote\GridFieldExtensions\GridFieldAddNewMultiClass;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Control\Director;
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Assets\File;
+use SilverStripe\Control\Controller;
+use SilverStripe\Core\Extension;
+use ZipArchive;
+
 /**
  * Class QuickBlocksExtension
  *
@@ -8,7 +30,7 @@
 class QuickBlocksExtension extends DataExtension
 {
     private static $many_many = [
-        'ContentBlocks' => 'QuickBlock'
+        'ContentBlocks' => QuickBlock::class
     ];
 
     private static $many_many_extraFields = [
@@ -28,12 +50,14 @@ class QuickBlocksExtension extends DataExtension
         $config = GridFieldConfig_RelationEditor::create(50);
         $config->addComponent(GridFieldOrderableRows::create('SortOrder'))
 //            ->removeComponentsByType('GridFieldDeleteAction')
-            ->removeComponentsByType('GridFieldAddNewButton')
+            ->removeComponentsByType(GridFieldAddNewButton::class)
             ->addComponent(new GridFieldContentBlockState())
             ->addComponent(new GridFieldArchiveAction());
+        $config->getComponentByType(GridFieldDetailForm::class)
+            ->setItemRequestClass(VersionedGridFieldItemRequest::class);
 
         $multiClass = new GridFieldAddNewMultiClass();
-        $multiClass->setClasses(Config::inst()->get('QuickBlocksExtension', 'available_blocks'));
+        $multiClass->setClasses(Config::inst()->get(QuickBlocksExtension::class, 'available_blocks'));
 
         $config->addComponent($multiClass);
 
@@ -65,7 +89,7 @@ class QuickBlocksExtension extends DataExtension
 /**
  * Class QuickBlocksControllerExtension
  *
- * @property Page_Controller $owner
+ * @property PageController $owner
  */
 class QuickBlocksControllerExtension extends Extension
 {
@@ -101,7 +125,7 @@ class QuickBlocksControllerExtension extends Extension
      * @param SS_HTTPRequest $request
      * @return SS_HTTPResponse
      */
-    public function download(SS_HTTPRequest $request)
+    public function download(HTTPRequest $request)
     {
         /** =========================================
          * @var File $file
@@ -119,7 +143,7 @@ class QuickBlocksControllerExtension extends Extension
 
     /**
      * @param array $ids
-     * @return SS_HTTPResponse
+     * @return HTTPResponse
      */
     public function getZipResponse($ids)
     {
@@ -147,7 +171,7 @@ class QuickBlocksControllerExtension extends Extension
                 header('Content-Length: ' . filesize($path));
 
                 if ($result === true) {
-                    return SS_HTTPRequest::send_file(
+                    return HTTPRequest::send_file(
                         file_get_contents($path),
                         'download.zip',
                         'application/zip'

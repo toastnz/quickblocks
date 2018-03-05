@@ -1,5 +1,14 @@
 <?php
 
+namespace Toast;
+
+use SilverStripe\Forms\GridField\GridField_FormAction;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\ORM\ValidationException;
+use SilverStripe\Control\Controller;
+use SilverStripe\Forms\GridField\GridField_ColumnProvider;
+use SilverStripe\Forms\GridField\GridField_ActionProvider;
+
 class GridFieldArchiveAction implements GridField_ColumnProvider, GridField_ActionProvider
 {
 
@@ -39,7 +48,8 @@ class GridFieldArchiveAction implements GridField_ColumnProvider, GridField_Acti
             false,
             "archive",
             ['RecordID' => $record->ID]
-        )->setAttribute('data-icon', 'cross-circle')
+        )
+            ->addExtraClass('btn btn--no-text btn--icon-md font-icon-cancel-circled grid-field__icon-action gridfield-button-archive')
             ->setAttribute('title', 'Archive')
             ->addExtraClass('gridfield-button-delete');
 

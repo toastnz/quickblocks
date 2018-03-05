@@ -1,5 +1,13 @@
 <?php
 
+namespace Toast;
+
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Forms\RequiredFields;
+
 /**
  * Class TestimonialBlock
  *
@@ -9,6 +17,7 @@ class TestimonialBlock extends QuickBlock
 {
     private static $singular_name = 'Testimonial';
     private static $plural_name = 'Testimonials';
+    private static $table_name = 'TestimonialBlock';
 
     private static $db = [
         'Testimonial' => 'Text',
@@ -40,19 +49,5 @@ class TestimonialBlock extends QuickBlock
     public function getCMSValidator()
     {
         return new RequiredFields(['Testimonial']);
-    }
-
-    /* ==========================================
-     * SEARCH
-     * ========================================*/
-
-
-    public function getShowInSearch() {
-        return 1;
-    }
-
-    public function getAbstract()
-    {
-        return $this->getContentSummary()->forTemplate();
     }
 }

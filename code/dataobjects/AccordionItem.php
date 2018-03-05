@@ -1,5 +1,17 @@
 <?php
 
+namespace Toast;
+
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Forms\TabSet;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\RequiredFields;
+use SilverStripe\ORM\FieldType\DBHTMLText;
+use SilverStripe\Security\Permission;
+use SilverStripe\ORM\DataObject;
+
 /**
  * Class AccordionItem
  *
@@ -14,6 +26,7 @@ class AccordionItem extends DataObject
     private static $singular_name = 'Item';
     private static $plural_name = 'Items';
     private static $default_sort = 'SortOrder';
+    private static $table_name = 'AccordionItem';
 
     private static $db = [
         'Heading'   => 'Text',
@@ -22,7 +35,7 @@ class AccordionItem extends DataObject
     ];
 
     private static $has_one = [
-        'Parent' => 'AccordionBlock'
+        'Parent' => AccordionBlock::class
     ];
 
     private static $summary_fields = [
@@ -42,7 +55,7 @@ class AccordionItem extends DataObject
 
         $title = strlen($title) > 20 ? '<span>' . $title . '</span>' : $title;
 
-        return DBField::create_field('HTMLText', $title);
+        return DBField::create_field(DBHTMLText::class, $title);
     }
 
     /**
@@ -108,65 +121,11 @@ class AccordionItem extends DataObject
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
     }
 
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         if ($this->Parent()) {
-            return $this->Parent()->canCreate($member);
+            return $this->Parent()->canCreate($member, $context);
         }
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
-    }
-
-    /* ==========================================
-     * SEARCH
-     * ========================================*/
-
-    /**
-     * Filter array
-     * eg. array('Disabled' => 0);
-     * @return array
-     */
-    public static function getSearchFilter()
-    {
-        return [];
-    }
-
-    /**
-     * Fields that compose the Title
-     * eg. array('Title', 'Subtitle');
-     * @return array
-     */
-    public function getTitleFields()
-    {
-        return ['Heading'];
-    }
-
-    /**
-     * Fields that compose the Content
-     * eg. array('Teaser', 'Content');
-     * @return array
-     */
-    public function getContentFields()
-    {
-        return ['Content'];
-    }
-
-    /**
-     * Parent objects that should be displayed in search results.
-     * @return SiteTree or SearchableLinkable
-     */
-    public function getOwner()
-    {
-        return $this->Parent()->Parent();
-    }
-
-    /**
-     * Whatever this specific Searchable should be included in search results.
-     * This allows you to exclude some DataObjects from search results.
-     * It plays more or less the same role that ShowInSearch plays for SiteTree.
-     * @return boolean
-     */
-    public function IncludeInSearch()
-    {
-        return true;
     }
 }

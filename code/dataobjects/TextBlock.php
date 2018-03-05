@@ -1,5 +1,11 @@
 <?php
 
+namespace Toast;
+
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\RequiredFields;
+
 /**
  * Class TextBlock
  *
@@ -9,6 +15,7 @@ class TextBlock extends QuickBlock
 {
     private static $singular_name = 'Text';
     private static $plural_name = 'Text';
+    private static $table_name = 'TextBlock';
 
     private static $db = [
         'Content' => 'HTMLText'
@@ -35,19 +42,4 @@ class TextBlock extends QuickBlock
     {
         return new RequiredFields(['Content']);
     }
-
-    /* ==========================================
-     * SEARCH
-     * ========================================*/
-
-
-    public function getShowInSearch() {
-        return 1;
-    }
-
-    public function getAbstract()
-    {
-        return $this->getContentSummary()->forTemplate();
-    }
-
 }
