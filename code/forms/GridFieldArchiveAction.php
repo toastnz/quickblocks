@@ -1,6 +1,6 @@
 <?php
 
-namespace Toast;
+namespace Toast\QuickBlocks;
 
 use SilverStripe\Forms\GridField\GridField_FormAction;
 use SilverStripe\Forms\GridField\GridField;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Toast;
+namespace Toast\QuickBlocks;
 
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;

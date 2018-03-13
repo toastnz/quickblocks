@@ -1,6 +1,6 @@
 <?php
 
-namespace Toast;
+namespace Toast\QuickBlocks;
 
 use finfo;
 use SilverStripe\Control\HTTPResponse;

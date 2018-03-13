@@ -1,6 +1,6 @@
 <?php
 
-namespace Toast;
+namespace Toast\QuickBlocks;
 
 use SilverStripe\Control\Director;
 use SilverStripe\ORM\FieldType\DBField;
@@ -77,7 +77,7 @@ class QuickBlock extends DataObject
 
     function forTemplate()
     {
-        return $this->renderWith([self::class, 'Toast\QuickBlocks\QuickBlock']);
+        return $this->renderWith([$this->ClassName, 'Toast\QuickBlocks\QuickBlock']);
     }
 
     public function getCMSFields()

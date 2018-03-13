@@ -1,6 +1,6 @@
 <?php
 
-namespace Toast;
+namespace Toast\QuickBlocks;
 
 use EdgarIndustries\YouTubeField\YouTubeField;
 use SilverStripe\Assets\Image;

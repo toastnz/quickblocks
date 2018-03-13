@@ -1,6 +1,6 @@
 <?php
 
-namespace Toast;
+namespace Toast\QuickBlocks;
 
 use SilverStripe\Assets\File;
 use SilverStripe\AssetAdmin\Forms\UploadField;

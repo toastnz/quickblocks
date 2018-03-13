@@ -1,6 +1,6 @@
 <?php
 
-namespace Toast;
+namespace Toast\QuickBlocks;
 
 use SilverStripe\Control\Controller;
 use SilverStripe\ORM\DataExtension;

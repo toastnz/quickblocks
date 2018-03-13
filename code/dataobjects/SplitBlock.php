@@ -1,6 +1,6 @@
 <?php
 
-namespace Toast;
+namespace Toast\QuickBlocks;
 
 use Sheadawson\Linkable\Forms\LinkField;
 use SilverStripe\Assets\Image;
