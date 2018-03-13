@@ -112,6 +112,8 @@ class QuickBlock extends DataObject
             $gridField
         ]);
 
+        $this->extend('updateCMSFields', $fields);
+
         return $fields;
     }
 
