@@ -152,12 +152,13 @@ class QuickBlocksControllerExtension extends Extension
         if ($files && $files->exists()) {
             if (count($ids) === 1) {
                 $file = $files->first();
-                $path = Director::baseFolder() . '/' . $file->Filename;
+                $path = Controller::join_links(Director::baseFolder(), $file->Link());
 
                 header('Content-Type: ' . _mime_content_type($path));
                 header('Content-disposition: attachment; filename=' . $file->Name);
                 header('Content-Length: ' . filesize($path));
                 readfile($path);
+
             } else {
                 $dir = sys_get_temp_dir() . '/archives';
                 if (!file_exists($dir)) {
@@ -203,7 +204,7 @@ class QuickBlocksControllerExtension extends Extension
         //cycle through each file
         foreach ($files->getIterator() as $file) {
             //make sure the file exists
-            if (file_exists(Controller::join_links(Director::baseFolder(), $file->Filename))) {
+            if (file_exists(Controller::join_links(Director::baseFolder(), $file->Link()))) {
                 $valid_files[] = $file;
             }
         }
@@ -222,7 +223,7 @@ class QuickBlocksControllerExtension extends Extension
 
             //add the files
             foreach ($valid_files as $file) {
-                $zip->addFile(Controller::join_links(Director::baseFolder(), $file->Filename), $file->Name);
+                $zip->addFile(Controller::join_links(Director::baseFolder(), $file->Link()), $file->Name);
             }
             $zip->close();
 
