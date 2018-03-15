@@ -45,30 +45,32 @@ class QuickBlocksExtension extends DataExtension
          * Blocks
          * ----------------------------------------*/
 
-        $fields->insertAfter('Main', new Tab('Blocks'));
+        if ($this->owner->exists()) {
+            $fields->insertAfter('Main', new Tab('Blocks'));
 
-        $config = GridFieldConfig_RelationEditor::create(50);
-        $config->addComponent(GridFieldOrderableRows::create('SortOrder'))
-//            ->removeComponentsByType('GridFieldDeleteAction')
-            ->removeComponentsByType(GridFieldAddNewButton::class)
-            ->addComponent(new GridFieldContentBlockState())
-            ->addComponent(new GridFieldArchiveAction());
-        $config->getComponentByType(GridFieldDetailForm::class)
-            ->setItemRequestClass(VersionedGridFieldItemRequest::class);
+            $config = GridFieldConfig_RelationEditor::create(50);
+            $config->addComponent(GridFieldOrderableRows::create('SortOrder'))
+    //            ->removeComponentsByType('GridFieldDeleteAction')
+                ->removeComponentsByType(GridFieldAddNewButton::class)
+                ->addComponent(new GridFieldContentBlockState())
+                ->addComponent(new GridFieldArchiveAction());
+            $config->getComponentByType(GridFieldDetailForm::class)
+                ->setItemRequestClass(VersionedGridFieldItemRequest::class);
 
-        $multiClass = new GridFieldAddNewMultiClass();
-        $multiClass->setClasses(Config::inst()->get(QuickBlocksExtension::class, 'available_blocks'));
+            $multiClass = new GridFieldAddNewMultiClass();
+            $multiClass->setClasses(Config::inst()->get(QuickBlocksExtension::class, 'available_blocks'));
 
-        $config->addComponent($multiClass);
+            $config->addComponent($multiClass);
 
-        $gridField = GridField::create(
-            'ContentBlocks',
-            'Blocks',
-            $this->owner->ContentBlocks(),
-            $config
-        );
+            $gridField = GridField::create(
+                'ContentBlocks',
+                'Blocks',
+                $this->owner->ContentBlocks(),
+                $config
+            );
 
-        $fields->addFieldToTab('Root.Blocks', $gridField);
+            $fields->addFieldToTab('Root.Blocks', $gridField);
+        }
     }
 
     /**
