@@ -23,8 +23,7 @@
   "require": {
     "composer/installers": "*",
     "symbiote/silverstripe-gridfieldextensions": "^3.1",
-    "silverstripe/cms": "^4.x@stable",
-    "silverstripe/framework": "^4.x@stable",
+    "silverstripe/recipe-cms": "^1.0.3",
     "edgarindustries/youtubefield": "^1.1",
     "sheadawson/silverstripe-linkable": "2.0.x-dev"
   }
