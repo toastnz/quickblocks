@@ -12,7 +12,7 @@ class VideoBlock extends QuickBlock
     private static $plural_name = 'Videos';
 
     private static $db = [
-        'Caption'   => 'Varchar(255)',
+        'Caption'   => 'Text',
         'VideoID'   => 'Varchar(50)'
     ];
 
@@ -28,7 +28,7 @@ class VideoBlock extends QuickBlock
         $fields = parent::getCMSFields();
 
         $fields->addFieldsToTab('Root.Main', [
-            TextField::create('Caption', 'Caption'),
+            TextareaField::create('Caption', 'Caption'),
             YouTubeField::create('VideoID', 'YouTube Video'),
             UploadField::create('Thumbnail', 'Thumbnail')
                 ->setFolderName('Uploads/videos')
