@@ -5,7 +5,9 @@ namespace Toast\QuickBlocks;
 use finfo;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
 use SilverStripe\Forms\GridField\GridFieldDetailForm;
+use SilverStripe\Forms\GridField\GridFieldSortableHeader;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Versioned\VersionedGridFieldItemRequest;
@@ -20,6 +22,7 @@ use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Assets\File;
 use SilverStripe\Control\Controller;
 use SilverStripe\Core\Extension;
+use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
 use ZipArchive;
 
 /**
@@ -49,9 +52,7 @@ class QuickBlocksExtension extends DataExtension
             $fields->insertAfter('Main', new Tab('Blocks'));
 
             $config = GridFieldConfig_RelationEditor::create(50);
-            $config->addComponent(GridFieldOrderableRows::create('SortOrder'))
-    //            ->removeComponentsByType('GridFieldDeleteAction')
-                ->removeComponentsByType(GridFieldAddNewButton::class)
+            $config->removeComponentsByType(GridFieldAddNewButton::class)
                 ->addComponent(new GridFieldContentBlockState())
                 ->addComponent(new GridFieldArchiveAction());
             $config->getComponentByType(GridFieldDetailForm::class)
@@ -61,6 +62,15 @@ class QuickBlocksExtension extends DataExtension
             $multiClass->setClasses(Config::inst()->get(QuickBlocksExtension::class, 'available_blocks'));
 
             $config->addComponent($multiClass);
+
+            /** @var GridFieldAddExistingAutocompleter $addExisting */
+            $addExisting = $config->getComponentByType(GridFieldAddExistingAutocompleter::class);
+
+            $addExisting->setSearchFields([
+                'Title:PartialMatch'
+            ]);
+
+            $config->addComponent(new GridFieldSortableRows('SortOrder'));
 
             $gridField = GridField::create(
                 'ContentBlocks',

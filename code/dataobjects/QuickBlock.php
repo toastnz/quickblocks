@@ -55,6 +55,8 @@ class QuickBlock extends DataObject
         Versioned::class
     ];
 
+    private static $versioned_gridfield_extensions = true;
+
     public function getIconForCMS()
     {
         // Check if this class has an icon set
@@ -74,6 +76,10 @@ class QuickBlock extends DataObject
         return DBField::create_field('HTMLText', '<img src="' . $icon . '">');
     }
 
+    public function IconForCMS()
+    {
+        return $this->getIconForCMS();
+    }
 
     function forTemplate()
     {

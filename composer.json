@@ -25,6 +25,7 @@
     "symbiote/silverstripe-gridfieldextensions": "^3.1",
     "silverstripe/recipe-cms": "^1.0.3",
     "edgarindustries/youtubefield": "^1.1",
-    "sheadawson/silverstripe-linkable": "2.0.x-dev"
+    "sheadawson/silverstripe-linkable": "2.0.x-dev",
+    "undefinedoffset/sortablegridfield": "^2.0.4"
   }
 }
