@@ -24,8 +24,6 @@ use SilverStripe\ORM\DataObject;
  * Class QuickBlock
  *
  * @property string Title
- *
- * @method ManyManyList|Page[] ParentPages()
  */
 class QuickBlock extends DataObject
 {
@@ -35,10 +33,6 @@ class QuickBlock extends DataObject
 
     private static $db = [
         'Title' => 'Varchar(255)'
-    ];
-
-    private static $belongs_many_many = [
-        'ParentPages' => 'Page'
     ];
 
     private static $casting = [
@@ -92,31 +86,6 @@ class QuickBlock extends DataObject
 
         $fields->addFieldToTab('Root.Main', TextField::create('Title', 'Name')
             ->setAttribute('placeholder', 'This is a helper field only (will not show in templates)'));
-
-        /** -----------------------------------------
-         * Pages
-         * ----------------------------------------*/
-
-        $fields->insertAfter('Main', new Tab('Pages'));
-
-        $config = GridFieldConfig_Base::create(50);
-
-        $config->getComponentByType(GridFieldDataColumns::class)->setDisplayFields([
-            'Title' => 'Page Name',
-            'Link'  => 'Link'
-        ]);
-
-        $gridField = GridField::create(
-            'ParentPages',
-            'Pages',
-            $this->ParentPages(),
-            $config
-        );
-
-        $fields->addFieldsToTab('Root.Pages', [
-            LiteralField::create('', '<div class="message warning">The following pages will be affected by any changes to this block</div>'),
-            $gridField
-        ]);
 
         $this->extend('updateCMSFields', $fields);
 
