@@ -2,7 +2,6 @@
 
 namespace Toast\QuickBlocks;
 
-use SilverStripe\Forms\GridField\GridField_ActionMenuItem;
 use SilverStripe\Forms\GridField\GridField_FormAction;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\ORM\DataObject;
@@ -11,7 +10,7 @@ use SilverStripe\Control\Controller;
 use SilverStripe\Forms\GridField\GridField_ColumnProvider;
 use SilverStripe\Forms\GridField\GridField_ActionProvider;
 
-class GridFieldArchiveAction implements GridField_ColumnProvider, GridField_ActionProvider, GridField_ActionMenuItem
+class GridFieldArchiveAction implements GridField_ColumnProvider, GridField_ActionProvider
 {
     /**
      * Add a column 'Delete'
@@ -171,23 +170,5 @@ class GridFieldArchiveAction implements GridField_ColumnProvider, GridField_Acti
         }
 
         return null;
-    }
-
-    /**
-     * Gets the group this menu item will belong to. A null value should indicate
-     * the button should not display.
-     *
-     * @see {@link GridField_ActionMenu->getColumnContent()}
-     *
-     * @param GridField  $gridField
-     * @param DataObject $record
-     *
-     * @return string|null $group
-     */
-    public function getGroup($gridField, $record, $columnName)
-    {
-        $field = $this->getArchiveAction($gridField, $record, $columnName);
-
-        return $field ? GridField_ActionMenuItem::DEFAULT_GROUP: null;
     }
 }
