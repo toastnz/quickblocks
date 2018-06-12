@@ -246,8 +246,14 @@ class QuickBlock extends DataObject
     {
         $this->invokeWithExtensions('onBeforeArchive', $this);
 
+        $thisID = $this->ID;
+
         if ($this->doUnpublish()) {
             $this->delete();
+
+            // Remove from join tables
+            DB::prepared_query("DELETE FROM \"Page_ContentBlocks\" WHERE \"QuickBlockID\" = ?", [$thisID]);
+
             $this->invokeWithExtensions('onAfterArchive', $this);
 
             return true;
@@ -295,36 +301,39 @@ class QuickBlock extends DataObject
      * @uses DocumentExtension->onBeforeUnpublish()
      * @uses DocumentExtension->onAfterUnpublish()
      */
-    public function doUnpublish()
-    {
-        if (!$this->canDeleteFromLive()) {
-            return false;
-        }
-        if (!$this->ID) {
-            return false;
-        }
-
-        $this->invokeWithExtensions('onBeforeUnpublish', $this);
-
-        $origStage = Versioned::get_reading_mode();
-        Versioned::set_reading_mode('Live');
-
-        // This way our ID won't be unset
-        $clone = clone $this;
-        $clone->delete();
-
-        Versioned::set_reading_mode($origStage);
-
-        // If we're on the draft site, then we can update the status.
-        // Otherwise, these lines will resurrect an inappropriate record
-        if (DB::prepared_query("SELECT \"ID\" FROM \"QuickBlock_Live\" WHERE \"ID\" = ?", [$this->ID])->value()
-            && Versioned::get_reading_mode() != 'Live') {
-            $this->write();
-        }
-
-        $this->invokeWithExtensions('onAfterUnpublish', $this);
-
-        return true;
-    }
+//    public function doUnpublish()
+//    {
+//        if (!$this->canDeleteFromLive()) {
+//            return false;
+//        }
+//        if (!$this->ID) {
+//            return false;
+//        }
+//
+//        $this->invokeWithExtensions('onBeforeUnpublish', $this);
+//
+//        $origStage = Versioned::get_reading_mode();
+//        Versioned::set_reading_mode(Versioned::LIVE);
+//
+//        // This way our ID won't be unset
+//        $clone = clone $this;
+//
+//        $clone->deleteFromStage(Versioned::LIVE);
+//        $clone->delete();
+//
+//
+//        Versioned::set_reading_mode($origStage);
+//
+//        // If we're on the draft site, then we can update the status.
+//        // Otherwise, these lines will resurrect an inappropriate record
+////        if (DB::prepared_query("SELECT \"ID\" FROM \"QuickBlock_Live\" WHERE \"ID\" = ?", [$this->ID])->value()
+////            && Versioned::get_reading_mode() != 'Live') {
+////            $this->write();
+////        }
+//
+//        $this->invokeWithExtensions('onAfterUnpublish', $this);
+//
+//        return true;
+//    }
 }
 
