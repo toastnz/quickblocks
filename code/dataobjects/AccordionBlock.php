@@ -3,6 +3,7 @@
 namespace Toast\QuickBlocks;
 
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\ORM\FieldType\DBHTMLText;
@@ -35,7 +36,7 @@ class AccordionBlock extends QuickBlock
         $fields = parent::getCMSFields();
 
         $config = GridFieldConfig_RelationEditor::create(50)
-            ->removeComponentsByType('GridFieldAddExistingAutoCompleter')
+            ->removeComponentsByType(GridFieldAddExistingAutoCompleter::class)
             ->removeComponentsByType(GridFieldDeleteAction::class)
             ->addComponents(new GridFieldDeleteAction())
             ->addComponents(GridFieldOrderableRows::create('SortOrder'));
