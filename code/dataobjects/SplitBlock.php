@@ -70,6 +70,8 @@ class SplitBlock extends QuickBlock
                 ->setDescription('Ideal size: 400x400'),
         ])));
 
+        $this->extend('updateCMSFields', $fields);
+
         return $fields;
     }
 

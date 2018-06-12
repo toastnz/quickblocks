@@ -35,6 +35,8 @@ class DownloadBlock extends QuickBlock
                 ->setFolderName('Uploads/downloads')
         ]);
 
+        $this->extend('updateCMSFields', $fields);
+
         return $fields;
     }
 

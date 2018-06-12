@@ -70,6 +70,8 @@ class AccordionItem extends DataObject
             HtmlEditorField::create('Content', 'Content'),
         ]);
 
+        $this->extend('updateCMSFields', $fields);
+
         return $fields;
     }
 

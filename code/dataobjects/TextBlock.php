@@ -30,6 +30,8 @@ class TextBlock extends QuickBlock
 
         $fields->addFieldToTab('Root.Main', HtmlEditorField::create('Content', 'Content'));
 
+        $this->extend('updateCMSFields', $fields);
+
         return $fields;
     }
 

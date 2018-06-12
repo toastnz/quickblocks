@@ -49,6 +49,8 @@ class AccordionBlock extends QuickBlock
             $fields->addFieldToTab('Root.Main', LiteralField::create('', '<div class="message notice">Save this block to show additional options.</div>'));
         }
 
+        $this->extend('updateCMSFields', $fields);
+
         return $fields;
     }
 

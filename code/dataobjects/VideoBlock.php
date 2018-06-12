@@ -47,6 +47,8 @@ class VideoBlock extends QuickBlock
                 ->setDescription('Will automatically use YouTube thumbnail if this image is not uploaded. Ideal size: 960x540')
         ]);
 
+        $this->extend('updateCMSFields', $fields);
+
         return $fields;
     }
 

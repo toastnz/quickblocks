@@ -38,6 +38,8 @@ class ImageBlock extends QuickBlock
                 ->setFolderName('Uploads/page-images')
         ]);
 
+        $this->extend('updateCMSFields', $fields);
+
         return $fields;
     }
 

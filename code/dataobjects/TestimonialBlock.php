@@ -38,6 +38,8 @@ class TestimonialBlock extends QuickBlock
             TextField::create('Location', 'Location')
         ]);
 
+        $this->extend('updateCMSFields', $fields);
+
         return $fields;
     }
 
