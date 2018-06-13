@@ -23,6 +23,10 @@ class DownloadBlock extends QuickBlock
         'Files' => File::class
     ];
 
+    private static $owns = [
+        'Files'
+    ];
+
     /**
      * @return FieldList
      */
