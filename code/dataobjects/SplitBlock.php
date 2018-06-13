@@ -41,6 +41,11 @@ class SplitBlock extends QuickBlock
         'RightLink'  => 'Link'
     ];
 
+    private static $owns = [
+        'LeftImage',
+        'RightImage'
+    ];
+
     /**
      * @return FieldList
      */

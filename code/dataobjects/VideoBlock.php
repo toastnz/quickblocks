@@ -32,6 +32,10 @@ class VideoBlock extends QuickBlock
         'Thumbnail' => Image::class
     ];
 
+    private static $owns = [
+        'Thumbnail'
+    ];
+
     /**
      * @return FieldList
      */

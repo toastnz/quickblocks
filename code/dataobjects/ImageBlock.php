@@ -26,6 +26,10 @@ class ImageBlock extends QuickBlock
         'Image' => Image::class
     ];
 
+    private static $owns = [
+        'Image'
+    ];
+
     /**
      * @return FieldList
      */
