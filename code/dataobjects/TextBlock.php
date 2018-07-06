@@ -42,6 +42,10 @@ class TextBlock extends QuickBlock
 
     public function getCMSValidator()
     {
-        return new RequiredFields(['Content']);
+        $required = new RequiredFields(['Content']);
+
+        $this->extend('updateCMSValidator',$required);
+
+        return $required;
     }
 }
