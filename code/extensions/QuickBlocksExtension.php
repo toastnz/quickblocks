@@ -23,28 +23,30 @@ class QuickBlocksExtension extends DataExtension
          * Blocks
          * ----------------------------------------*/
 
-        $fields->insertAfter('Main', new Tab('Blocks'));
+        if ($this->owner->exists()) {
+            $fields->insertAfter('Main', new Tab('Blocks'));
 
-        $config = GridFieldConfig_RelationEditor::create(50);
-        $config->addComponent(GridFieldOrderableRows::create('SortOrder'))
-//            ->removeComponentsByType('GridFieldDeleteAction')
-            ->removeComponentsByType('GridFieldAddNewButton')
-            ->addComponent(new GridFieldContentBlockState())
-            ->addComponent(new GridFieldArchiveAction());
+            $config = GridFieldConfig_RelationEditor::create(50);
+            $config->addComponent(GridFieldOrderableRows::create('SortOrder'))
+    //            ->removeComponentsByType('GridFieldDeleteAction')
+                ->removeComponentsByType('GridFieldAddNewButton')
+                ->addComponent(new GridFieldContentBlockState())
+                ->addComponent(new GridFieldArchiveAction());
 
-        $multiClass = new GridFieldAddNewMultiClass();
-        $multiClass->setClasses(Config::inst()->get('QuickBlocksExtension', 'available_blocks'));
+            $multiClass = new GridFieldAddNewMultiClass();
+            $multiClass->setClasses(Config::inst()->get('QuickBlocksExtension', 'available_blocks'));
 
-        $config->addComponent($multiClass);
+            $config->addComponent($multiClass);
 
-        $gridField = GridField::create(
-            'ContentBlocks',
-            'Blocks',
-            $this->owner->ContentBlocks(),
-            $config
-        );
+            $gridField = GridField::create(
+                'ContentBlocks',
+                'Blocks',
+                $this->owner->ContentBlocks(),
+                $config
+            );
 
-        $fields->addFieldToTab('Root.Blocks', $gridField);
+            $fields->addFieldToTab('Root.Blocks', $gridField);
+        }
     }
 
     /**
