@@ -86,20 +86,6 @@ class QuickBlocksExtension extends DataExtension
             $fields->addFieldToTab('Root.Blocks', $gridField);
         }
     }
-
-    /**
-     * Publish all content blocks
-     */
-    public function onAfterPublish()
-    {
-        // Loop through content blocks and publish
-        /** @var QuickBlock $contentBlock */
-        foreach ($this->owner->ContentBlocks() as $contentBlock) {
-            if ($contentBlock->canPublish()) {
-                $contentBlock->publish('Stage', 'Live');
-            }
-        }
-    }
 }
 
 /**
