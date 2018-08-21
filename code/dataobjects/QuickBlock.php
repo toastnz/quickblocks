@@ -77,7 +77,11 @@ class QuickBlock extends DataObject
 
     function forTemplate()
     {
-        return $this->renderWith([$this->ClassName, 'Toast\QuickBlocks\QuickBlock']);
+        $template = $this->ClassName;
+
+        $this->extend('updateBlockTemplate', $template);
+
+        return $this->renderWith([$template, 'Toast\QuickBlocks\QuickBlock']);
     }
 
     public function getCMSFields()
