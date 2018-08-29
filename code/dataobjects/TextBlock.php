@@ -26,11 +26,11 @@ class TextBlock extends QuickBlock
      */
     public function getCMSFields()
     {
+        $this->beforeUpdateCMSFields(function ($fields) {
+            $fields->addFieldToTab('Root.Main', HtmlEditorField::create('Content', 'Content'));
+        });
+
         $fields = parent::getCMSFields();
-
-        $fields->addFieldToTab('Root.Main', HtmlEditorField::create('Content', 'Content'));
-
-        $this->extend('updateCMSFields', $fields);
 
         return $fields;
     }

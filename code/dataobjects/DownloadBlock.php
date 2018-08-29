@@ -32,14 +32,14 @@ class DownloadBlock extends QuickBlock
      */
     public function getCMSFields()
     {
+        $this->beforeUpdateCMSFields(function ($fields) {
+            $fields->addFieldsToTab('Root.Main', [
+                UploadField::create('Files', 'Files')
+                    ->setFolderName('Uploads/downloads')
+            ]);
+        });
+
         $fields = parent::getCMSFields();
-
-        $fields->addFieldsToTab('Root.Main', [
-            UploadField::create('Files', 'Files')
-                ->setFolderName('Uploads/downloads')
-        ]);
-
-        $this->extend('updateCMSFields', $fields);
 
         return $fields;
     }

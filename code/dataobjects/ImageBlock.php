@@ -35,14 +35,14 @@ class ImageBlock extends QuickBlock
      */
     public function getCMSFields()
     {
+        $this->beforeUpdateCMSFields(function ($fields) {
+            $fields->addFieldsToTab('Root.Main', [
+                UploadField::create('Image', 'Image')
+                    ->setFolderName('Uploads/page-images')
+            ]);
+        });
+
         $fields = parent::getCMSFields();
-
-        $fields->addFieldsToTab('Root.Main', [
-            UploadField::create('Image', 'Image')
-                ->setFolderName('Uploads/page-images')
-        ]);
-
-        $this->extend('updateCMSFields', $fields);
 
         return $fields;
     }

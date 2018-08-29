@@ -41,17 +41,17 @@ class VideoBlock extends QuickBlock
      */
     public function getCMSFields()
     {
+        $this->beforeUpdateCMSFields(function ($fields) {
+            $fields->addFieldsToTab('Root.Main', [
+                TextField::create('Caption', 'Caption'),
+                YouTubeField::create('VideoID', 'YouTube Video'),
+                UploadField::create('Thumbnail', 'Thumbnail')
+                    ->setFolderName('Uploads/videos')
+                    ->setDescription('Will automatically use YouTube thumbnail if this image is not uploaded. Ideal size: 960x540')
+            ]);
+        });
+
         $fields = parent::getCMSFields();
-
-        $fields->addFieldsToTab('Root.Main', [
-            TextField::create('Caption', 'Caption'),
-            YouTubeField::create('VideoID', 'YouTube Video'),
-            UploadField::create('Thumbnail', 'Thumbnail')
-                ->setFolderName('Uploads/videos')
-                ->setDescription('Will automatically use YouTube thumbnail if this image is not uploaded. Ideal size: 960x540')
-        ]);
-
-        $this->extend('updateCMSFields', $fields);
 
         return $fields;
     }

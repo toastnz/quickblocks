@@ -51,31 +51,32 @@ class SplitBlock extends QuickBlock
      */
     public function getCMSFields()
     {
+        $this->beforeUpdateCMSFields(function ($fields) {
+            // Left Block
+            $fields->addFieldToTab('Root.Main', ToggleCompositeField::create('LeftBlock', 'Left Block', FieldList::create([
+                HeaderField::create('', 'Left Block'),
+                TextareaField::create('LeftHeading', 'Heading')
+                    ->setRows(2),
+                TextareaField::create('LeftContent', 'Content'),
+                LinkField::create('LeftLinkID', 'Link'),
+                UploadField::create('LeftImage', 'Image')
+                    ->setDescription('Ideal size: 400x400'),
+            ])));
+
+            // Right Block
+            $fields->addFieldToTab('Root.Main', ToggleCompositeField::create('RightBlock', 'Right Block', FieldList::create([
+                HeaderField::create('', 'Right Block'),
+                TextareaField::create('RightHeading', 'Heading')
+                    ->setRows(2),
+                TextareaField::create('RightContent', 'Content'),
+                LinkField::create('RightLinkID', 'Link'),
+                UploadField::create('RightImage', 'Image')
+                    ->setDescription('Ideal size: 400x400'),
+            ])));
+
+        });
+
         $fields = parent::getCMSFields();
-
-        // Left Block
-        $fields->addFieldToTab('Root.Main', ToggleCompositeField::create('LeftBlock', 'Left Block', FieldList::create([
-            HeaderField::create('', 'Left Block'),
-            TextareaField::create('LeftHeading', 'Heading')
-                ->setRows(2),
-            TextareaField::create('LeftContent', 'Content'),
-            LinkField::create('LeftLinkID', 'Link'),
-            UploadField::create('LeftImage', 'Image')
-                ->setDescription('Ideal size: 400x400'),
-        ])));
-
-        // Right Block
-        $fields->addFieldToTab('Root.Main', ToggleCompositeField::create('RightBlock', 'Right Block', FieldList::create([
-            HeaderField::create('', 'Right Block'),
-            TextareaField::create('RightHeading', 'Heading')
-                ->setRows(2),
-            TextareaField::create('RightContent', 'Content'),
-            LinkField::create('RightLinkID', 'Link'),
-            UploadField::create('RightImage', 'Image')
-                ->setDescription('Ideal size: 400x400'),
-        ])));
-
-        $this->extend('updateCMSFields', $fields);
 
         return $fields;
     }

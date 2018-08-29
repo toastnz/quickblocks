@@ -45,6 +45,10 @@ class QuickBlock extends DataObject
         'ContentSummary' => 'Content'
     ];
 
+    private static $has_one = [
+        'ParentPage' => Page::class
+    ];
+
     private static $extensions = [
         Versioned::class
     ];
@@ -88,8 +92,13 @@ class QuickBlock extends DataObject
     {
         $fields = FieldList::create([new TabSet('Root')]);
 
-        $fields->addFieldToTab('Root.Main', TextField::create('Title', 'Name')
-            ->setAttribute('placeholder', 'This is a helper field only (will not show in templates)'));
+        $fields->addFieldsToTab('Root.Main', [
+            LiteralField::create('BlockLink', '<p><strong>Link: </strong>' . $this->AbsoluteLink() . '</p>'),
+            TreeDropdownField::create('ParentPageID', 'Parent Page', SiteTree::class)
+                ->setDescription('Select this block\'s main page. When this block is linked to, it will go to this page.'),
+            TextField::create('Title', 'Name')
+                ->setAttribute('placeholder', 'This is a helper field only (will not show in templates)')
+        ]);
 
         $this->extend('updateCMSFields', $fields);
 
@@ -118,6 +127,72 @@ class QuickBlock extends DataObject
     public function getApiURL()
     {
         return Controller::join_links(Controller::curr()->AbsoluteLink(), 'QuickBlock', $this->ID);
+    }
+
+
+    /**
+     * @param null $action
+     * @return string
+     *
+     * Link logic
+     */
+    public function getLink($action = null)
+    {
+        /** @var SiteTree $parent */
+        $parent = $this->ParentPage();
+
+        if ($parent && $parent->exists()) {
+            return $parent->Link($action) . '#' . $this->getHtmlID();
+        }
+
+        // Otherwise, get the first page parent
+        $parent = Page::get()->leftJoin('Page_ContentBlocks', '"Page_ContentBlocks"."PageID" = "SiteTree"."ID"')
+            ->where('"Page_ContentBlocks"."QuickBlockID" = ' . $this->ID)
+            ->first();
+
+        if ($parent && $parent->exists()) {
+            return $parent->Link($action) . '#' . $this->getHtmlID();
+        }
+
+        return '';
+    }
+
+    public function Link($action = null)
+    {
+        return $this->getLink($action);
+    }
+
+    public function getAbsoluteLink($action = null)
+    {
+        return Controller::join_links(Director::absoluteBaseURL(), $this->Link($action));
+    }
+
+    public function AbsoluteLink($action = null)
+    {
+        return $this->getAbsoluteLink($action);
+    }
+
+    public function getHtmlID()
+    {
+        $reflect = new ReflectionClass($this);
+
+        $templateName = $reflect->getShortName() ?: $this->ClassName;
+
+        return $templateName . '_' . $this->ID;
+    }
+
+    public function getDisplayTitle()
+    {
+        $title = $this->Title;
+
+        $parent = $this->ParentPage();
+
+        /** @var Page $parent */
+        if ($parent && $parent->exists()) {
+            $title .= ' (on page ' . $parent->Title . ')';
+        }
+
+        return $title;
     }
 
     /* ==========================================

@@ -30,15 +30,15 @@ class TestimonialBlock extends QuickBlock
      */
     public function getCMSFields()
     {
+        $this->beforeUpdateCMSFields(function ($fields) {
+            $fields->addFieldsToTab('Root.Main', [
+                TextareaField::create('Testimonial', 'Testimonial'),
+                TextField::create('Attribution', 'Name'),
+                TextField::create('Location', 'Location')
+            ]);
+        });
+
         $fields = parent::getCMSFields();
-
-        $fields->addFieldsToTab('Root.Main', [
-            TextareaField::create('Testimonial', 'Testimonial'),
-            TextField::create('Attribution', 'Name'),
-            TextField::create('Location', 'Location')
-        ]);
-
-        $this->extend('updateCMSFields', $fields);
 
         return $fields;
     }
