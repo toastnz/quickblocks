@@ -81,6 +81,6 @@ class TabbedContentBlock extends QuickBlock
             $content .= $tab->dbObject('Content')->LimitWordCount(20) . '<br>';
         }
 
-        return DBField::create_field(DBHTMLText::class, implode('<br><br>', $content));
+        return DBField::create_field(DBHTMLText::class, $content);
     }
 }
