@@ -68,11 +68,11 @@ class QuickBlock extends DataObject
         $themeColour = Config::inst()->get(QuickBlock::class, 'theme_color') ?: '#0074ae';
 
         if (!empty($statIcon) && file_exists(Director::baseFolder() . '/' . $statIcon)) {
-            return DBField::create_field('HTMLText',  '<div style="background-color: ' . $themeColour . ';"><img src="' . $statIcon . '"></div>');
+            return DBField::create_field('HTMLText', '<div style="background-color: ' . $themeColour . ';"><img src="' . $statIcon . '"></div>');
         }
 
         $path = TOAST_QUICKBLOCKS_DIR . '/images/';
-        $icon = $path . strtolower($this->i18n_singular_name()) . '.png';
+        $icon = $path . str_replace(' ', '', strtolower($this->i18n_singular_name()) . '.png');
 
         if (!file_exists(Director::baseFolder() . '/' . $icon)) {
             $icon = $path . 'text.png';
