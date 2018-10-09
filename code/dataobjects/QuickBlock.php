@@ -68,7 +68,7 @@ class QuickBlock extends DataObject
         $themeColour = Config::inst()->get(QuickBlock::class, 'theme_color') ?: '#0074ae';
 
         if (!empty($statIcon) && file_exists(Director::baseFolder() . '/' . $statIcon)) {
-            return DBField::create_field('HTMLText', '<div title="' . $this->i18n_singular_name() . '" style="background-color: ' . $themeColour . ';"><img src="' . $statIcon . '"></div>');
+            return DBField::create_field('HTMLText', '<div title="' . $this->i18n_singular_name() . '" style="width:50px; height:50px; background-color: ' . $themeColour . ';"><img style="width:100%;height:100%;" src="' . $statIcon . '"></div>');
         }
 
         $path = TOAST_QUICKBLOCKS_DIR . '/images/';
@@ -78,7 +78,7 @@ class QuickBlock extends DataObject
             $icon = $path . 'text.png';
         }
 
-        return DBField::create_field('HTMLText', '<div title="' . $this->i18n_singular_name() . '" style="background-color: ' . $themeColour . ';"><img src="' . $icon . '"></div>');
+        return DBField::create_field('HTMLText', '<div title="' . $this->i18n_singular_name() . '" style="width:50px; height:50px; background-color: ' . $themeColour . ';"><img style="width:100%;height:100%;" src="' . $icon . '"></div>');
     }
 
     public function IconForCMS()
