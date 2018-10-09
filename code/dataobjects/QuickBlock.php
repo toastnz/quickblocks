@@ -6,6 +6,7 @@ use Page;
 use ReflectionClass;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Director;
+use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\Forms\TabSet;
@@ -23,6 +24,7 @@ use SilverStripe\Security\Member;
 use SilverStripe\ORM\DB;
 use SilverStripe\Versioned\Versioned;
 use SilverStripe\ORM\DataObject;
+
 /**
  * Class QuickBlock
  *
@@ -63,8 +65,10 @@ class QuickBlock extends DataObject
         // Check if this class has an icon set
         $statIcon = self::config()->get('icon');
 
+        $themeColour = Config::inst()->get(QuickBlock::class, 'theme_color') ?: '#0074ae';
+
         if (!empty($statIcon) && file_exists(Director::baseFolder() . '/' . $statIcon)) {
-            return DBField::create_field('HTMLText', '<img src="' . $statIcon . '">');
+            return DBField::create_field('HTMLText',  '<div style="background-color: ' . $themeColour . ';"><img src="' . $statIcon . '"></div>');
         }
 
         $path = TOAST_QUICKBLOCKS_DIR . '/images/';
@@ -74,7 +78,7 @@ class QuickBlock extends DataObject
             $icon = $path . 'text.png';
         }
 
-        return DBField::create_field('HTMLText', '<img src="' . $icon . '">');
+        return DBField::create_field('HTMLText', '<div style="background-color: ' . $themeColour . ';"><img src="' . $icon . '"></div>');
     }
 
     public function IconForCMS()
