@@ -1,25 +1,16 @@
-<% if $Alignment == 'left'%>
-    <div class="wysiwyg testimonial testimonial--{$Alignment}">
-        <div class="innerWrap">
-            <div class="flex">
-                <h5>
-                    <span class="testimonial__icon">$SVG('quotes-dark')</span>
-                    {$Testimonial}
-                </h5>
-                <p><span class="colour--{$Colour}">{$Attribution},</span> $Location</p>
-            </div>
+<%----------------------------------------------------------------
+Testimonial Block
+----------------------------------------------------------------%>
+<div class="contentBlock testimonialBlock">
+    <div class="testimonialBlock__wrap row">
+        <div class="column">
+
+            <%----------------------------------------------------------------
+            Testimonial
+            ----------------------------------------------------------------%>
+            <h4 class="testimonialBlock__wrap__title">{$Testimonial}</h4>
+            <p class="testimonialBlock__wrap__credit">{$Attribution}, $Location</p>
+
         </div>
     </div>
-<% else %>
-    <div class="wysiwyg testimonial testimonial--{$Alignment}">
-        <div class="innerWrap">
-            <div class="flex">
-                <p><span class="colour--{$Colour}">{$Attribution},</span> $Location</p>
-                <h5>
-                    <span class="testimonial__icon">$SVG('quotes-dark')</span>
-                    {$Testimonial}
-                </h5>
-            </div>
-        </div>
-    </div>
-<% end_if %>
+</div>

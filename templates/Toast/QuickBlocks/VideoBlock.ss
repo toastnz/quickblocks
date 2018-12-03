@@ -1,21 +1,44 @@
-<div class="newsContent">
-    <div class="innerWrap">
-        <div class="inlineVideo [ js-video ]" data-video-id="{$VideoID}">
-            <div class="inlineVideo__wrap">
+<%----------------------------------------------------------------
+Video Block
+----------------------------------------------------------------%>
+<div class="contentBlock videoBlock">
+    <div class="videoBlock__wrap row">
+        <div class="column">
+
+            <%----------------------------------------------------------------
+            Video Thumbnail
+            ----------------------------------------------------------------%>
+            <div class="videoBlock__wrap__thumbnail [ js-video-modal ]" data-video-type="$VideoType" data-video-id="$VideoID">
+
                 <% if $Thumbnail %>
-                    {$Thumbnail.FocusFill(960,540)}
-                <% else %>
-                    <img src="https://img.youtube.com/vi/{$VideoID}/maxresdefault.jpg">
+                    {$Thumbnail.FocusFill(1280,720)}
                 <% end_if %>
+
+                <%----------------------------------------------------------------
+                Play Icon
+                ----------------------------------------------------------------%>
                 <div class="inlineVideo__play">
-                    <div class="responsiveSVG">
-                        $SVG('play-large')
-                    </div>
+                    $SVG('play')
                 </div>
+
             </div>
+
+            <%----------------------------------------------------------------
+            Video Caption
+            ----------------------------------------------------------------%>
             <% if $Caption %>
-                <span class="inlineVideo__caption">{$Caption}</span>
+                <div class="videoBlock__wrap__caption">
+                    <p>{$Caption}</p>
+                </div>
             <% end_if %>
+
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
