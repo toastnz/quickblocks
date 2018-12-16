@@ -24,7 +24,7 @@
     "composer/installers": "*",
     "symbiote/silverstripe-gridfieldextensions": "^3.1",
     "edgarindustries/youtubefield": "^1.1",
-    "sheadawson/silverstripe-linkable": "2.0.x-dev",
+    "sheadawson/silverstripe-linkable": "^2.0.0",
     "undefinedoffset/sortablegridfield": "^2.0.4"
   }
 }
