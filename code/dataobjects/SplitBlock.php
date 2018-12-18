@@ -3,6 +3,7 @@
 namespace Toast\QuickBlocks;
 
 use Sheadawson\Linkable\Forms\LinkField;
+use Sheadawson\Linkable\Models\Link;
 use SilverStripe\Assets\Image;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\TextareaField;
@@ -37,8 +38,8 @@ class SplitBlock extends QuickBlock
     private static $has_one = [
         'LeftImage'  => Image::class,
         'RightImage' => Image::class,
-        'LeftLink'   => 'Link',
-        'RightLink'  => 'Link'
+        'LeftLink'   => Link::class,
+        'RightLink'  => Link::class
     ];
 
     private static $owns = [
@@ -88,6 +89,6 @@ class SplitBlock extends QuickBlock
 
     public function getCMSValidator()
     {
-        return new RequiredFields(['LeftContent', 'RightContent', 'LeftImage', 'RightImage']);
+        return new RequiredFields(['LeftContent', 'RightContent']);
     }
 }
