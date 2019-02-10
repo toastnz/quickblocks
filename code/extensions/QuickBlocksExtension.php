@@ -55,6 +55,7 @@ class QuickBlocksExtension extends DataExtension
 
             $config = GridFieldConfig_RelationEditor::create(50);
             $config->removeComponentsByType(GridFieldAddNewButton::class)
+                ->removeComponentsByType(GridFieldFilterHeader::class)
                 ->removeComponentsByType(GridField_ActionMenu::class)
                 ->addComponent(new GridFieldContentBlockState())
                 ->addComponent(new GridFieldArchiveAction());
