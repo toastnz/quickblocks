@@ -59,7 +59,7 @@ class QuickBlocksExtension extends DataExtension
                 ->removeComponentsByType(GridFieldFilterHeader::class)
                 ->removeComponentsByType(GridField_ActionMenu::class)
                 ->addComponent(new GridFieldContentBlockState())
-                ->addComponent(new GridFieldArchiveAction());
+                ->addComponent(new GridFieldVersionedUnlinkAction());
 
             $config->getComponentByType(GridFieldDetailForm::class)
                 ->setItemRequestClass(VersionedGridFieldItemRequest::class);

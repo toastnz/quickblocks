@@ -2,6 +2,8 @@
 
 namespace Toast\QuickBlocks;
 
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\GridField\GridField_FormAction;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\ORM\DataObject;
@@ -10,7 +12,7 @@ use SilverStripe\Control\Controller;
 use SilverStripe\Forms\GridField\GridField_ColumnProvider;
 use SilverStripe\Forms\GridField\GridField_ActionProvider;
 
-class GridFieldArchiveAction implements GridField_ColumnProvider, GridField_ActionProvider
+class GridFieldVersionedUnlinkAction implements GridField_ColumnProvider, GridField_ActionProvider
 {
     /**
      * Add a column 'Delete'
@@ -72,7 +74,7 @@ class GridFieldArchiveAction implements GridField_ColumnProvider, GridField_Acti
      */
     public function getColumnContent($gridField, $record, $columnName)
     {
-        $field = $this->getArchiveAction($gridField, $record, $columnName);
+        $field = $this->getUnlinkAction($gridField, $record, $columnName);
 
         if ($field) {
             return $field->Field();
@@ -87,7 +89,7 @@ class GridFieldArchiveAction implements GridField_ColumnProvider, GridField_Acti
      * @param string     $columnName
      * @return GridField_FormAction
      */
-    public function getArchiveAction($gridField, $record, $columnName)
+    public function getUnlinkAction($gridField, $record, $columnName)
     {
         if (!$record->canEdit()) {
             return;
@@ -95,43 +97,55 @@ class GridFieldArchiveAction implements GridField_ColumnProvider, GridField_Acti
 
         $field = GridField_FormAction::create(
             $gridField,
-            'ArchiveAction' . $record->ID,
+            'UnlinkAction' . $record->ID,
             false,
-            "archive",
+            "unlink",
             ['RecordID' => $record->ID]
         )
-            ->addExtraClass('btn btn--no-text btn--icon-md font-icon-trash-bin grid-field__icon-action gridfield-button-delete')
-            ->setAttribute('title', 'Archive')
-            ->setDescription('Archive')
-            ->setAttribute('aria-label', 'Archive');
+            ->addExtraClass('btn btn--no-text btn--icon-md font-icon-link-broken grid-field__icon-action gridfield-button-unlink action-menu--handled')
+            ->setAttribute('classNames', 'gridfield-button-unlink font-icon-link-broken')
+            ->setAttribute('title', 'Unlink')
+            ->setDescription('Unlink')
+            ->setAttribute('aria-label', 'Unlink');
 
         return $field;
     }
 
     public function getActions($gridField)
     {
-        return ['archive'];
+        return ['unlink'];
     }
 
     public function handleAction(GridField $gridField, $actionName, $arguments, $data)
     {
-        if ($actionName == 'archive') {
+        if ($actionName == 'unlink') {
             /** @var QuickBlock|SiteTree $item */
             $item = $gridField->getList()->byID($arguments['RecordID']);
             if (!$item) {
                 return;
             }
 
-            if (!$item->canArchive()) {
+            if (!$item->canEdit()) {
                 throw new ValidationException(
-                    _t('GridFieldAction_Delete.DeletePermissionsFailure', "No delete permissions"), 0);
+                    _t('GridFieldAction_Edit.EditPermissionsFailure', "No permission to unlink record"), 0);
             }
 
-            $item->doArchive();
+            // RecordID = CB ID
+
+            // Page = $data['ID']
+
+            if (isset($data['ID'])) {
+                // Perform a deletion
+                $page = SiteTree::get()->byID($data['ID']);
+
+                if ($page && $page->exists()) {
+                    $page->ContentBlocks()->remove($item);
+                }
+            }
 
             Controller::curr()->getResponse()->setStatusCode(
                 200,
-                'Record archived.'
+                'Record unlinked.'
             );
         }
     }
@@ -148,7 +162,7 @@ class GridFieldArchiveAction implements GridField_ColumnProvider, GridField_Acti
      */
     public function getTitle($gridField, $record, $columnName)
     {
-        return 'Archive';
+        return 'Unlink';
     }
 
     /**
@@ -163,7 +177,7 @@ class GridFieldArchiveAction implements GridField_ColumnProvider, GridField_Acti
      */
     public function getExtraData($gridField, $record, $columnName)
     {
-        $field = $this->getArchiveAction($gridField, $record, $columnName);
+        $field = $this->getUnlinkAction($gridField, $record, $columnName);
 
         if ($field) {
             return $field->getAttributes();

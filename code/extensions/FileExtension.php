@@ -3,6 +3,7 @@
 namespace Toast\QuickBlocks;
 
 use SilverStripe\Control\Controller;
+use SilverStripe\CMS\Controllers\ContentController;
 use SilverStripe\ORM\DataExtension;
 
 /**
