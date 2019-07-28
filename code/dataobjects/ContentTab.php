@@ -57,6 +57,8 @@ class ContentTab extends DataObject
                 ->setRows(15)
         ]);
 
+        $this->extend('updateCMSFields', $fields);
+
         return $fields;
     }
 
