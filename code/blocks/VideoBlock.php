@@ -10,6 +10,8 @@ use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\FieldType\DBHTMLText;
+use Axllent\FormFields\FieldType\VideoLink;
+use Axllent\FormFields\Forms\VideoLinkField;
 
 /**
  * Class VideoBlock
@@ -25,7 +27,7 @@ class VideoBlock extends QuickBlock
 
     private static $db = [
         'Caption'   => 'Varchar(255)',
-        'VideoID'   => 'Varchar(50)'
+        'Video'   => VideoLink::class
     ];
 
     private static $has_one = [
@@ -44,7 +46,8 @@ class VideoBlock extends QuickBlock
         $this->beforeUpdateCMSFields(function ($fields) {
             $fields->addFieldsToTab('Root.Main', [
                 TextField::create('Caption', 'Caption'),
-                YouTubeField::create('VideoID', 'YouTube Video'),
+                VideoLinkField::create('Video')
+                    ->showPreview(500),
                 UploadField::create('Thumbnail', 'Thumbnail')
                     ->setFolderName('Uploads/videos')
                     ->setDescription('Will automatically use YouTube thumbnail if this image is not uploaded. Ideal size: 960x540')

@@ -20,9 +20,12 @@ class TestimonialBlock extends QuickBlock
     private static $table_name = 'TestimonialBlock';
 
     private static $db = [
-        'Testimonial' => 'Text',
-        'Attribution' => 'Varchar(100)',
-        'Location'    => 'Varchar(100)'
+        'Heading' => 'Text'
+    ];
+
+
+    private static $many_many = [
+        'Testimonials' => Testimonial::class,
     ];
 
     /**
@@ -30,15 +33,27 @@ class TestimonialBlock extends QuickBlock
      */
     public function getCMSFields()
     {
+
         $this->beforeUpdateCMSFields(function ($fields) {
-            $fields->addFieldsToTab('Root.Main', [
-                TextareaField::create('Testimonial', 'Testimonial'),
-                TextField::create('Attribution', 'Name'),
-                TextField::create('Location', 'Location')
-            ]);
+            $config = GridFieldConfig_RelationEditor::create(50)
+                ->removeComponentsByType(GridFieldDeleteAction::class)
+                ->addComponents(new GridFieldDeleteAction())
+                ->addComponents(GridFieldOrderableRows::create('SortOrder'));
+
+            $grid = GridField::create('Testimonials', 'Testimonials', $this->Testimonials(), $config);
+
+            if ($this->ID) {
+                $fields->addFieldToTab('Root.Main', $grid);
+            } else {
+                $fields->addFieldToTab('Root.Main', LiteralField::create('', '<div class="message notice">Save this block to show additional options.</div>'));
+            }
         });
 
         $fields = parent::getCMSFields();
+
+        $fields->addFieldsToTab('Root.Main', [
+            TextField::create('Heading', 'Heading'),
+        ]);
 
         return $fields;
     }
