@@ -12,3 +12,7 @@ SilverStripe\Assets\File:
     - Toast\QuickBlocks\FileExtension
 Toast\QuickBlocks\QuickBlock:
   better_buttons_enabled: false
+
+SilverStripe\CMS\Model\SiteTree:
+  extensions:
+    - Toast\QuickBlocks\SiteTreeExtension
