@@ -2,15 +2,17 @@
 
 namespace Toast\QuickBlocks;
 
-use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
-use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\Forms\TabSet;
+use SilverStripe\ORM\DataObject;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\RequiredFields;
-use SilverStripe\ORM\FieldType\DBHTMLText;
+use Toast\QuickBlocks\SliderBlock;
 use SilverStripe\Security\Permission;
-use SilverStripe\ORM\DataObject;
+use SilverStripe\Forms\RequiredFields;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\ORM\FieldType\DBHTMLText;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\AssetAdmin\Forms\UploadField;
 
 /**
  * Class SliderItem
