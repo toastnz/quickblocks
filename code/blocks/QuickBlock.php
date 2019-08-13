@@ -37,7 +37,8 @@ class QuickBlock extends DataObject
     private static $table_name = 'QuickBlock';
 
     private static $db = [
-        'Title' => 'Varchar(255)'
+        'Title' => 'Varchar(255)',
+        'Heading' => 'Varchar(255)'
     ];
 
     private static $casting = [
@@ -104,7 +105,8 @@ class QuickBlock extends DataObject
             TreeDropdownField::create('ParentPageID', 'Parent Page', SiteTree::class)
                 ->setDescription('Select this block\'s main page. When this block is linked to, it will go to this page.'),
             TextField::create('Title', 'Name')
-                ->setAttribute('placeholder', 'This is a helper field only (will not show in templates)')
+                ->setAttribute('placeholder', 'This is a helper field only (will not show in templates)'),
+            TextField::create('Heading', 'Heading')
         ]);
 
         $this->extend('updateCMSFields', $fields);
