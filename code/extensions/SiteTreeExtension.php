@@ -7,6 +7,7 @@ use SilverStripe\ORM\DataExtension;
 use SilverStripe\View\Requirements;
 use Toast\QuickBlocks\QuickBlock;
 use Toast\QuickBlocks\QuickBlocksExtension;
+use SilverStripe\Forms\FieldList;
 
 class SiteTreeExtension extends DataExtension
 {
