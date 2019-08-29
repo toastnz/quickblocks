@@ -10,7 +10,6 @@ use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\Forms\LiteralField;
 
-
 /**
  * Class VideoBlock
  *
@@ -55,21 +54,22 @@ class VideoBlockExtension extends QuickBlock
             if ($this->IsVimeo()) {
                 $cmsQualityList = $this->VimeoThumbQuality();
                 $frontendQualityList = $this->VimeoThumbQuality();
-                $title = 'VimeoThumb';
+                $title = 'Vimeo Thumbnail';
             } else {
                 $cmsQualityList = $this->YouTubeThumbQuality();
                 $frontendQualityList = $this->YouTubeThumbQuality();
-                $title = 'YouTubeThumb';
+                $title = 'You Tube Thumbnail';
             }
 
             $fields->addFieldsToTab('Root.Main', [
                 DropdownField::create('thumbQualityCms', 'Thumbnail Size CMS', $cmsQualityList),
                 DropdownField::create('thumbQualityFront', 'Thumbnail Size Front-End', $frontendQualityList)
-                //            UploadField::create('Thumbnail', 'Thumbnail', SS_List($this->VideoThumbnail()))
             ]);
 
-            $html = '<div class="form-group field text"><label class="form__field-label">&nbsp;</label><div class="form__field-holder"><img src="' . $this->VideoThumbnail($this->thumbQualityCms) . '"></div></div>';
-            $fields->addFieldToTab('Root.Main', LiteralField::create($title, $html));
+            if ($this->Video) {
+                $html = '<div class="form-group field text"><label class="form__field-label">' . $title . '</label><div class="form__field-holder"><img src="' . $this->VideoThumbnail($this->thumbQualityCms) . '"></div></div>';
+                $fields->addFieldToTab('Root.Main', LiteralField::create('VideoThumbnail', $html));
+            }
 
             $fields->addFieldsToTab('Root.Main', [
                 DropdownField::create('BackgroundColor', 'Background Color', $this->dbObject('BackgroundColor')->enumValues()),
@@ -97,6 +97,11 @@ class VideoBlockExtension extends QuickBlock
         return DBField::create_field(DBHTMLText::class, $this->Video);
     }
 
+    /**
+     * Check for a valid video source
+     *
+     * @return bool
+     */
     public function checkVideoSource()
     {
         $sourceList = [
@@ -189,7 +194,7 @@ class VideoBlockExtension extends QuickBlock
     }
 
     /**
-     * Get YouTube thumbnail
+     * Get video thumbnail
      *
      * @param string $quality
      * @return string
@@ -197,15 +202,39 @@ class VideoBlockExtension extends QuickBlock
     public function VideoThumbnail($quality = '1')
     {
         if ($this->IsVimeo()) {
+            $quality = ($quality) ?: 'medium';
             $imageUrl = $this->VimeoThumbnail($quality);
         } else {
+            $quality = ($quality) ?: '1';
             $imageUrl = $this->YouTubeThumbnail($quality);
         }
 
         return $imageUrl;
     }
 
+    /**
+     * Get YouTube video ID
+     *
+     * @param bool $url
+     * @return bool|mixed
+     */
+    public function getYouTubeId($url = false)
+    {
+        if ($url) {
+            parse_str(parse_url($url, PHP_URL_QUERY), $urlVars);
 
+            return $urlVars['v'];
+        }
+
+        return false;
+    }
+
+    /**
+     * Get YouTube thumbnail
+     *
+     * @param $quality
+     * @return bool|string
+     */
     public function YouTubeThumbnail($quality)
     {
         $id = str_replace(['https://youtu.be/', 'https://www.youtube.com/watch?v='], '', $this->Video);
@@ -236,20 +265,8 @@ class VideoBlockExtension extends QuickBlock
 
             $videoInfo = $apiData[0];
 
-            switch ($quality) {
-                case 'small':
-                    $imageUrl = $videoInfo['thumbnail_small'];
-                    break;
-                case 'medium':
-                    $imageUrl = $videoInfo['thumbnail_medium'];
-                    break;
-                case 'large':
-                    $imageUrl = $videoInfo['thumbnail_large'];
-                    break;
-                default:
-                    $imageUrl = false;
-                    break;
-            }
+            $imageUrl = $videoInfo['thumbnail_' . $quality];
+
         }
 
         return $imageUrl;
