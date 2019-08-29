@@ -2,13 +2,13 @@
 
 namespace Toast\QuickBlocks;
 
-use SilverStripe\Assets\Image;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\Forms\LiteralField;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 
 /**
  * Class VideoBlock
@@ -18,26 +18,22 @@ use SilverStripe\Forms\LiteralField;
  * @property string thumbQualityCms
  * @property string thumbQualityFront
  */
-class VideoBlockExtension extends QuickBlock
+class VideoBlock extends QuickBlock
 {
     private static $singular_name = 'Video';
     private static $plural_name   = 'Videos';
     private static $table_name    = 'VideoBlock';
 
     private static $db = [
-        'Caption'   => 'Varchar(255)',
+        'Caption'           => 'Varchar(255)',
         'Video'             => 'Text',
         'thumbQualityCms'   => 'Varchar(20)',
         'thumbQualityFront' => 'Varchar(20)'
     ];
 
-    private static $has_one = [
-        'Thumbnail' => Image::class
-    ];
+    private static $has_one = [];
 
-    private static $owns = [
-        'Thumbnail'
-    ];
+    private static $owns = [];
 
     /**
      * @return FieldList
@@ -45,6 +41,7 @@ class VideoBlockExtension extends QuickBlock
     public function getCMSFields()
     {
         $this->beforeUpdateCMSFields(function ($fields) {
+
             $fields->addFieldsToTab('Root.Main', [
                 TextField::create('Video', 'Video URL')
                          ->setDescription('NOTE: Only accepts either YouTube or Vimeo. <br>Paste the whole URL link for the video.'),
@@ -68,7 +65,9 @@ class VideoBlockExtension extends QuickBlock
 
             if ($this->Video) {
                 $html = '<div class="form-group field text"><label class="form__field-label">' . $title . '</label><div class="form__field-holder"><img src="' . $this->VideoThumbnail($this->thumbQualityCms) . '"></div></div>';
-                $fields->addFieldToTab('Root.Main', LiteralField::create('VideoThumbnail', $html));
+                $fields->addFieldsToTab('Root.Main', [
+                    LiteralField::create('VideoThumbnail', $html)
+                ]);
             }
 
             $fields->addFieldsToTab('Root.Main', [
@@ -87,7 +86,7 @@ class VideoBlockExtension extends QuickBlock
     {
         $required = new RequiredFields(['Title', 'Video']);
 
-        $this->extend('updateCMSValidator',$required);
+        $this->extend('updateCMSValidator', $required);
 
         return $required;
     }
@@ -237,10 +236,15 @@ class VideoBlockExtension extends QuickBlock
      */
     public function YouTubeThumbnail($quality)
     {
-        $id = str_replace(['https://youtu.be/', 'https://www.youtube.com/watch?v='], '', $this->Video);
-        $imageUrl = 'https://img.youtube.com/vi/' . $id . '/' . $quality . '.jpg';
+        $id = ($this->getYouTubeId($this->owner->Video)) ?: false;
 
-        return $imageUrl;
+        if ($id) {
+            $imageUrl = 'https://img.youtube.com/vi/' . $id . '/' . $quality . '.jpg';
+
+            return $imageUrl;
+        }
+
+        return false;
     }
 
     /**
