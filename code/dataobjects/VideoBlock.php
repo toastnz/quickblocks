@@ -48,38 +48,45 @@ class VideoBlock extends QuickBlock
                 TextField::create('Caption', 'Caption')
             ]);
 
-            if ($this->IsVimeo()) {
-                $cmsQualityList = $this->VimeoThumbQuality();
-                $frontendQualityList = $this->VimeoThumbQuality();
-                $title = 'Vimeo Thumbnail';
-            } else {
-                $cmsQualityList = $this->YouTubeThumbQuality();
-                $frontendQualityList = $this->YouTubeThumbQuality();
-                $title = 'You Tube Thumbnail';
-            }
+            if ($this->Video && $this->checkVideoSource()) {
 
-            $fields->addFieldsToTab('Root.Main', [
-                DropdownField::create('thumbQualityCms', 'Thumbnail Size CMS', $cmsQualityList),
-                DropdownField::create('thumbQualityFront', 'Thumbnail Size Front-End', $frontendQualityList)
-            ]);
+                if ($this->IsVimeo()) {
+                    $cmsQualityList = $this->VimeoThumbQuality();
+                    $frontendQualityList = $this->VimeoThumbQuality();
+                    $title = 'Vimeo Thumbnail';
+                } else {
+                    $cmsQualityList = $this->YouTubeThumbQuality();
+                    $frontendQualityList = $this->YouTubeThumbQuality();
+                    $title = 'You Tube Thumbnail';
+                }
 
-            if ($this->Video) {
                 $html = '<div class="form-group field text"><label class="form__field-label">' . $title . '</label><div class="form__field-holder"><img src="' . $this->VideoThumbnail($this->thumbQualityCms) . '"></div></div>';
+
                 $fields->addFieldsToTab('Root.Main', [
+                    DropdownField::create('thumbQualityCms', 'Thumbnail Size CMS', $cmsQualityList),
+                    DropdownField::create('thumbQualityFront', 'Thumbnail Size Front-End', $frontendQualityList),
                     LiteralField::create('VideoThumbnail', $html)
                 ]);
             }
 
-            $fields->addFieldsToTab('Root.Main', [
-                DropdownField::create('BackgroundColor', 'Background Color', $this->dbObject('BackgroundColor')->enumValues()),
-                DropdownField::create('BackgroundShape', 'Background Shape', $this->dbObject('BackgroundShape')->enumValues()),
-                DropdownField::create('BackgroundAlignment', 'Background Alignment', $this->dbObject('BackgroundAlignment')->enumValues())
-            ]);
         });
 
         $fields = parent::getCMSFields();
 
         return $fields;
+    }
+
+    public function validate()
+    {
+        $result = parent::validate();
+
+        if (!$this->checkVideoSource()) {
+            $result->addError('Video URL must be from either YouTube or Vimeo.');
+        }
+
+        $this->extend('updateValidate', $result);
+
+        return $result;
     }
 
     public function getCMSValidator()
@@ -130,9 +137,9 @@ class VideoBlock extends QuickBlock
             'youtube',
             'youtu.be'
         ];
+
         foreach ($sourceList as $url) {
             if (stripos($this->Video, $url) !== false) {
-
                 return true;
             }
         }
@@ -149,7 +156,6 @@ class VideoBlock extends QuickBlock
     public function IsVimeo()
     {
         if (stripos($this->Video, 'vimeo') !== false) {
-
             return true;
         }
 
@@ -171,7 +177,6 @@ class VideoBlock extends QuickBlock
             'hqdefault'     => 'Medium',
             'sddefault'     => 'Large',
             'maxresdefault' => 'HD'
-
         ];
 
         return $list;
@@ -198,13 +203,13 @@ class VideoBlock extends QuickBlock
      * @param string $quality
      * @return string
      */
-    public function VideoThumbnail($quality = '1')
+    public function VideoThumbnail($quality = false)
     {
         if ($this->IsVimeo()) {
             $quality = ($quality) ?: 'medium';
             $imageUrl = $this->VimeoThumbnail($quality);
         } else {
-            $quality = ($quality) ?: '1';
+            $quality = ($quality) ?: 'mqdefault';
             $imageUrl = $this->YouTubeThumbnail($quality);
         }
 
@@ -221,7 +226,6 @@ class VideoBlock extends QuickBlock
     {
         if ($url) {
             parse_str(parse_url($url, PHP_URL_QUERY), $urlVars);
-
             return $urlVars['v'];
         }
 
@@ -240,7 +244,6 @@ class VideoBlock extends QuickBlock
 
         if ($id) {
             $imageUrl = 'https://img.youtube.com/vi/' . $id . '/' . $quality . '.jpg';
-
             return $imageUrl;
         }
 
