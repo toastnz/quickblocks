@@ -173,6 +173,7 @@ class VideoBlock extends QuickBlock
         // Reference: https://stackoverflow.com/questions/2068344/how-do-i-get-a-youtube-video-thumbnail-from-the-youtube-api
 
         $list = [
+            '2'             => 'Thumbnail',
             'mqdefault'     => 'Small',
             'hqdefault'     => 'Medium',
             'sddefault'     => 'Large',
