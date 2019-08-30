@@ -207,10 +207,10 @@ class VideoBlock extends QuickBlock
     public function VideoThumbnail($quality = false)
     {
         if ($this->IsVimeo()) {
-            $quality = ($quality) ?: 'medium';
+            $quality = !empty(array_keys($this->VimeoThumbQuality(), $quality)) ?: 'medium';
             $imageUrl = $this->VimeoThumbnail($quality);
         } else {
-            $quality = ($quality) ?: 'mqdefault';
+            $quality = !empty(array_keys($this->YouTubeThumbQuality(), $quality)) ?: 'mqdefault';
             $imageUrl = $this->YouTubeThumbnail($quality);
         }
 
