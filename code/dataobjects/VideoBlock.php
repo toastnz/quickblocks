@@ -63,8 +63,8 @@ class VideoBlock extends QuickBlock
                 $html = '<div class="form-group field text"><label class="form__field-label">' . $title . '</label><div class="form__field-holder"><img src="' . $this->VideoThumbnail($this->thumbQualityCms) . '"></div></div>';
 
                 $fields->addFieldsToTab('Root.Main', [
-                    DropdownField::create('thumbQualityCms', 'Thumbnail Size CMS', $cmsQualityList),
-                    DropdownField::create('thumbQualityFront', 'Thumbnail Size Front-End', $frontendQualityList),
+                    DropdownField::create('thumbQualityCms', 'Image Size CMS', $cmsQualityList),
+                    DropdownField::create('thumbQualityFront', 'Image Size Front-End', $frontendQualityList),
                     LiteralField::create('VideoThumbnail', $html)
                 ]);
             }
