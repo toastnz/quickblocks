@@ -204,13 +204,15 @@ class VideoBlock extends QuickBlock
      * @param string $quality
      * @return string
      */
-    public function VideoThumbnail($quality = false)
+    public function VideoThumbnail($quality)
     {
         if ($this->IsVimeo()) {
-            $quality = !empty(array_keys($this->VimeoThumbQuality(), $quality)) ?: 'medium';
+            $sizeValues = array_keys($this->VimeoThumbQuality());
+            $quality = (in_array($quality, $sizeValues)) ? $quality : 'medium';
             $imageUrl = $this->VimeoThumbnail($quality);
         } else {
-            $quality = !empty(array_keys($this->YouTubeThumbQuality(), $quality)) ?: 'mqdefault';
+            $sizeValues = array_keys($this->YouTubeThumbQuality());
+            $quality = (in_array($quality, $sizeValues)) ? $quality : 'mqdefault';
             $imageUrl = $this->YouTubeThumbnail($quality);
         }
 
