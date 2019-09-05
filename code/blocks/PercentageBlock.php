@@ -76,20 +76,20 @@ class PercentageBlock extends QuickBlock
     {
         switch ($this->Size) {
             case '50/50':
-                $left = '50';
-                $right = '50';
+                $left = '6';
+                $right = '6';
                 break;
             case '33/66':
-                $left = '33';
-                $right = '66';
+                $left = '4';
+                $right = '8';
                 break;
             case '66/33':
-                $left = '66';
-                $right = '33';
+                $left = '8';
+                $right = '4';
                 break;
             default:
-                $left = '50';
-                $right = '50';
+                $left = '6';
+                $right = '6';
                 break;
         }
 
