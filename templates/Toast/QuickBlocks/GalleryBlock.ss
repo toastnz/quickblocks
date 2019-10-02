@@ -6,8 +6,9 @@
          <% loop $GalleryImages %>
             <div class="column">
                 <a href="#Title" class="galleryBlock__wrap__item">
-                    <img src="https://via.placeholder.com/640x480" alt="$Title" class="galleryBlock__wrap__item__media">
+                    <img src="{$GalleryImage.URL.ScaleWidth(300)}}" alt="$Title" class="galleryBlock__wrap__item__media">
                 </a>
+                <h4>$Title</h4>
             </div>
          <% end_loop %>
     </div>
