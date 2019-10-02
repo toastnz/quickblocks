@@ -68,7 +68,9 @@ class GalleryImageItem extends DataObject
 
     public function getCMSValidator()
     {
-        return new RequiredFields([Image::class]);
+        return new RequiredFields([
+            Image::class
+        ]);
     }
 
     /* ==========================================

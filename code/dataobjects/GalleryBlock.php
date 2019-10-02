@@ -26,8 +26,20 @@ class GalleryBlock extends QuickBlock
     private static $plural_name   = 'Galleries';
     private static $table_name    = 'GalleryBlock';
 
+    private static $has_one = [
+        'CoverImage' => Image::class
+    ];
+
+    private static $owns = [
+        'CoverImage'
+    ];
+
     private static $has_many = [
         'GalleryImages' => GalleryImageItem::class
+    ];
+
+    private static $summary_fields = [
+        'CoverImage.CMSThumbnail' => 'Image'
     ];
 
     /**
@@ -36,12 +48,12 @@ class GalleryBlock extends QuickBlock
     public function getCMSFields()
     {
         $this->beforeUpdateCMSFields(function ($fields) {
+
             $config = GridFieldConfig_RelationEditor::create(50)
                                                     ->removeComponentsByType(GridFieldAddExistingAutoCompleter::class)
                                                     ->removeComponentsByType(GridFieldDeleteAction::class)
                                                     ->addComponents(new GridFieldDeleteAction())
                                                     ->addComponents(GridFieldOrderableRows::create('SortOrder'));
-
             $grid = GridField::create(
                 'GalleryImages',
                 'Gallery Images',
@@ -50,7 +62,10 @@ class GalleryBlock extends QuickBlock
             );
 
             if ($this->ID) {
-                $fields->addFieldToTab('Root.Main', $grid);
+                $fields->addFieldsToTab('Root.Main', [
+                    UploadField::create('CoverImage', 'Cover Image')->setFolderName('Uploads/blocks/gallery-images'),
+                    $grid
+                ]);
             } else {
                 $fields->addFieldToTab('Root.Main', LiteralField::create('', '<div class="message notice">Save this block to show additional options.</div>'));
             }
