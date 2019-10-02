@@ -77,32 +77,32 @@ class GalleryImageItem extends DataObject
 
     public function canView($member = null)
     {
-        if ($this->Parent()) {
-            return $this->Parent()->canView($member);
+        if ($this->GalleryBlock()) {
+            return $this->GalleryBlock()->canView($member);
         }
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
     }
 
     public function canEdit($member = null)
     {
-        if ($this->Parent()) {
-            return $this->Parent()->canEdit($member);
+        if ($this->GalleryBlock()) {
+            return $this->GalleryBlock()->canEdit($member);
         }
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
     }
 
     public function canDelete($member = null)
     {
-        if ($this->Parent()) {
-            return $this->Parent()->canDelete($member);
+        if ($this->GalleryBlock()) {
+            return $this->GalleryBlock()->canDelete($member);
         }
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
     }
 
     public function canCreate($member = null, $context = [])
     {
-        if ($this->Parent()) {
-            return $this->Parent()->canCreate($member, $context);
+        if ($this->GalleryBlock()) {
+            return $this->GalleryBlock()->canCreate($member, $context);
         }
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
     }
