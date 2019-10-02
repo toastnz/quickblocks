@@ -16,7 +16,7 @@ use SilverStripe\Forms\RequiredFields;
 class DownloadBlock extends QuickBlock
 {
     private static $singular_name = 'Download';
-    private static $plural_name = 'Download';
+    private static $plural_name = 'Downloads';
     private static $table_name = 'DownloadBlock';
 
     private static $many_many = [

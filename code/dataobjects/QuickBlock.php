@@ -72,7 +72,7 @@ class QuickBlock extends DataObject
         }
 
         $path = TOAST_QUICKBLOCKS_DIR . '/images/';
-        $icon = $path . strtolower($this->i18n_singular_name()) . '.png';
+        $icon = $path . strtolower(str_replace(' ', '', $this->i18n_singular_name())) . '.png';
 
         if (!file_exists(Director::baseFolder() . '/' . $icon)) {
             $icon = $path . 'text.png';
