@@ -1,4 +1,7 @@
 <section class="imageBlock marginBlock">
+
+    <h1>IMAGE BLOCK</h1>
+
     <% if $Heading || $Summary %>
         <% include Heading Heading=$Heading, Summary=$Summary %>
     <% end_if %>

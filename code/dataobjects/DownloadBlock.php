@@ -16,8 +16,8 @@ use SilverStripe\Forms\RequiredFields;
 class DownloadBlock extends QuickBlock
 {
     private static $singular_name = 'Download';
-    private static $plural_name = 'Downloads';
-    private static $table_name = 'DownloadBlock';
+    private static $plural_name   = 'Downloads';
+    private static $table_name    = 'DownloadBlock';
 
     private static $many_many = [
         'Files' => File::class
@@ -35,7 +35,7 @@ class DownloadBlock extends QuickBlock
         $this->beforeUpdateCMSFields(function ($fields) {
             $fields->addFieldsToTab('Root.Main', [
                 UploadField::create('Files', 'Files')
-                    ->setFolderName('Uploads/downloads')
+                           ->setFolderName('Uploads/downloads')
             ]);
         });
 
