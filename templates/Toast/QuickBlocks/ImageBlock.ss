@@ -1,6 +1,6 @@
 <section class="imageBlock marginBlock">
 
-    <h1>IMAGE BLOCK</h1>
+    <h5>IMAGE BLOCK</h5>
 
     <% if $Heading || $Summary %>
         <% include Heading Heading=$Heading, Summary=$Summary %>

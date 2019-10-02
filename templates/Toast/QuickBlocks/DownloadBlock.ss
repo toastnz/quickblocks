@@ -1,7 +1,7 @@
 <% if $Files %>
 <section class="downloadsBlock marginBlock">
 
-    <h1>DOWNLOAD BLOCK</h1>
+    <h5>DOWNLOAD BLOCK</h5>
 
     <% if $Heading || $Summary %>
         <% include Heading Heading=$Heading, Summary=$Summary %>
