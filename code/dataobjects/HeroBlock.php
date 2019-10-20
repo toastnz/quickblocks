@@ -48,13 +48,8 @@ class HeroBlock extends QuickBlock
          * ========================================*/
         $fields = parent::getCMSFields();
 
-        $fields->removeByName('BlockLink');
-
         $fields->addFieldsToTab('Root.Main', [
-            TextField::create('Title', 'Title'),
-            HTMLEditorField::create('Content', 'Content')
-                           ->setRows(15),
-
+            TextField::create('Title', 'Title')
         ]);
 
         // Images
