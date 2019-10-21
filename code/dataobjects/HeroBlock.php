@@ -33,7 +33,7 @@ class HeroBlock extends QuickBlock
     private static $db = [
         'Title'     => 'Text',
         'Content'   => 'HTMLText',
-        'FullWidth' => 'Boolean'
+        'ContentWidth' => 'Boolean'
     ];
 
     private static $has_one = [
@@ -56,7 +56,7 @@ class HeroBlock extends QuickBlock
             TextField::create('Title', 'Title'),
             HTMLEditorField::create('Content', 'Content')->setRows(5),
             LinkField::create('BlockLinkID', 'Link'),
-            DropdownField::create('FullWidth', 'Width', [0 => 'Full Width', 1 => 'Content Width']),
+            DropdownField::create('ContentWidth', 'Width', [0 => 'Full Width', 1 => 'Content Width']),
             UploadField::create('BackgroundImage', 'Background Image')
         ]);
 
