@@ -30,14 +30,19 @@ class HeroBlock extends QuickBlock
     private static $icon          = 'quickblocks/images/image.png';
 
     private static $db = [
-        'Title'          => 'Text'
+        'Title'     => 'Text',
+        'Content'   => 'HTMLText',
+        'FullWidth' => 'Boolean'
     ];
 
-    private static $has_many = [
-        'SlideImages' => HeroSliderImage::class
+    private static $has_one = [
+        'BlockLink'       => Link::class,
+        'BackgroundImage' => Image::class
     ];
 
-    private static $owns = [];
+    private static $owns = [
+        'BackgroundImage'
+    ];
 
     public function getCMSFields()
     {
@@ -49,23 +54,11 @@ class HeroBlock extends QuickBlock
         $fields = parent::getCMSFields();
 
         $fields->addFieldsToTab('Root.Main', [
-            TextField::create('Title', 'Title')
-        ]);
-
-        // Images
-        $config = GridFieldConfig_RelationEditor::create(10);
-        $config->addComponent(GridFieldOrderableRows::create('SortOrder'))
-               ->removeComponentsByType(GridFieldDeleteAction::class)
-               ->addComponent(new GridFieldDeleteAction(false));
-        $imagesGridField = GridField::create(
-            'SlideImages',
-            'Slide Images',
-            $this->owner->SlideImages(),
-            $config
-        );
-
-        $fields->addFieldsToTab('Root.Images', [
-            $imagesGridField
+            TextField::create('Title', 'Title'),
+            HTMLEditorField::create('Content', 'Content')->setRows(5),
+            LinkField::create('BlockLinkID', 'Link'),
+            DropdownField::create('FullWidth', 'Width', [0 => 'Full Width', 1 => 'Content Width']),
+            UploadField::create('BackgroundImage', 'Background Image')
         ]);
 
         return $fields;
