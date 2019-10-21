@@ -14,8 +14,9 @@ use SilverStripe\Forms\RequiredFields;
 class TextBlock extends QuickBlock
 {
     private static $singular_name = 'Text';
-    private static $plural_name = 'Text';
-    private static $table_name = 'TextBlock';
+    private static $plural_name   = 'Text';
+    private static $table_name    = 'TextBlock';
+    private static $icon          = 'quickblocks/images/text.png';
 
     private static $db = [
         'Content' => 'HTMLText'
@@ -44,7 +45,7 @@ class TextBlock extends QuickBlock
     {
         $required = new RequiredFields(['Content']);
 
-        $this->extend('updateCMSValidator',$required);
+        $this->extend('updateCMSValidator', $required);
 
         return $required;
     }

@@ -28,7 +28,7 @@ class HeroBlock extends QuickBlock
     private static $singular_name = 'Hero block';
     private static $plural_name   = 'Hero blocks';
     private static $table_name    = 'HeroBlock';
-    private static $icon          = 'quickblocks/images/image.png';
+    private static $icon          = 'quickblocks/images/hero.png';
 
     private static $db = [
         'Title'     => 'Text',
@@ -47,8 +47,6 @@ class HeroBlock extends QuickBlock
 
     public function getCMSFields()
     {
-        $noteStyles = 'background-color:#dfecf8;color:#2e668e;padding:10px;margin:0 0 20px 0;';
-
         /** =========================================
          * @var FieldList $fields
          * ========================================*/

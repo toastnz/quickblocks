@@ -25,6 +25,7 @@ class GalleryBlock extends QuickBlock
     private static $singular_name = 'Gallery';
     private static $plural_name   = 'Galleries';
     private static $table_name    = 'GalleryBlock';
+    private static $icon          = 'quickblocks/images/gallery.png';
 
     private static $has_one = [
         'CoverImage' => Image::class

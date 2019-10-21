@@ -21,8 +21,9 @@ use SilverStripe\ORM\GroupedList;
 class AccordionBlock extends QuickBlock
 {
     private static $singular_name = 'Accordion';
-    private static $plural_name = 'Accordions';
-    private static $table_name = 'AccordionBlock';
+    private static $plural_name   = 'Accordions';
+    private static $table_name    = 'AccordionBlock';
+    private static $icon          = 'quickblocks/images/accordion.png';
 
     private static $has_many = [
         'AccordionItems' => AccordionItem::class
@@ -35,10 +36,10 @@ class AccordionBlock extends QuickBlock
     {
         $this->beforeUpdateCMSFields(function ($fields) {
             $config = GridFieldConfig_RelationEditor::create(50)
-                ->removeComponentsByType(GridFieldAddExistingAutoCompleter::class)
-                ->removeComponentsByType(GridFieldDeleteAction::class)
-                ->addComponents(new GridFieldDeleteAction())
-                ->addComponents(GridFieldOrderableRows::create('SortOrder'));
+                                                    ->removeComponentsByType(GridFieldAddExistingAutoCompleter::class)
+                                                    ->removeComponentsByType(GridFieldDeleteAction::class)
+                                                    ->addComponents(new GridFieldDeleteAction())
+                                                    ->addComponents(GridFieldOrderableRows::create('SortOrder'));
 
             $grid = GridField::create('AccordionItems', 'Accordion Items', $this->AccordionItems(), $config);
 

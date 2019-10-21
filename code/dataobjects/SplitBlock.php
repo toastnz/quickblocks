@@ -25,8 +25,9 @@ use SilverStripe\ORM\FieldType\DBHTMLText;
 class SplitBlock extends QuickBlock
 {
     private static $singular_name = 'Split Block';
-    private static $plural_name = 'Split Blocks';
-    private static $table_name = 'SplitBlock';
+    private static $plural_name   = 'Split Blocks';
+    private static $table_name    = 'SplitBlock';
+    private static $icon          = 'quickblocks/images/splitblock.png';
 
     private static $db = [
         'LeftContent'  => 'Text',
@@ -57,22 +58,22 @@ class SplitBlock extends QuickBlock
             $fields->addFieldToTab('Root.Main', ToggleCompositeField::create('LeftBlock', 'Left Block', FieldList::create([
                 HeaderField::create('', 'Left Block'),
                 TextareaField::create('LeftHeading', 'Heading')
-                    ->setRows(2),
+                             ->setRows(2),
                 TextareaField::create('LeftContent', 'Content'),
                 LinkField::create('LeftLinkID', 'Link'),
                 UploadField::create('LeftImage', 'Image')
-                    ->setDescription('Ideal size: 400x400'),
+                           ->setDescription('Ideal size: 400x400'),
             ])));
 
             // Right Block
             $fields->addFieldToTab('Root.Main', ToggleCompositeField::create('RightBlock', 'Right Block', FieldList::create([
                 HeaderField::create('', 'Right Block'),
                 TextareaField::create('RightHeading', 'Heading')
-                    ->setRows(2),
+                             ->setRows(2),
                 TextareaField::create('RightContent', 'Content'),
                 LinkField::create('RightLinkID', 'Link'),
                 UploadField::create('RightImage', 'Image')
-                    ->setDescription('Ideal size: 400x400'),
+                           ->setDescription('Ideal size: 400x400'),
             ])));
 
         });

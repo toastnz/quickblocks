@@ -19,8 +19,9 @@ use SilverStripe\ORM\FieldType\DBHTMLText;
 class ImageBlock extends QuickBlock
 {
     private static $singular_name = 'Image';
-    private static $plural_name = 'Images';
-    private static $table_name = 'ImageBlock';
+    private static $plural_name   = 'Images';
+    private static $table_name    = 'ImageBlock';
+    private static $icon          = 'quickblocks/images/image.png';
 
     private static $has_one = [
         'Image' => Image::class
@@ -38,7 +39,7 @@ class ImageBlock extends QuickBlock
         $this->beforeUpdateCMSFields(function ($fields) {
             $fields->addFieldsToTab('Root.Main', [
                 UploadField::create('Image', 'Image')
-                    ->setFolderName('Uploads/page-images')
+                           ->setFolderName('Uploads/page-images')
             ]);
         });
 

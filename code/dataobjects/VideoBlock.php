@@ -20,12 +20,13 @@ use SilverStripe\ORM\FieldType\DBHTMLText;
 class VideoBlock extends QuickBlock
 {
     private static $singular_name = 'Video';
-    private static $plural_name = 'Videos';
-    private static $table_name = 'VideoBlock';
+    private static $plural_name   = 'Videos';
+    private static $table_name    = 'VideoBlock';
+    private static $icon          = 'quickblocks/images/video.png';
 
     private static $db = [
-        'Caption'   => 'Varchar(255)',
-        'VideoID'   => 'Varchar(50)'
+        'Caption' => 'Varchar(255)',
+        'VideoID' => 'Varchar(50)'
     ];
 
     private static $has_one = [
@@ -46,8 +47,8 @@ class VideoBlock extends QuickBlock
                 TextField::create('Caption', 'Caption'),
                 YouTubeField::create('VideoID', 'YouTube Video'),
                 UploadField::create('Thumbnail', 'Thumbnail')
-                    ->setFolderName('Uploads/videos')
-                    ->setDescription('Will automatically use YouTube thumbnail if this image is not uploaded. Ideal size: 960x540')
+                           ->setFolderName('Uploads/videos')
+                           ->setDescription('Will automatically use YouTube thumbnail if this image is not uploaded. Ideal size: 960x540')
             ]);
         });
 
@@ -60,7 +61,7 @@ class VideoBlock extends QuickBlock
     {
         $required = new RequiredFields(['Title', 'VideoID']);
 
-        $this->extend('updateCMSValidator',$required);
+        $this->extend('updateCMSValidator', $required);
 
         return $required;
     }
