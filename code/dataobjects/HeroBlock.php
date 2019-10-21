@@ -21,6 +21,7 @@ use SilverStripe\ORM\DataObject;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use Toast\Model\BannerSliderImage;
 use Toast\Model\FeatureBlockImage;
+use SilverStripe\Assets\Image;
 
 class HeroBlock extends QuickBlock
 {
