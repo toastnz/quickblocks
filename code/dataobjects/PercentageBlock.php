@@ -27,7 +27,7 @@ class PercentageBlock extends QuickBlock
         'LeftContent'  => 'HTMLText',
         'RightHeading' => 'Text',
         'RightContent' => 'HTMLText',
-        'FullWidth' => 'Boolean'
+        'ContentWidth' => 'Boolean'
     ];
 
     private static $has_one = [
@@ -51,7 +51,7 @@ class PercentageBlock extends QuickBlock
                 '50/50' => '50/50',
                 '66/33' => '66/33'
             ]),
-            DropdownField::create('FullWidth', 'Width', [0 => 'Full Width', 1 => 'Content Width']),
+            DropdownField::create('ContentWidth', 'Width', [0 => 'Full Width', 1 => 'Content Width']),
         ]);
 
         $fields->addFieldsToTab('Root.Left', [
