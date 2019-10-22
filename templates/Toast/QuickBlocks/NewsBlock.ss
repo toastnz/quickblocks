@@ -1,9 +1,16 @@
+<section class="newsBlock contentBlock" data-equalize>
 
-  <h2>$Title</h2>
-  $Content
+    <div class="newsBlock__item row">
 
-<% loop $Items %>
-    $Title
-    $Content
-    $Image
-<% end_loop %>
+      <h2>$Title</h2>
+      $Content
+
+    <% loop $Items %>
+        <h4>$Title</h4>
+        $Content
+        $Image
+    <% end_loop %>
+
+    </div>
+
+</div>
