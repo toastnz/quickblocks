@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: hadleelineham
- * Date: 2019-02-28
- * Time: 10:08
- */
 
 namespace Toast\QuickBlocks;
-
 
 use Sheadawson\Linkable\Forms\LinkField;
 use Sheadawson\Linkable\Models\Link;
@@ -23,22 +16,23 @@ use SilverStripe\ORM\FieldType\DBField;
 class PercentageBlock extends QuickBlock
 {
     private static $singular_name = 'Percentage';
-    private static $plural_name = 'Percentages';
-    private static $table_name = 'PercentageBlock';
+    private static $plural_name   = 'Percentages';
+    private static $table_name    = 'PercentageBlock';
+    private static $icon          = 'quickblocks/images/statistic.png';
 
     private static $db = [
-        'Size' => 'Enum("33/66, 50/50, 66/33", "50/50")',
-        'LeftHeading' => 'Text',
-        'LeftContent' => 'HTMLText',
+        'Size'         => 'Enum("33/66, 50/50, 66/33", "50/50")',
+        'LeftHeading'  => 'Text',
+        'LeftContent'  => 'HTMLText',
         'RightHeading' => 'Text',
         'RightContent' => 'HTMLText',
     ];
 
     private static $has_one = [
-        'LeftImage' => Image::class,
+        'LeftImage'  => Image::class,
         'RightImage' => Image::class,
-        'LeftLink' => Link::class,
-        'RightLink' => Link::class
+        'LeftLink'   => Link::class,
+        'RightLink'  => Link::class
     ];
 
     private static $owns = [
@@ -74,9 +68,11 @@ class PercentageBlock extends QuickBlock
         return $fields;
     }
 
-    public function getWidth($side){
-        switch ($this->Size){
+    public function getWidth($side)
+    {
+        switch ($this->Size) {
             case '50/50':
+            default:
                 $left = '6';
                 $right = '6';
                 break;
@@ -88,56 +84,56 @@ class PercentageBlock extends QuickBlock
                 $left = '8';
                 $right = '4';
                 break;
-            default:
-                $left = '6';
-                $right = '6';
-                break;
         }
 
 
-        if ($side == 'left'){
+        if ($side == 'left') {
             return $left;
-        }else{
+        } else {
             return $right;
         }
     }
 
-    public function getRightBackgroundImageURL(){
+//    public function getRightBackgroundImageURL()
+//    {
+//
+//        if ($this->RightImage()->exists()) {
+//
+//            return $this->RightImage()->URL;
+//        } else {
+//            return 'themes/quicksilver/dist/images/standard/percentage-pattern.png';
+//        }
+//    }
+//
+//    public function getLeftBackgroundImageURL()
+//    {
+//        if ($this->LeftImage()->exists()) {
+//            return $this->LeftImage()->URL;
+//        } else {
+//            return 'themes/quicksilver/dist/images/standard/percentage-pattern.png';
+//        }
+//    }
 
-        if ($this->RightImage()->exists()){
-
-            return $this->RightImage()->URL;
-        }else{
-            return 'themes/quicksilver/dist/images/standard/percentage-pattern.png';
-        }
-    }
-
-    public function getLeftBackgroundImageURL(){
-        if ($this->LeftImage()->exists()){
-            return $this->LeftImage()->URL;
-        }else{
-            return 'themes/quicksilver/dist/images/standard/percentage-pattern.png';
-        }
-    }
-
-    public function getLeft(){
-        return new ArrayData    ([
+    public function getLeft()
+    {
+        return ArrayData::create    ([
             'Title'   => $this->LeftHeading,
             'Content' => DBField::create_field(DBHTMLText::class, $this->LeftContent),
             'Image'   => $this->LeftImage,
-            'Size'   => $this->getWidth('left'),
-            'Link'   => $this->LeftLink,
+            'Size'    => $this->getWidth('left'),
+            'Link'    => $this->LeftLink,
         ]);
     }
 
-    public function getRight(){
+    public function getRight()
+    {
 
-        return new ArrayData    ([
+        return ArrayData::create    ([
             'Title'   => $this->RightHeading,
             'Content' => DBField::create_field(DBHTMLText::class, $this->RightContent),
             'Image'   => $this->RightImage,
-            'Size'   => $this->getWidth('right'),
-            'Link'   => $this->RightLink,
+            'Size'    => $this->getWidth('right'),
+            'Link'    => $this->RightLink,
         ]);
-    }    
+    }
 }

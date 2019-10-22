@@ -31,8 +31,8 @@ class HeroBlock extends QuickBlock
     private static $icon          = 'quickblocks/images/hero.png';
 
     private static $db = [
-        'Title'     => 'Text',
-        'Content'   => 'HTMLText',
+        'Title'        => 'Text',
+        'Content'      => 'HTMLText',
         'ContentWidth' => 'Boolean'
     ];
 

@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: staff
- * Date: 1/02/19
- * Time: 3:20 PM
- */
 
 namespace Toast\QuickBlocks;
-
 
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
@@ -17,14 +10,12 @@ use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use Toast\Model\NewsBlockItem;
 
-
 class NewsBlock extends QuickBlock
 {
     private static $singular_name = 'News';
-    private static $plural_name = 'News';
-    private static $table_name = 'NewsBlock';
-    private static $icon = 'quickblocks/images/image.png';
-
+    private static $plural_name   = 'News';
+    private static $table_name    = 'NewsBlock';
+    private static $icon          = 'quickblocks/images/news.png';
 
     private static $has_many = [
         'Items' => NewsBlockItem::class
@@ -34,9 +25,9 @@ class NewsBlock extends QuickBlock
     {
         $NewsConfig = GridFieldConfig_RelationEditor::create(10);
         $NewsConfig->addComponent(GridFieldOrderableRows::create('SortOrder'))
-            ->removeComponentsByType(GridFieldDeleteAction::class)
-            ->addComponent(new GridFieldDeleteAction(false))
-            ->removeComponentsByType('GridFieldAddExistingAutoCompleter');
+                   ->removeComponentsByType(GridFieldDeleteAction::class)
+                   ->addComponent(new GridFieldDeleteAction(false))
+                   ->removeComponentsByType('GridFieldAddExistingAutoCompleter');
 
         $NewsBlockGridField = GridField::create(
             'Items',

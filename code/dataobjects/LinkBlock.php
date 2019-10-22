@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: staff
- * Date: 1/02/19
- * Time: 3:20 PM
- */
 
 namespace Toast\QuickBlocks;
-
 
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
@@ -17,17 +10,16 @@ use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use Toast\Model\LinkBlockItem;
 
-
 class LinkBlock extends QuickBlock
 {
     private static $singular_name = 'Link';
-    private static $plural_name = 'Links';
-    private static $table_name = 'LinkBlock';
-    private static $icon = 'quickblocks/images/image.png';
+    private static $plural_name   = 'Links';
+    private static $table_name    = 'LinkBlock';
+    private static $icon          = 'quickblocks/images/link.png';
 
     private static $db = [
-        'Title'     => 'Varchar(100)',
-        'Content'   => 'HTMLText',
+        'Title'   => 'Varchar(100)',
+        'Content' => 'HTMLText',
     ];
 
     private static $has_many = [
@@ -39,9 +31,9 @@ class LinkBlock extends QuickBlock
     {
         $LinkConfig = GridFieldConfig_RelationEditor::create(10);
         $LinkConfig->addComponent(GridFieldOrderableRows::create('SortOrder'))
-            ->removeComponentsByType(GridFieldDeleteAction::class)
-            ->addComponent(new GridFieldDeleteAction(false))
-            ->removeComponentsByType('GridFieldAddExistingAutoCompleter');
+                   ->removeComponentsByType(GridFieldDeleteAction::class)
+                   ->addComponent(new GridFieldDeleteAction(false))
+                   ->removeComponentsByType('GridFieldAddExistingAutoCompleter');
 
         $LinkBlockGridField = GridField::create(
             'Items',
@@ -58,7 +50,7 @@ class LinkBlock extends QuickBlock
         $fields->addFieldsToTab('Root.Main', [
             TextField::create('Title', 'Title'),
             HTMLEditorField::create('Content', 'Content')
-                ->setRows(15),
+                           ->setRows(15),
         ]);
 
         /** -----------------------------------------

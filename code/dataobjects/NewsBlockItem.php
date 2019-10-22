@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: staff
- * Date: 1/02/19
- * Time: 3:43 PM
- */
 
 namespace Toast\Model;
-
 
 use Sheadawson\Linkable\Forms\LinkField;
 use Sheadawson\Linkable\Models\Link;
@@ -19,11 +12,10 @@ use SilverStripe\ORM\DataObject;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use Toast\QuickBlocks\NewsBlock;
 
-
-class NewsBlockItem extends  DataObject
+class NewsBlockItem extends DataObject
 {
     private static $table_name = 'NewsBlockItem';
-    private static $db = [
+    private static $db         = [
         'SortOrder' => 'Int',
         'Title'     => 'Varchar(100)',
         'Content'   => 'HTMLText',
@@ -39,9 +31,10 @@ class NewsBlockItem extends  DataObject
         'Image.CMSThumbnail' => 'Thumbnail',
         'Title'              => 'Title',
     ];
-    private static $owns = [
+    private static $owns           = [
         'Image'
     ];
+
     /**
      * @return FieldList
      */
@@ -67,11 +60,11 @@ class NewsBlockItem extends  DataObject
 
         $fields->addFieldsToTab('Root.Main', [
             TextField::create('Title', 'Title'),
-            LinkField::create('LinkID','Link'),
+            LinkField::create('LinkID', 'Link'),
             HTMLEditorField::create('Content', 'Content')->setRows(5),
             UploadField::create('Image', 'Image')
-                ->setDescription('Ideal size at least 510px * 510px')
-                ->setFolderName('Uploads/Images')
+                       ->setDescription('Ideal size at least 510px * 510px')
+                       ->setFolderName('Uploads/Images')
         ]);
 
 

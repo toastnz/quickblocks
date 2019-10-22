@@ -2,6 +2,6 @@ $Title
 $Content
 
 <% loop $Items %>
-$Title
-$Image
+    $Title
+    $Image
 <% end_loop %>
