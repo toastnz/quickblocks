@@ -17,6 +17,11 @@ class NewsBlock extends QuickBlock
     private static $table_name    = 'NewsBlock';
     private static $icon          = 'quickblocks/images/news.png';
 
+    private static $db = [
+        'Title'   => 'Text',
+        'Content' => 'HTMLText'
+    ];
+
     private static $has_many = [
         'Items' => NewsBlockItem::class
     ];
@@ -47,6 +52,8 @@ class NewsBlock extends QuickBlock
          * ----------------------------------------*/
         if ($this->ID !== 0) {
             $fields->addFieldsToTab('Root.Main', [
+                TextField::create('Title', 'Title'),
+                HTMLEditorField::create('Content', 'Content'),
                 $NewsBlockGridField
             ]);
         }
