@@ -16,6 +16,7 @@ use SilverStripe\Assets\Image;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use Toast\QuickBlocks\NewsBlock;
 
 
