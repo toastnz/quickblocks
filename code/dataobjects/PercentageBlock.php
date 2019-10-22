@@ -94,25 +94,29 @@ class PercentageBlock extends QuickBlock
         }
     }
 
-//    public function getRightBackgroundImageURL()
-//    {
-//
-//        if ($this->RightImage()->exists()) {
-//
-//            return $this->RightImage()->URL;
-//        } else {
-//            return 'themes/quicksilver/dist/images/standard/percentage-pattern.png';
-//        }
-//    }
-//
-//    public function getLeftBackgroundImageURL()
-//    {
-//        if ($this->LeftImage()->exists()) {
-//            return $this->LeftImage()->URL;
-//        } else {
-//            return 'themes/quicksilver/dist/images/standard/percentage-pattern.png';
-//        }
-//    }
+    public function getRightBackgroundImageURL()
+    {
+
+        if ($this->RightImage()->exists()) {
+
+            return $this->RightImage()->URL;
+        } else {
+            return 'themes/quicksilver/dist/images/standard/percentage-pattern.png';
+        }
+
+        return false;
+    }
+
+    public function getLeftBackgroundImageURL()
+    {
+        if ($this->LeftImage()->exists()) {
+            return $this->LeftImage()->URL;
+        } else {
+            return 'themes/quicksilver/dist/images/standard/percentage-pattern.png';
+        }
+
+        return false;
+    }
 
     public function getLeft()
     {
