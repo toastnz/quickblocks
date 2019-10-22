@@ -26,19 +26,16 @@ class ColumnBlock extends QuickBlock
     /**
      * @return FieldList
      */
+
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
-        $this->beforeUpdateCMSFields(function ($fields) {
-
-            $fields->addFieldsToTab('Root.Main', [
-                TextField::create('Heading', 'Heading'),
-                HTMLEditorField::create('Content', 'Content')
-                    ->setRows(15),
-                DropdownField::create('Columns', 'Columns', singleton(ColumnBlock::class)->dbObject('Columns')->enumValues()),
-            ]);
-        });
-
+        $fields->addFieldsToTab('Root.Main', [
+            TextField::create('Heading', 'Heading'),
+            HTMLEditorField::create('Content', 'Content')
+                ->setRows(15),
+            DropdownField::create('Columns', 'Columns', singleton(ColumnBlock::class)->dbObject('Columns')->enumValues()),
+        ]);
         return $fields;
     }
 
