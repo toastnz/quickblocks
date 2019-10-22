@@ -42,7 +42,6 @@ class LinkBlockItem extends  DataObject
     private static $summary_fields = [
         'Image.CMSThumbnail' => 'Thumbnail',
         'Title'              => 'Title',
-        'ContentSummary'     => 'Content'
     ];
     private static $owns = [
         'Image'
