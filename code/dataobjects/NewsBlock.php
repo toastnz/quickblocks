@@ -53,7 +53,10 @@ class NewsBlock extends QuickBlock
         if ($this->ID !== 0) {
             $fields->addFieldsToTab('Root.Main', [
                 TextField::create('Title', 'Title'),
-                HTMLEditorField::create('Content', 'Content'),
+                HTMLEditorField::create('Content', 'Content')
+            ]);
+
+            $fields->addFieldsToTab('Root.NewsItems', [
                 $NewsBlockGridField
             ]);
         }
