@@ -21,7 +21,7 @@ class ColumnBlock extends QuickBlock
     private static $db = [
         'Heading' => 'Varchar(255)',
         'Content' => 'HTMLText',
-        'Columns' => 'Enum("1,2,3,4,5,6,7,8,9,10", "3")'
+        'Columns' => 'Enum("1,2,3", "3")'
     ];
     /**
      * @return FieldList
