@@ -11,11 +11,11 @@ use SilverStripe\Forms\TextField;
  * Class ColumnsBlock
  *
  */
-class ColumnsBlock extends QuickBlock
+class ColumnBlock extends QuickBlock
 {
     private static $singular_name = 'Column';
     private static $plural_name   = 'Columns';
-    private static $table_name    = 'ColumnsBlock';
+    private static $table_name    = 'ColumnBlock';
     private static $icon          = 'quickblocks/images/text.png';
 
     private static $db = [
