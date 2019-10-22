@@ -12,6 +12,7 @@ use SilverStripe\Forms\TextField;
 use SilverStripe\View\ArrayData;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Forms\DropdownField;
 
 class PercentageBlock extends QuickBlock
 {
@@ -100,13 +101,12 @@ class PercentageBlock extends QuickBlock
     {
 
         if ($this->RightImage()->exists()) {
-
             return $this->RightImage()->URL;
         } else {
             return 'themes/quicksilver/dist/images/standard/percentage-pattern.png';
         }
 
-        return false;
+//        return false;
     }
 
     public function getLeftBackgroundImageURL()
@@ -117,7 +117,7 @@ class PercentageBlock extends QuickBlock
             return 'themes/quicksilver/dist/images/standard/percentage-pattern.png';
         }
 
-        return false;
+//        return false;
     }
 
     public function getLeft()
