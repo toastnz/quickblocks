@@ -11,7 +11,7 @@ use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 
 class ColumnBlockItem extends DataObject
 {
-    private static $table_name = 'LinkBlockItem';
+    private static $table_name = 'ColumnBlockItem';
     private static $db = [
         'SortOrder' => 'Int',
         'Content' => 'HTMLText',
