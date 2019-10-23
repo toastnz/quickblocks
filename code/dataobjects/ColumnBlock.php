@@ -6,6 +6,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\TextField;
+use Toast\Model\ColumnBlockItem;
 
 /**
  * Class ColumnBlock
