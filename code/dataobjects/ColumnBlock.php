@@ -33,17 +33,17 @@ class ColumnBlock extends QuickBlock
 
     public function getCMSFields()
     {
-        $config = GridFieldConfig_RelationEditor::create(50)
-            ->removeComponentsByType(GridFieldAddExistingAutoCompleter::class)
-            ->removeComponentsByType(GridFieldDeleteAction::class)
-            ->addComponents(new GridFieldDeleteAction())
-            ->addComponents(GridFieldOrderableRows::create('SortOrder'));
-        $grid = GridField::create(
-            'ColumnItems',
-            'Column Items',
-            $this->ColumnItems(),
-            $config
-        );
+//        $config = GridFieldConfig_RelationEditor::create(50)
+//            ->removeComponentsByType(GridFieldAddExistingAutoCompleter::class)
+//            ->removeComponentsByType(GridFieldDeleteAction::class)
+//            ->addComponents(new GridFieldDeleteAction())
+//            ->addComponents(GridFieldOrderableRows::create('SortOrder'));
+//        $grid = GridField::create(
+//            'ColumnItems',
+//            'Column Items',
+//            $this->ColumnItems(),
+//            $config
+//        );
 
         $fields = parent::getCMSFields();
         $fields->addFieldsToTab('Root.Main', [
@@ -51,7 +51,7 @@ class ColumnBlock extends QuickBlock
             HTMLEditorField::create('Content', 'Content')
                 ->setRows(15),
             DropdownField::create('Columns', 'Columns', singleton(ColumnBlock::class)->dbObject('Columns')->enumValues()),
-            $grid
+           // $grid
         ]);
         return $fields;
     }
