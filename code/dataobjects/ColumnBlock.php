@@ -24,7 +24,7 @@ class ColumnBlock extends QuickBlock
         'Columns' => 'Enum("1,2,3", "3")'
     ];
     private static $has_many = [
-        'Items' => ColumnBlockItem::class
+        'ColumnItems' => ColumnBlockItem::class
     ];
     /**
      * @return FieldList
@@ -38,9 +38,9 @@ class ColumnBlock extends QuickBlock
             ->addComponents(new GridFieldDeleteAction())
             ->addComponents(GridFieldOrderableRows::create('SortOrder'));
         $grid = GridField::create(
-            'Items',
-            'Items',
-            $this->Items(),
+            'ColumnItems',
+            'Column Items',
+            $this->ColumnItems(),
             $config
         );
 
