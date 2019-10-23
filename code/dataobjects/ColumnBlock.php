@@ -6,6 +6,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\TextField;
+use Toast\Model\ColumnBlockItem;
 
 /**
  * Class ColumnBlock
@@ -23,13 +24,26 @@ class ColumnBlock extends QuickBlock
         'Content' => 'HTMLText',
         'Columns' => 'Enum("1,2,3", "3")'
     ];
-
+    private static $has_many = [
+        'ColumnItems' => ColumnBlockItem::class
+    ];
     /**
      * @return FieldList
      */
 
     public function getCMSFields()
     {
+        $config = GridFieldConfig_RelationEditor::create(50)
+            ->removeComponentsByType(GridFieldAddExistingAutoCompleter::class)
+            ->removeComponentsByType(GridFieldDeleteAction::class)
+            ->addComponents(new GridFieldDeleteAction())
+            ->addComponents(GridFieldOrderableRows::create('SortOrder'));
+        $grid = GridField::create(
+            'ColumnItems',
+            'Column Items',
+            $this->ColumnItems(),
+            $config
+        );
 
         $fields = parent::getCMSFields();
         $fields->addFieldsToTab('Root.Main', [
@@ -37,6 +51,7 @@ class ColumnBlock extends QuickBlock
             HTMLEditorField::create('Content', 'Content')
                 ->setRows(15),
             DropdownField::create('Columns', 'Columns', singleton(ColumnBlock::class)->dbObject('Columns')->enumValues()),
+            $grid
         ]);
         return $fields;
     }
