@@ -25,37 +25,43 @@ class ColumnBlock extends QuickBlock
 
     private static $db = [
         'Heading' => 'Varchar(255)',
-        'Content' => 'HTMLText',
-        'Columns' => 'Enum("1,2,3", "3")'
+        'ContentLeft' => 'HTMLText',
+        'ContentMiddle' => 'HTMLText',
+        'ContentRight' => 'HTMLText',
+//        'Columns' => 'Enum("1,2,3", "3")'
     ];
-    private static $has_many = [
-        'ColumnItems' => ColumnBlockItem::class
-    ];
+//    private static $has_many = [
+//        'ColumnItems' => ColumnBlockItem::class
+//    ];
     /**
      * @return FieldList
      */
 
     public function getCMSFields()
     {
-        $config = GridFieldConfig_RelationEditor::create(50)
-            ->removeComponentsByType(GridFieldAddExistingAutoCompleter::class)
-            ->removeComponentsByType(GridFieldDeleteAction::class)
-            ->addComponents(new GridFieldDeleteAction())
-            ->addComponents(GridFieldOrderableRows::create('SortOrder'));
-        $grid = GridField::create(
-            'ColumnItems',
-            'Column Items',
-            $this->ColumnItems(),
-            $config
-        );
+//        $config = GridFieldConfig_RelationEditor::create(50)
+//            ->removeComponentsByType(GridFieldAddExistingAutoCompleter::class)
+//            ->removeComponentsByType(GridFieldDeleteAction::class)
+//            ->addComponents(new GridFieldDeleteAction())
+//            ->addComponents(GridFieldOrderableRows::create('SortOrder'));
+//        $grid = GridField::create(
+//            'ColumnItems',
+//            'Column Items',
+//            $this->ColumnItems(),
+//            $config
+//        );
 
         $fields = parent::getCMSFields();
         $fields->addFieldsToTab('Root.Main', [
             TextField::create('Heading', 'Heading'),
-            HTMLEditorField::create('Content', 'Content')
+            HTMLEditorField::create('ContentLeft', 'Content Left')
                 ->setRows(15),
-            DropdownField::create('Columns', 'Columns', singleton(ColumnBlock::class)->dbObject('Columns')->enumValues()),
-            $grid
+            HTMLEditorField::create('ContentMiddle', 'Content Middle')
+                ->setRows(15),
+            HTMLEditorField::create('ContentRight', 'Content Right')
+                ->setRows(15),
+//            DropdownField::create('Columns', 'Columns', singleton(ColumnBlock::class)->dbObject('Columns')->enumValues()),
+//            $grid
         ]);
         return $fields;
     }
