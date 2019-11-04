@@ -1,4 +1,4 @@
-<% if $Alignment == 'left'%>
+<%--<% if $Alignment == 'left'%>--%>
     <div class="wysiwyg testimonial testimonial--{$Alignment}">
         <div class="innerWrap">
             <div class="flex">
@@ -22,4 +22,4 @@
             </div>
         </div>
     </div>
-<% end_if %>
+<%--<% end_if %>--%>
