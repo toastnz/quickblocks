@@ -1,4 +1,4 @@
-<section class="heroBlock contentBlock" data-equalize>
+<section class="heroBlock contentBlock">
     <% if $ContentWidth %><div class="row"><div class="column"><% end_if %>
     <div class="heroBlock__item" data-parallax>
 
@@ -11,7 +11,7 @@
                 <div class="verticalAlign">
                     <div class="row">
                         <% if $Content %>
-                            <div class="heroBlock__item__wrap__content column heroContent" data-equalize-watch>
+                            <div class="heroBlock__item__wrap__content column heroContent">
                                 $Content
                             </div>
                         <% end_if %>
