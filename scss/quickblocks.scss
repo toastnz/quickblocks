@@ -1,8 +1,8 @@
 //------------------------------------------------------------------
-// Block imports
+// Block Imports
 //------------------------------------------------------------------
 
-@if not (variable-exists(core)) {@warn 'Quickblocks are dependant on the core style.';}
+@if not (variable-exists(core)) {@warn 'Quickblocks are dependent on the core style.';}
 
 @import 'QuickBlocks/AccordionBlock';
 @import 'QuickBlocks/ColumnBlock';
