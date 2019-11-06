@@ -66,4 +66,20 @@ class ColumnBlock extends QuickBlock
         return $fields;
     }
 
+    public function getColumns()
+    {
+        $columns = 0;
+        
+        if ($this->ContentLeft !== "") {
+            $columns += 1;
+        };
+        if ($this->ContentMiddle !== "") {
+            $columns += 1;
+        };
+        if ($this->ContentRight !== "") {
+            $columns += 1;
+        };
+        return $columns;
+    }
+
 }

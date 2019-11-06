@@ -67,4 +67,9 @@ class AccordionBlock extends QuickBlock
     {
         return GroupedList::create($this->AccordionItems());
     }
+
+    public function Items()
+    {
+        return $this->AccordionItems();
+    }
 }

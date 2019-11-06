@@ -40,7 +40,7 @@ class ContentTab extends DataObject
 
     private static $summary_fields = [
         'Title'           => 'Heading',
-        'Description'     => 'Description',
+        // 'Description'     => 'Description',
         'Content.Summary' => 'Content'
     ];
 
@@ -49,13 +49,16 @@ class ContentTab extends DataObject
      */
     public function getCMSFields()
     {
+
         $fields = FieldList::create([
             TextField::create('Title', 'Title'),
-            TextareaField::create('Description', 'Description')
-                ->setRows(2),
+            // TextareaField::create('Description', 'Description')
+            //     ->setRows(2),
             HTMLEditorField::create('Content', 'Content')
                 ->setRows(15)
         ]);
+
+        $fields->removeByName(['Description']);
 
         $this->extend('updateCMSFields', $fields);
 
