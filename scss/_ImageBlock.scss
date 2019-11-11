@@ -2,11 +2,13 @@
 // Image Block
 //------------------------------------------------------------------
 
-.imageBlock {
-	&__wrap {
-		&__media {
-			width: 100%;
-			height: auto;
+@mixin ImageBlock {
+	.imageBlock {
+		&__wrap {
+			&__media {
+				width: 100%;
+				height: auto;
+			}
 		}
 	}
 }

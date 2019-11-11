@@ -2,13 +2,15 @@
 // Video Block
 //------------------------------------------------------------------
 
-.videoBlock {
-	&__wrap {
-		&__media {
-			@include cover;
-			position: relative;
-			width: 100%;
-			@include videoEmbed;
+@mixin VideoBlock {
+	.videoBlock {
+		&__wrap {
+			&__media {
+				@include cover;
+				position: relative;
+				width: 100%;
+				@include videoEmbed;
+			}
 		}
 	}
 }

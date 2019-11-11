@@ -2,35 +2,37 @@
 // News
 //------------------------------------------------------------------
 
-.newsBlock {
-  &__wrap {
-    &__item {
-      display: block;
-      cursor: pointer;
-      color: $text;
-      margin-bottom: $gutterWidth * 2;
-      
-      @include active {
-        .link {
-          color: $secondary;
+@mixin NewsBlock {
+  .newsBlock {
+    &__wrap {
+      &__item {
+        display: block;
+        cursor: pointer;
+        color: $text;
+        margin-bottom: $gutterWidth * 2;
+        
+        @include active {
+          .link {
+            color: $secondary;
+          }
         }
-      }
 
-      &__media {
-        @include cover;
-        width: 100%;
-        padding-bottom: 100%;
-        margin-bottom: $gutterWidth;
-      }
+        &__media {
+          @include cover;
+          width: 100%;
+          padding-bottom: 100%;
+          margin-bottom: $gutterWidth;
+        }
 
-      &__details {
-        margin-bottom: $gutterWidth;
-      }
+        &__details {
+          margin-bottom: $gutterWidth;
+        }
 
-      &__link {
-        color: $primary;
-        @include transition(color);
+        &__link {
+          color: $primary;
+          @include transition(color);
 
+        }
       }
     }
   }

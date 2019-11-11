@@ -2,23 +2,23 @@
 // Column Block
 //------------------------------------------------------------------
 
-.columnBlock {
-	background-color: $off-white;
+@mixin ColumnBlock {
+	.columnBlock {
+		background-color: $off-white;
 
-	&__header {
-		margin-bottom: 6rem;
-		&__title {
-			margin-bottom: 0;
-		}
-	}
-	&__wrap {
-		&__item {
+		&__header {
 			margin-bottom: 6rem;
+			&__title {
+				margin-bottom: 0;
+			}
+		}
+		&__wrap {
+			&__item {
+				margin-bottom: 6rem;
 
-			&__content {
-				// &__heading {
-				// 	margin-bottom: $gutterWidth;
-				// }
+				&__content {
+
+				}
 			}
 		}
 	}

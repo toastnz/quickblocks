@@ -2,63 +2,63 @@
 // Download Block
 //------------------------------------------------------------------
 
-.downloadBlock {
-	&__wrap {
-		&__item {
-			display: block;
-			border-width: 0 0 .2rem 0;
-			border-style: solid;
-			border-color: rgba($primary, .2);
-			text-align: left;
-			@include transition(background-color);
-			// margin-bottom: $gutterWidth * 2;
-
-
-			@include active {
-				background-color: $off-white;
-				.title {
-					color: $primary;
-				}
-			}
-
-			&:first-child {
-				border-width: .2rem 0;
-			}
-
-			&__media {
-				@include cover;
-				padding-bottom: 75%;
-			}
-
-			&__heading {
+@mixin DownloadBlock {
+	.downloadBlock {
+		&__wrap {
+			&__item {
 				display: block;
-				position: relative;
-				padding-left: 6rem;
-				padding-top: $gutterWidth;
-				padding-bottom: $gutterWidth;
+				border-width: 0 0 .2rem 0;
+				border-style: solid;
+				border-color: rgba($primary, .2);
+				text-align: left;
+				@include transition(background-color);
 
-				&__title {
-					color: $text;
-					margin-bottom: .5rem;
-					@include transition(color);
+				@include active {
+					background-color: $off-white;
+					.title {
+						color: $primary;
+					}
 				}
 
-				&__info {
-					font-size: 1.4rem;
-					margin-bottom: 0;
+				&:first-child {
+					border-width: .2rem 0;
 				}
 
-				.icon {
-					@include svg(33,42);
-					position: absolute;
-					top: 50%;
-					left: 0;
-					width: 3.3rem;
-					transform: translateY(-50%);
+				&__media {
+					@include cover;
+					padding-bottom: 75%;
+				}
 
-					svg {
-						path {
-							fill: $text;
+				&__heading {
+					display: block;
+					position: relative;
+					padding-left: 6rem;
+					padding-top: $gutterWidth;
+					padding-bottom: $gutterWidth;
+
+					&__title {
+						color: $text;
+						margin-bottom: .5rem;
+						@include transition(color);
+					}
+
+					&__info {
+						font-size: 1.4rem;
+						margin-bottom: 0;
+					}
+
+					.icon {
+						@include svg(33,42);
+						position: absolute;
+						top: 50%;
+						left: 0;
+						width: 3.3rem;
+						transform: translateY(-50%);
+
+						svg {
+							path {
+								fill: $text;
+							}
 						}
 					}
 				}
