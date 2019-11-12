@@ -1,7 +1,7 @@
 <% if Testimonials %>
     <section class="testimonialBlock contentBlock">
         <div class="testimonialBlock__wrap row">
-            <div class="<% if $Slider %>[ js-slider--testimonials ]<% end_if %>">
+            <div class="<% if $ShowSlider %>[ js-slider--testimonials ]<% end_if %>">
                 <% loop Testimonials %>
                     <div class="testimonialBlock__wrap__item column">
                         <h4 class="testimonialBlock__wrap__item__icon">&quot;</h4>
