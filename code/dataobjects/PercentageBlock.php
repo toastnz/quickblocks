@@ -34,12 +34,14 @@ class PercentageBlock extends QuickBlock
         'LeftImage'  => Image::class,
         'RightImage' => Image::class,
         'LeftLink'   => Link::class,
-        'RightLink'  => Link::class
+        'RightLink'  => Link::class,
+        'DefaultImage'  => Image::class,
     ];
 
     private static $owns = [
         'LeftImage',
-        'RightImage'
+        'RightImage',
+        'DefaultImage'
     ];
 
     public function getCMSFields()
@@ -52,6 +54,7 @@ class PercentageBlock extends QuickBlock
                 '66/33' => '66/33'
             ]),
             DropdownField::create('ContentWidth', 'Width', [0 => 'Full Width', 1 => 'Content Width']),
+            UploadField::create('DefaultImage', 'Default Background Image'),
         ]);
 
         $fields->addFieldsToTab('Root.Left', [
