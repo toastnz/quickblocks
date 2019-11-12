@@ -27,21 +27,21 @@ class GalleryBlock extends QuickBlock
     private static $table_name    = 'GalleryBlock';
     private static $icon          = 'quickblocks/images/gallery.png';
 
-    private static $has_one = [
-        'CoverImage' => Image::class
-    ];
+    // private static $has_one = [
+    //     'CoverImage' => Image::class
+    // ];
 
-    private static $owns = [
-        'CoverImage'
-    ];
+    // private static $owns = [
+    //     'CoverImage'
+    // ];
 
     private static $has_many = [
         'GalleryImages' => GalleryImageItem::class
     ];
 
-    private static $summary_fields = [
-        'CoverImage.CMSThumbnail' => 'Image'
-    ];
+    // private static $summary_fields = [
+    //     'CoverImage.CMSThumbnail' => 'Image'
+    // ];
 
     /**
      * @return FieldList
@@ -64,7 +64,7 @@ class GalleryBlock extends QuickBlock
 
             if ($this->ID) {
                 $fields->addFieldsToTab('Root.Main', [
-                    UploadField::create('CoverImage', 'Cover Image')->setFolderName('Uploads/blocks/gallery-images'),
+                    // UploadField::create('CoverImage', 'Cover Image')->setFolderName('Uploads/blocks/gallery-images'),
                     $grid
                 ]);
             } else {

@@ -1,25 +1,21 @@
-<%--<% if $Alignment == 'left'%>--%>
-    <div class="wysiwyg testimonial testimonial--{$Alignment}">
-        <div class="innerWrap">
-            <div class="flex">
-                <h5>
-                    <span class="testimonial__icon">$SVG('quotes-dark')</span>
-                    {$Testimonial}
-                </h5>
-                <p><span class="colour--{$Colour}">{$Attribution},</span> $Location</p>
+<% if Testimonials %>
+    <section class="testimonialBlock contentBlock">
+        <div class="testimonialBlock__wrap row">
+            <div class="[ js-slider--testimonials ]">
+                <% loop Testimonials %>
+                    <div class="testimonialBlock__wrap__item column">
+                        <h4 class="testimonialBlock__wrap__item__icon">&quot;</h4>
+                        <div class="testimonialBlock__wrap__item__quote">
+                            <p>{$Testimonial}</p>
+                        </div>
+                        <div class="testimonialBlock__wrap__item__credit">
+                            <% if $Attribution %>
+                                <p><span>{$Attribution}<% if $Location %>,<% end_if %></span> {$Location}</p>
+                            <% end_if %>
+                        </div>
+                    </div>
+                <% end_loop %>
             </div>
         </div>
-    </div>
-<% else %>
-    <div class="wysiwyg testimonial testimonial--{$Alignment}">
-        <div class="innerWrap">
-            <div class="flex">
-                <p><span class="colour--{$Colour}">{$Attribution},</span> $Location</p>
-                <h5>
-                    <span class="testimonial__icon">$SVG('quotes-dark')</span>
-                    {$Testimonial}
-                </h5>
-            </div>
-        </div>
-    </div>
-<%--<% end_if %>--%>
+    </section>
+<% end_if %>

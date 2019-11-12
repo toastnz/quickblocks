@@ -5,7 +5,6 @@ namespace Toast\QuickBlocks;
 use SilverStripe\Assets\File;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\Forms\RequiredFields;
 
@@ -20,10 +19,6 @@ class DownloadBlock extends QuickBlock
     private static $plural_name   = 'Downloads';
     private static $table_name    = 'DownloadBlock';
     private static $icon          = 'quickblocks/images/download.png';
-
-    private static $db = [
-        'Title'      => 'Varchar(255)',
-    ];
 
     private static $many_many = [
         'Files' => File::class
@@ -40,7 +35,6 @@ class DownloadBlock extends QuickBlock
     {
         $this->beforeUpdateCMSFields(function ($fields) {
             $fields->addFieldsToTab('Root.Main', [
-                TextField::create('Title', 'Title'),
                 UploadField::create('Files', 'Files')
                            ->setFolderName('Uploads/downloads')
             ]);
@@ -63,6 +57,11 @@ class DownloadBlock extends QuickBlock
     public function getCMSValidator()
     {
         return new RequiredFields(['Files']);
+    }
+
+    public function Items()
+    {
+        return $this->Files();
     }
 
 }

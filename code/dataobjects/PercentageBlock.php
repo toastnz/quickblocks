@@ -23,9 +23,9 @@ class PercentageBlock extends QuickBlock
 
     private static $db = [
         'Size'         => 'Enum("33/66, 50/50, 66/33", "50/50")',
-        'LeftHeading'  => 'Text',
+        // 'LeftHeading'  => 'Text',
         'LeftContent'  => 'HTMLText',
-        'RightHeading' => 'Text',
+        // 'RightHeading' => 'Text',
         'RightContent' => 'HTMLText',
         'ContentWidth' => 'Boolean'
     ];
@@ -58,14 +58,14 @@ class PercentageBlock extends QuickBlock
         ]);
 
         $fields->addFieldsToTab('Root.Left', [
-            TextField::create('LeftHeading', 'Heading'),
+            // TextField::create('LeftHeading', 'Heading'),
             HTMLEditorField::create('LeftContent', 'Content'),
             UploadField::create('LeftImage', 'Background Image'),
             LinkField::create('LeftLinkID', 'Link'),
         ]);
 
         $fields->addFieldsToTab('Root.Right', [
-            TextField::create('RightHeading', 'Heading'),
+            // TextField::create('RightHeading', 'Heading'),
             HTMLEditorField::create('RightContent', 'Content'),
             UploadField::create('RightImage', 'Background Image'),
             LinkField::create('RightLinkID', 'Link'),
@@ -106,7 +106,11 @@ class PercentageBlock extends QuickBlock
         if ($this->RightImage()->exists()) {
             return $this->RightImage()->URL;
         }
+        // else {
+            // return 'themes/quicksilver/dist/images/standard/percentage-pattern.png';
+        // }
 
+       return false;
     }
 
     public function getLeftBackgroundImageURL()
@@ -114,13 +118,17 @@ class PercentageBlock extends QuickBlock
         if ($this->LeftImage()->exists()) {
             return $this->LeftImage()->URL;
         }
+        // else {
+        //     return 'themes/quicksilver/dist/images/standard/percentage-pattern.png';
+        // }
 
+       return false;
     }
 
     public function getLeft()
     {
         return ArrayData::create    ([
-            'Title'   => $this->LeftHeading,
+            // 'Title'   => $this->LeftHeading,
             'Content' => DBField::create_field(DBHTMLText::class, $this->LeftContent),
             'Image'   => $this->LeftImage,
             'Size'    => $this->getWidth('left'),
@@ -132,7 +140,7 @@ class PercentageBlock extends QuickBlock
     {
 
         return ArrayData::create    ([
-            'Title'   => $this->RightHeading,
+            // 'Title'   => $this->RightHeading,
             'Content' => DBField::create_field(DBHTMLText::class, $this->RightContent),
             'Image'   => $this->RightImage,
             'Size'    => $this->getWidth('right'),

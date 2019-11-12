@@ -2,12 +2,13 @@
 
 namespace Toast\QuickBlocks;
 
+use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
-use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
-use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\TextField;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use Toast\Model\LinkBlockItem;
 
 class LinkBlock extends QuickBlock
@@ -20,6 +21,7 @@ class LinkBlock extends QuickBlock
     private static $db = [
         'Title'   => 'Varchar(100)',
         'Content' => 'HTMLText',
+        'Columns' => 'Enum("2, 3, 4", "2")',
     ];
 
     private static $has_many = [
@@ -51,6 +53,7 @@ class LinkBlock extends QuickBlock
             TextField::create('Title', 'Title'),
             HTMLEditorField::create('Content', 'Content')
                            ->setRows(15),
+            DropdownField::create('Columns', 'Columns', singleton('Toast\QuickBlocks\LinkBlock')->dbObject('Columns')->enumValues()),
         ]);
 
         /** -----------------------------------------

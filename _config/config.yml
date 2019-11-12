@@ -12,3 +12,8 @@ SilverStripe\Assets\File:
     - Toast\QuickBlocks\FileExtension
 Toast\QuickBlocks\QuickBlock:
   better_buttons_enabled: false
+
+
+Toast\QuickBlocks\TestimonialBlock:
+  extensions:
+    - Toast\Extensions\TestimonialBlockExtension

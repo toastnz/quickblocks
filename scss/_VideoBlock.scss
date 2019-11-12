@@ -1,0 +1,16 @@
+//------------------------------------------------------------------
+// Video Block
+//------------------------------------------------------------------
+
+@mixin VideoBlock {
+	.videoBlock {
+		&__wrap {
+			&__media {
+				@include cover;
+				position: relative;
+				width: 100%;
+				@include videoEmbed;
+			}
+		}
+	}
+}
