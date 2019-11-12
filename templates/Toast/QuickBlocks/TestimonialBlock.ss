@@ -5,10 +5,10 @@
                 <% loop Testimonials %>
                     <div class="testimonialBlock__wrap__item item column">
                         <h4 class="testimonialBlock__wrap__item__icon icon">&quot;</h4>
-                        <div class="testimonialBlock__wrap__item__quote">
+                        <div class="testimonialBlock__wrap__item__quote quote">
                             <p>{$Testimonial}</p>
                         </div>
-                        <div class="testimonialBlock__wrap__item__credit">
+                        <div class="testimonialBlock__wrap__item__credit credit">
                             <% if $Attribution %>
                                 <p><span>{$Attribution}<% if $Location %>,<% end_if %></span> {$Location}</p>
                             <% end_if %>
