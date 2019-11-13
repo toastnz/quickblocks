@@ -17,3 +17,9 @@ Toast\QuickBlocks\QuickBlock:
 Toast\QuickBlocks\TestimonialBlock:
   extensions:
     - Toast\Extensions\TestimonialBlockExtension
+
+# Used to remove buttons from the DataObject.
+# NOTE: The documented getCMSActions and updateCMSActions do not actually work.
+SilverStripe\Forms\GridField\GridFieldDetailForm_ItemRequest:
+  extensions:
+    CmsActionsExtension: CmsActionsExtension
