@@ -13,15 +13,28 @@
 
 					&__link {
 						display: block;
+						position: relative;
 						padding: 1rem 2rem;
 
-						box-shadow: inset .4rem 0 0 0 rgba($primary, .2);
-						@include transition((box-shadow, background-color));
+						box-shadow: inset .4rem 0 0 0 transparent;
+						@include transition(box-shadow);
+
+						&:before {
+							content: '';
+							opacity: 0;
+							background-color: $primary;
+							@include pos(absolute, 0);
+							@include transition(opacity);
+						}
 
 						&.js-active {
-							background-color: rgba($primary, .05);
+							// background-color: rgba($primary, .05);
 							box-shadow: inset .4rem 0 0 0 $primary;
 							cursor: default;
+
+							&:before {
+								opacity: .05;
+							}
 						}
 
 						&:not(.js-active) {

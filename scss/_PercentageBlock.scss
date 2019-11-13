@@ -4,6 +4,8 @@
 
 @mixin PercentageBlock {
   .percentageBlock {
+    @include cover;
+    
     &__wrap {
 
       &:not(.collapse) {

@@ -5,17 +5,52 @@
 @mixin TestimonialBlock {
 	.testimonialBlock {
 		&__wrap {
+			.stack {
+				.item {
+					position: relative;
+					padding-bottom: 6rem;
+
+					&:nth-child(odd) {
+						&:before {
+							content: '';
+							position: absolute;
+							top: 0;
+							bottom: 0;
+							left: 50%;
+							width: 100vw;
+							transform: translateX(-50%);
+							background-color: $off-white;
+						}
+
+						> * {
+							position: relative;
+						}
+					}
+				}
+			}
+			
+			.slider {
+				.icon {
+					display: block;
+					position: absolute;
+					top: 0;
+					left: 50%;
+					margin-bottom: 0;
+					font-size: 8rem;
+					transform: translateX(-50%);
+				}
+
+				.quote,
+				.credit {
+					text-align: center!important;
+				}
+			}
+
 			&__item {
 				position: relative;
 				padding-top: 6rem;
 				&__icon {
-					position: absolute;
-					top: 0;
-					left: 50%;
-					transform: translateX(-50%);
-
-					margin-bottom: 0;
-					font-size: 8rem;
+					display: none;
 				}
 
 				&__quote, 
@@ -29,6 +64,12 @@
 					p {
 						font-size: 2rem;
 						font-style: italic;
+					}
+				}
+
+				&__credit {
+					:last-child {
+						margin-bottom: 0;
 					}
 				}
 			}

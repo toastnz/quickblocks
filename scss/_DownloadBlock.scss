@@ -9,7 +9,7 @@
 				display: block;
 				border-width: 0 0 .2rem 0;
 				border-style: solid;
-				border-color: rgba($primary, .2);
+				border-color: $primary;
 				text-align: left;
 				@include transition(background-color);
 
