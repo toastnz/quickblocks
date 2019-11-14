@@ -14,6 +14,7 @@ use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use SilverStripe\Forms\CheckboxField;
 
 /**
  * Class GalleryBlock
@@ -26,6 +27,10 @@ class GalleryBlock extends QuickBlock
     private static $plural_name   = 'Galleries';
     private static $table_name    = 'GalleryBlock';
     private static $icon          = 'quickblocks/images/gallery.png';
+
+    private static $db = [
+        'ShowThumbnail' => 'Boolean',
+    ];
 
     // private static $has_one = [
     //     'CoverImage' => Image::class
@@ -64,6 +69,11 @@ class GalleryBlock extends QuickBlock
 
             if ($this->ID) {
                 $fields->addFieldsToTab('Root.Main', [
+                    $fields->insertAfter(
+                        'ParentPageID',
+                        CheckboxField::create('ShowThumbnail', 'Show Thumbnail')
+                    ),
+
                     // UploadField::create('CoverImage', 'Cover Image')->setFolderName('Uploads/blocks/gallery-images'),
                     $grid
                 ]);
