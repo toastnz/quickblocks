@@ -9,7 +9,7 @@
             			$Content
         			</div>
 
-        			<span class="newsBlock__wrap__item__link link">Read more</span>
+        			<p><span class="newsBlock__wrap__item__link link">Read more</span></p>
         		</a>
         	<% end_loop %>
     	</div>

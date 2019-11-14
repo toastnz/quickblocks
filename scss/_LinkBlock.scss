@@ -5,6 +5,31 @@
 @mixin LinkBlock {
   .linkBlock {
     &__wrap {
+
+      &.xmd-up-2 {
+        .alignContent {
+          height: 35rem;
+          @include media($xmd) {
+            padding: $gutterWidth * 3;
+          }
+        }
+      }
+
+      &.xmd-up-3 {
+        .alignContent {
+          height: 25rem;
+          @include media($xmd) {
+            padding: $gutterWidth * 2;
+          }
+        }
+      }
+
+      &.xmd-up-4 {
+        .alignContent {
+          height: 20rem;
+        }
+      }
+
       &__item {
         display: block;
         cursor: pointer;
@@ -12,16 +37,40 @@
         margin-bottom: $gutterWidth * 2;
         
         @include active {
-          .link {
-            text-decoration: underline;
+
+          .media {
+            &:after {
+              opacity: 0.8;
+            }
+          }
+
+          .hoverContent {
+            opacity: 1;
+            transform: scale(1);
           }
         }
 
         &__media {
-          @include cover;
+          position: relative;
           width: 100%;
-          padding-bottom: 100%;
           margin-bottom: $gutterWidth;
+          overflow: hidden;
+          
+          @include cover;
+          @include overlay($secondary, 0);
+
+          &__content {
+            opacity: 0;
+            position: relative;
+            z-index: 1;
+            transform: scale(1.1);
+
+            @include transition((opacity, transform));
+            
+            .alignContent {
+              padding: $gutterWidth;
+            }            
+          }
         }
 
         &__details {
@@ -30,6 +79,7 @@
 
         &__link {
           color: $primary;
+          font-size: 1.6rem;
           @include transition(color);
         }
       }
