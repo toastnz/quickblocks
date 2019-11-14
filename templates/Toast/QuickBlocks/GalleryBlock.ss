@@ -15,10 +15,11 @@
                         <% end_loop %>
                     </div>
                 </div>
-                <% if $ShowThumbnail %>
+
                 <% if $GalleryImages.Count() >= 2 %>
                     <div class="sliderBlock__wrap__nav">
                         <div class="[ js-sliderGallery--nav init-up-3 sm-up-4 xmd-up-5 lg-up-6 xl-up-7 ]">
+                        <% if $ShowThumbnail %>
                             <% loop $GalleryImages %>
                                 <div class="sliderBlock__wrap__nav__item [ js-sliderGallery--nav-item ]">
                                     <% if $GalleryImage %>
@@ -28,9 +29,9 @@
                                     <% end_if %>
                                 </div>
                             <% end_loop %>
+                        <% end_if %>
                         </div>
                     </div>
-                <% end_if %>
                 <% end_if %>
             </div>
         </div>
