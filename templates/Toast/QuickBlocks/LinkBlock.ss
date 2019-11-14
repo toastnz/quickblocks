@@ -12,7 +12,7 @@
             			<h5>$Title</h5>
             			$Content
         			</div>
-        			<span class="linkBlock__wrap__item__link link">Read more</span>
+        			<p><span class="linkBlock__wrap__item__link link">Read more</span></p>
         		</a>
         	<% end_loop %>
     	</div>

@@ -11,7 +11,7 @@
 
         <% if $Link %>
             <% with $Link %>
-                <a href="{$LinkURL}" {$TargetAttr} class="button button--bordered--primary percentageBlock__wrap__item__link">{$Title}</a>
+                <p><a href="{$LinkURL}" {$TargetAttr} class="redirect--arrow percentageBlock__wrap__item__link">{$Title}</a></p>
             <% end_with %>
         <% end_if %>
     </div>
