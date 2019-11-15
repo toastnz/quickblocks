@@ -63,12 +63,14 @@
 
 					p {
 						font-size: 2rem;
-						font-style: italic;
+						// font-style: italic;
 					}
 				}
 
 				&__credit {
-					:last-child {
+					p {
+						font-weight: bold;
+						color: $primary;
 						margin-bottom: 0;
 					}
 				}
