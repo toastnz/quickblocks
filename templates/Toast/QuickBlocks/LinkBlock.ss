@@ -8,7 +8,7 @@
                             <div class="alignContent">
                                 <div class="contentRow">
                                     <div class="verticalAlign verticalAlign--top" data-equalize-watch="summary">
-                                        <p>$Content.Summary</p>
+                                        <p>$Summary</p>
                                     </div>
                                 </div>
                                 <div class="contentRow">
