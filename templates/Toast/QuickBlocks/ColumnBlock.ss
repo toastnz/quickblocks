@@ -1,9 +1,11 @@
 <section class="columnBlock contentBlock--padding">
-    <div class="columnBlock__header row">
-        <div class="column">
-            <h4 class="columnBlock__header__title">$Heading</h4>
+    <% if $Heading %>
+        <div class="columnBlock__header row">
+            <div class="column">
+                <h4 class="columnBlock__header__title">$Heading</h4>
+            </div>
         </div>
-    </div>
+    <% end_if %>
     <div class="columnBlock__wrap row xmd-up-alignContent xmd-up-$getColumns()">
 
         <div class="columnBlock__wrap__item column verticalAlign verticalAlign--top">
