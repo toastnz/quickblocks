@@ -50,10 +50,6 @@
           position: relative;
           opacity: 1;
           @include transition(opacity, 3s);
-
-          a {
-            color: $white;
-          }
           
           @include media($xmd) {
             p {
