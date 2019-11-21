@@ -15,8 +15,8 @@
 				&__item {
 					&__media {
 						width: 100%;
-						padding-bottom: 56.25%;
-						@include contain;
+						height: auto;
+						// @include contain;
 					}
 				}
 			}

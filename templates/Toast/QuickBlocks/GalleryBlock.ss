@@ -6,11 +6,7 @@
                     <div class="[ js-sliderGallery--main ]">
                         <% loop $GalleryImages %>
                             <div class="sliderBlock__wrap__slider__item column">
-                                <% if $GalleryImage %>
-                                    <div class="sliderBlock__wrap__slider__item__media" style="background-image: url('{$GalleryImage.URL}');"></div>
-                                <% else %>
-                                    <img class="sliderBlock__wrap__slider__item__media" src="https://via.placeholder.com/1920x1080" alt="$Title" title="$Title">
-                                <% end_if %>
+                                <img class="sliderBlock__wrap__slider__item__media" src="{$GalleryImage.URL}" alt="{$GalleryImage.Title}">
                             </div>
                         <% end_loop %>
                     </div>
