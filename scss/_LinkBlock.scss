@@ -90,4 +90,22 @@
       }
     }
   }
+
+  + .linkBlock.contentBlock {
+    margin-top: -5rem;
+
+    @include media($xmd) {
+      margin-top: -10rem;
+    }
+  }
+
+  &.contentBlock {
+    + .linkBlock.contentBlock {
+      margin-top: -5rem;
+
+      @include media($xmd) {
+        margin-top: -10rem;
+      }
+    }
+  }
 }
