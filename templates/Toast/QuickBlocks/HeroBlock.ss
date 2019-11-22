@@ -7,7 +7,7 @@
         <% end_if %>
 
         <% if $Content || $Title %>
-            <div class="heroBlock__item__wrap height alignContent">
+            <a href="$BlockLink.LinkURL" class="heroBlock__item__wrap height alignContent">
                 <div class="verticalAlign">
                     <div class="row">
                         <% if $Content %>
@@ -17,7 +17,7 @@
                         <% end_if %>
                     </div>
                 </div>
-            </div>
+            </a>
         <% end_if %>
     </div>
     <% if $ContentWidth %></div></div><% end_if %>
