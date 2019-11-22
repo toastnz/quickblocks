@@ -2,6 +2,7 @@
 
 namespace Toast\QuickBlocks;
 
+use SilverStripe\Blog\Model\BlogPost;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
@@ -13,12 +14,12 @@ use Toast\Model\NewsBlockItem;
 class NewsBlock extends QuickBlock
 {
     private static $singular_name = 'News';
-    private static $plural_name   = 'News';
-    private static $table_name    = 'NewsBlock';
-    private static $icon          = 'quickblocks/images/news.png';
+    private static $plural_name = 'News';
+    private static $table_name = 'NewsBlock';
+    private static $icon = 'quickblocks/images/news.png';
 
     private static $db = [
-        'Title'   => 'Text',
+        'Title' => 'Text',
         'Content' => 'HTMLText'
     ];
 
@@ -30,9 +31,9 @@ class NewsBlock extends QuickBlock
     {
         $NewsConfig = GridFieldConfig_RelationEditor::create(10);
         $NewsConfig->addComponent(GridFieldOrderableRows::create('SortOrder'))
-                   ->removeComponentsByType(GridFieldDeleteAction::class)
-                   ->addComponent(new GridFieldDeleteAction(false))
-                   ->removeComponentsByType('GridFieldAddExistingAutoCompleter');
+            ->removeComponentsByType(GridFieldDeleteAction::class)
+            ->addComponent(new GridFieldDeleteAction(false))
+            ->removeComponentsByType('GridFieldAddExistingAutoCompleter');
 
         $NewsBlockGridField = GridField::create(
             'Items',
@@ -62,5 +63,11 @@ class NewsBlock extends QuickBlock
         }
 
         return $fields;
+    }
+
+    public function getLatestNews()
+    {
+
+        return BlogPost::get()->Limit(3);
     }
 }
