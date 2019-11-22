@@ -55,6 +55,7 @@
           width: 100%;
           margin-bottom: $gutterWidth;
           overflow: hidden;
+          background-color: $off-white;
           
           @include cover;
           @include overlay($secondary, 0);
@@ -69,6 +70,10 @@
             
             .alignContent {
               padding: $gutterWidth;
+              
+              * {
+                color: $white;
+              }
             }            
           }
         }
@@ -78,7 +83,7 @@
         }
 
         &__link {
-          color: $primary;
+          color: $primary!important;
           font-size: 1.6rem;
           @include transition(color);
         }
