@@ -25,7 +25,7 @@ class VideoBlock extends QuickBlock
     private static $singular_name = 'Video';
     private static $plural_name   = 'Videos';
     private static $table_name    = 'VideoBlock';
-    private static $icon          = 'quickblocks/images/video.png';
+    private static $icon          = 'quickblocks/images/video.svg';
 
     private static $db = [
         'Caption' => 'Varchar(255)',

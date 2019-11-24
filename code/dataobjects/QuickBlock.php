@@ -65,20 +65,20 @@ class QuickBlock extends DataObject
         // Check if this class has an icon set
         $statIcon = self::config()->get('icon');
 
-        $themeColour = Config::inst()->get(QuickBlock::class, 'theme_color') ?: '#0074ae';
+        $themeColour = Config::inst()->get(QuickBlock::class, 'theme_color') ?: '#377cff';
 
         if (!empty($statIcon) && file_exists(Director::baseFolder() . '/' . $statIcon)) {
-            return DBField::create_field('HTMLText', '<div title="' . $this->i18n_singular_name() . '" style="width:50px; height:50px; background-color: ' . $themeColour . ';"><img style="width:100%;height:100%;" src="' . $statIcon . '"></div>');
+            return DBField::create_field('HTMLText', '<div title="' . $this->i18n_singular_name() . '" style="width:50px; height:50px;"><img style="width:100%;height:100%;" src="' . $statIcon . '"></div>');
         }
 
         $path = TOAST_QUICKBLOCKS_DIR . '/images/';
-        $icon = $path . strtolower(str_replace(' ', '', $this->i18n_singular_name())) . '.png';
+        $icon = $path . strtolower(str_replace(' ', '', $this->i18n_singular_name())) . '.svg';
 
         if (!file_exists(Director::baseFolder() . '/' . $icon)) {
-            $icon = $path . 'text.png';
+            $icon = $path . 'text.svg';
         }
 
-        return DBField::create_field('HTMLText', '<div title="' . $this->i18n_singular_name() . '" style="width:50px; height:50px; background-color: ' . $themeColour . ';"><img style="width:100%;height:100%;" src="' . $icon . '"></div>');
+        return DBField::create_field('HTMLText', '<div title="' . $this->i18n_singular_name() . '" style="width:50px; height:50px; "><img style="width:100%;height:100%;" src="' . $icon . '"></div>');
     }
 
     public function IconForCMS()

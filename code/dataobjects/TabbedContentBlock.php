@@ -25,7 +25,7 @@ class TabbedContentBlock extends QuickBlock
     private static $plural_name = 'Tabbed Content';
     private static $table_name = 'TabbedContentBlock';
 
-    private static $icon = 'quickblocks/images/utilityblock.png';
+    private static $icon = 'quickblocks/images/utilityblock.svg';
 
     private static $db = [
         'Colour' => 'Enum("grey,white","white")'

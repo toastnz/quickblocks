@@ -15,7 +15,7 @@ class NewsBlock extends QuickBlock
     private static $singular_name = 'News';
     private static $plural_name   = 'News';
     private static $table_name    = 'NewsBlock';
-    private static $icon          = 'quickblocks/images/news.png';
+    private static $icon          = 'quickblocks/images/news.svg';
 
     private static $db = [
         'Title'   => 'Text',

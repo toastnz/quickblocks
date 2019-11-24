@@ -28,7 +28,7 @@ class HeroBlock extends QuickBlock
     private static $singular_name = 'Hero block';
     private static $plural_name   = 'Hero blocks';
     private static $table_name    = 'HeroBlock';
-    private static $icon          = 'quickblocks/images/hero.png';
+    private static $icon          = 'quickblocks/images/hero.svg';
 
     private static $db = [
         'Title'        => 'Text',

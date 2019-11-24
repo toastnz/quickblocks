@@ -18,7 +18,7 @@ class DownloadBlock extends QuickBlock
     private static $singular_name = 'Download';
     private static $plural_name   = 'Downloads';
     private static $table_name    = 'DownloadBlock';
-    private static $icon          = 'quickblocks/images/download.png';
+    private static $icon          = 'quickblocks/images/download.svg';
 
     private static $many_many = [
         'Files' => File::class

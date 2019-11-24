@@ -22,7 +22,7 @@ class ImageBlock extends QuickBlock
     private static $singular_name = 'Image';
     private static $plural_name   = 'Images';
     private static $table_name    = 'ImageBlock';
-    private static $icon          = 'quickblocks/images/image.png';
+    private static $icon          = 'quickblocks/images/image.svg';
 
     private static $db = [
         'ContentWidth' => 'Boolean'

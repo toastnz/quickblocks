@@ -19,7 +19,7 @@ class TestimonialBlock extends QuickBlock
     private static $singular_name = 'Testimonial';
     private static $plural_name   = 'Testimonials';
     private static $table_name    = 'TestimonialBlock';
-    private static $icon          = 'quickblocks/images/testimonial.png';
+    private static $icon          = 'quickblocks/images/testimonial.svg';
 
     private static $db = [
         'Testimonial' => 'Text',

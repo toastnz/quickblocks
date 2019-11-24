@@ -11,7 +11,7 @@ use SilverStripe\Forms\GridField\GridField_ColumnProvider;
  * @subpackage lumberjack
  *
  * @author Michael Strong <mstrong@silverstripe.org>
-**/
+ **/
 class GridFieldContentBlockState implements GridField_ColumnProvider
 {
 

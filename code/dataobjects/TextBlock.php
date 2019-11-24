@@ -16,7 +16,7 @@ class TextBlock extends QuickBlock
     private static $singular_name = 'Text';
     private static $plural_name   = 'Text';
     private static $table_name    = 'TextBlock';
-    private static $icon          = 'quickblocks/images/text.png';
+    private static $icon          = 'quickblocks/images/text.svg';
 
     private static $db = [
         'Content' => 'HTMLText'

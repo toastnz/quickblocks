@@ -19,7 +19,7 @@ class PercentageBlock extends QuickBlock
     private static $singular_name = 'Percentage';
     private static $plural_name   = 'Percentages';
     private static $table_name    = 'PercentageBlock';
-    private static $icon          = 'quickblocks/images/statistic.png';
+    private static $icon          = 'quickblocks/images/statistic.svg';
 
     private static $db = [
         'Size'         => 'Enum("33/66, 50/50, 66/33", "50/50")',
@@ -106,9 +106,6 @@ class PercentageBlock extends QuickBlock
         if ($this->RightImage()->exists()) {
             return $this->RightImage()->URL;
         }
-        // else {
-            // return 'themes/quicksilver/dist/images/standard/percentage-pattern.png';
-        // }
 
        return false;
     }
@@ -118,9 +115,6 @@ class PercentageBlock extends QuickBlock
         if ($this->LeftImage()->exists()) {
             return $this->LeftImage()->URL;
         }
-        // else {
-        //     return 'themes/quicksilver/dist/images/standard/percentage-pattern.png';
-        // }
 
        return false;
     }

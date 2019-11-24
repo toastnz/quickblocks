@@ -16,7 +16,7 @@ class LinkBlock extends QuickBlock
     private static $singular_name = 'Link';
     private static $plural_name   = 'Links';
     private static $table_name    = 'LinkBlock';
-    private static $icon          = 'quickblocks/images/link.png';
+    private static $icon          = 'quickblocks/images/link.svg';
 
     private static $db = [
         'Title'   => 'Varchar(100)',

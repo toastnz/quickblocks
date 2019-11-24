@@ -17,7 +17,7 @@ class ChildLinkBlock extends QuickBlock
     private static $singular_name = 'Children';
     private static $plural_name   = 'Children Links';
     private static $table_name    = 'ChildLinkBlock';
-    private static $icon          = 'quickblocks/images/link.png';
+    private static $icon          = 'quickblocks/images/link.svg';
 
     private static $db = [
         'Title'   => 'Varchar(100)',
