@@ -61,7 +61,7 @@ class NewsBlock extends QuickBlock
 
         return $fields;
     }
-    
+
     public function getLatestNews()
     {
 

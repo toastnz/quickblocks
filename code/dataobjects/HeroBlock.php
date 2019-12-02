@@ -37,7 +37,6 @@ class HeroBlock extends QuickBlock
     ];
 
     private static $has_one = [
-        'BlockLink'       => Link::class,
         'BackgroundImage' => Image::class
     ];
 
@@ -55,7 +54,6 @@ class HeroBlock extends QuickBlock
         $fields->addFieldsToTab('Root.Main', [
             TextField::create('Title', 'Title'),
             HTMLEditorField::create('Content', 'Content')->setRows(5),
-            LinkField::create('BlockLinkID', 'Link'),
             DropdownField::create('ContentWidth', 'Width', [0 => 'Full Width', 1 => 'Content Width']),
             UploadField::create('BackgroundImage', 'Background Image')
         ]);
