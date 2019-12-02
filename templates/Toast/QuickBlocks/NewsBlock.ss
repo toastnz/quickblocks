@@ -1,6 +1,7 @@
 <% if $Items %>
     <section class="newsBlock contentBlock" data-equalize>
         <div class="newsBlock__wrap row sm-up-2 md-up-3">
+			$Content
         	<% loop $Items %>
         		<a href="$Link.LinkURL" class="newsBlock__wrap__item column">
         			<div class="newsBlock__wrap__item__media" style="background-image: url('{$Image.fill(640,640).URL}');"></div>
