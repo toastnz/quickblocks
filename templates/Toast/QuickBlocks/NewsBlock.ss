@@ -1,6 +1,6 @@
 $Title
 $Content
-<% if $LatestNews %>
+<% if $LatestNews.sort('SortOrder DESC') %>
 	<section class="newsBlock contentBlock" data-equalize>
 		<div class="newsBlock__wrap row sm-up-2 md-up-3">
 			<% loop $LatestNews %>
