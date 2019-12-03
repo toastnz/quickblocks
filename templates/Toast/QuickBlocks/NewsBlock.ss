@@ -3,7 +3,7 @@
         <div class="newsBlock__wrap row sm-up-2 md-up-3">
 			$Content
         	<% loop $LatestNews %>
-        		<a href="$Link.LinkURL" class="newsBlock__wrap__item column">
+        		<a href="$Link" class="newsBlock__wrap__item column">
         			<div class="newsBlock__wrap__item__media" style="background-image: url('{$Image.fill(640,640).URL}');"></div>
         			<div class="newsBlock__wrap__item__details" data-equalize-watch>
             			<h5>$Title</h5>
