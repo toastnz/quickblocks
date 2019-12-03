@@ -9,6 +9,7 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use Toast\Model\NewsBlockItem;
+use SilverStripe\Blog\Model\BlogPost;
 
 class NewsBlock extends QuickBlock
 {
