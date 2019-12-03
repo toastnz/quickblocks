@@ -22,30 +22,13 @@ class NewsBlock extends QuickBlock
         'Content' => 'HTMLText'
     ];
 
-    private static $has_many = [
-        'Items' => NewsBlockItem::class
-    ];
-
     public function getCMSFields()
     {
-        $NewsConfig = GridFieldConfig_RelationEditor::create(10);
-        $NewsConfig->addComponent(GridFieldOrderableRows::create('SortOrder'))
-                   ->removeComponentsByType(GridFieldDeleteAction::class)
-                   ->addComponent(new GridFieldDeleteAction(false))
-                   ->removeComponentsByType('GridFieldAddExistingAutoCompleter');
-
-        $NewsBlockGridField = GridField::create(
-            'Items',
-            'News Block Items',
-            $this->owner->Items(),
-            $NewsConfig
-        );
 
         /**
          * @var FieldList $fields
          */
         $fields = parent::getCMSFields();
-
 
         /** -----------------------------------------
          * Slide Details
@@ -55,9 +38,6 @@ class NewsBlock extends QuickBlock
                 HTMLEditorField::create('Content', 'Content')
             ]);
 
-            $fields->addFieldsToTab('Root.NewsItems', [
-                $NewsBlockGridField
-            ]);
         }
 
         return $fields;
