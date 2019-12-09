@@ -9,6 +9,7 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use Toast\Model\NewsBlockItem;
+use SilverStripe\Blog\Model\BlogPost;
 
 class NewsBlock extends QuickBlock
 {
@@ -18,49 +19,33 @@ class NewsBlock extends QuickBlock
     private static $icon          = 'quickblocks/images/news.png';
 
     private static $db = [
-        'Title'   => 'Text',
         'Content' => 'HTMLText'
-    ];
-
-    private static $has_many = [
-        'Items' => NewsBlockItem::class
     ];
 
     public function getCMSFields()
     {
-        $NewsConfig = GridFieldConfig_RelationEditor::create(10);
-        $NewsConfig->addComponent(GridFieldOrderableRows::create('SortOrder'))
-                   ->removeComponentsByType(GridFieldDeleteAction::class)
-                   ->addComponent(new GridFieldDeleteAction(false))
-                   ->removeComponentsByType('GridFieldAddExistingAutoCompleter');
-
-        $NewsBlockGridField = GridField::create(
-            'Items',
-            'News Block Items',
-            $this->owner->Items(),
-            $NewsConfig
-        );
 
         /**
          * @var FieldList $fields
          */
         $fields = parent::getCMSFields();
 
-
         /** -----------------------------------------
          * Slide Details
          * ----------------------------------------*/
         if ($this->ID !== 0) {
             $fields->addFieldsToTab('Root.Main', [
-                TextField::create('Title', 'Title'),
                 HTMLEditorField::create('Content', 'Content')
             ]);
 
-            $fields->addFieldsToTab('Root.NewsItems', [
-                $NewsBlockGridField
-            ]);
         }
 
         return $fields;
+    }
+
+    public function getLatestNews()
+    {
+
+        return BlogPost::get()->Limit(3);
     }
 }
