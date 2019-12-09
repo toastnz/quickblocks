@@ -1,18 +1,12 @@
 //------------------------------------------------------------------
-// Image Block
+// Quick Block
 //------------------------------------------------------------------
 
-@mixin ImageBlock {
-	.imageBlock {
-		&__wrap {
-			&__media {
-				width: 100%;
-				height: auto;
-			}
-		}
-
+@mixin QuickBlock {
+	.quickBlock {
 		+ .imageBlock,
-		+ .textBlock {
+		+ .textBlock,
+		+ .accordionBlock {
 			margin-top: -3rem;
 
 			@include media($xmd) {
