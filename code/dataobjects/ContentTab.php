@@ -38,11 +38,11 @@ class ContentTab extends DataObject
         'Parent' => TabbedContentBlock::class
     ];
 
-    private static $summary_fields = [
-        'Title'           => 'Heading',
-        // 'Description'     => 'Description',
-        'ContentSummary' => 'Content'
-    ];
+//    private static $summary_fields = [
+//        'Title'           => 'Heading',
+//        // 'Description'     => 'Description',
+//        'ContentSummary' => 'Content'
+//    ];
 
     /**
      * @return FieldList
