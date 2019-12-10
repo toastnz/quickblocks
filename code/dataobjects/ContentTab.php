@@ -41,7 +41,7 @@ class ContentTab extends DataObject
     private static $summary_fields = [
         'Title'           => 'Heading',
         // 'Description'     => 'Description',
-        'Content.Summary' => 'Content'
+        'ContentSummary' => 'Content'
     ];
 
     /**
@@ -75,6 +75,10 @@ class ContentTab extends DataObject
         }
 
         parent::onBeforeWrite();
+    }
+    public function getContentSummary()
+    {
+        return $this->dbObject('Content')->LimitCharacters(250);
     }
 
     /* ==========================================
