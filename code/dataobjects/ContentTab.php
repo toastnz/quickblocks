@@ -43,6 +43,10 @@ class ContentTab extends DataObject
 //        // 'Description'     => 'Description',
 //        'ContentSummary' => 'Content'
 //    ];
+    private static $summary_fields = [
+        'Title'           => 'Heading',
+        'ContentSummary'     => 'Content',
+    ];
 
     /**
      * @return FieldList
