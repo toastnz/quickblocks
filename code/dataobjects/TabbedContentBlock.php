@@ -90,15 +90,6 @@ class TabbedContentBlock extends QuickBlock
 
     public function getContentSummary()
     {
-
-        $content = '';
-
-        /** @var ContentTab $tab */
-        foreach ($this->Tabs() as $tab) {
-            $content = $tab->dbObject('Content')->LimitCharacters(250);
-            //$content .= $tab->dbObject('Content')->LimitWordCount(20) . '<br>';
-        }
-
-        return DBField::create_field(DBHTMLText::class, $content);
+        return $this->dbObject('Content')->LimitCharacters(250);
     }
 }
