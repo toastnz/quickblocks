@@ -18,7 +18,7 @@ class Testimonial extends DataObject
     ];
 
     private static $summary_fields = [
-        'Testimonial' => 'Testimonial',
+        'ContentSummary' => 'Testimonial',
         'Attribution' => 'Name',
         'Location' => 'Location'
     ];
@@ -42,9 +42,14 @@ class Testimonial extends DataObject
         return $fields;
     }
 
+//    public function getContentSummary()
+//    {
+//
+//        return DBField::create_field('HTMLText', $this->Testimonial);
+//    }
     public function getContentSummary()
     {
-        return DBField::create_field('HTMLText', $this->Testimonial);
+        return $this->dbObject('Content')->LimitCharacters(100);
     }
 
 }
