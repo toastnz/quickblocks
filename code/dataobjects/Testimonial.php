@@ -18,8 +18,8 @@ class Testimonial extends DataObject
     ];
 
     private static $summary_fields = [
-        'ContentSummary' => 'Testimonial',
         'Attribution' => 'Name',
+        'ContentSummary' => 'Testimonial',
         'Location' => 'Location'
     ];
 
