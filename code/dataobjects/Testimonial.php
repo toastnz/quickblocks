@@ -49,7 +49,7 @@ class Testimonial extends DataObject
 //    }
     public function getContentSummary()
     {
-        return $this->dbObject('Content')->LimitCharacters(100);
+        return $this->dbObject('Testimonial')->LimitCharacters(100);
     }
 
 }
