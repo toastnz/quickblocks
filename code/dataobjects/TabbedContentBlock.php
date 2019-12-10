@@ -35,9 +35,9 @@ class TabbedContentBlock extends QuickBlock
         'Tabs' => ContentTab::class
     ];
 
-    private static $summary_fields = [
-        'ContentSummary' => 'Content'
-    ];
+//    private static $summary_fields = [
+//        'ContentSummary' => 'Content'
+//    ];
 
     public function getCMSFields()
     {
@@ -75,18 +75,18 @@ class TabbedContentBlock extends QuickBlock
         return $fields;
     }
 
-    public function getContentSummary()
-    {
-
-        $content = '';
-
-        /** @var ContentTab $tab */
-        foreach ($this->Tabs() as $tab) {
-            $content .= $tab->dbObject('Content')->LimitWordCount(20) . '<br>';
-        }
-
-        return DBField::create_field(DBHTMLText::class, $content);
-    }
+//    public function getContentSummary()
+//    {
+//
+//        $content = '';
+//
+//        /** @var ContentTab $tab */
+//        foreach ($this->Tabs() as $tab) {
+//            $content .= $tab->dbObject('Content')->LimitWordCount(20) . '<br>';
+//        }
+//
+//        return DBField::create_field(DBHTMLText::class, $content);
+//    }
 
 //    public function getContentSummary()
 //    {
