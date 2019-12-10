@@ -82,7 +82,7 @@ class ContentTab extends DataObject
     }
     public function getContentSummary()
     {
-        return $this->dbObject('Content')->LimitCharacters(250);
+        return $this->dbObject('Content')->LimitCharacters(25);
     }
 
     /* ==========================================
