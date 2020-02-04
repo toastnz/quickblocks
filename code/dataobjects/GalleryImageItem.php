@@ -51,7 +51,8 @@ class GalleryImageItem extends DataObject
      */
     public function getCMSFields()
     {
-        $fields = FieldList::create([new TabSet('Root')]);
+        $fields = parent::getCMSFields();
+        $fields->removeByName(['SortOrder', 'GalleryBlockID']);
 
         $fields->addFieldsToTab('Root.Main', [
             TextField::create('Title', 'Title'),
