@@ -10,9 +10,9 @@ class BlockTablesMigrationTask extends BuildTask
 {
     private static $segment = 'BlockTablesMigrationTask';
 
-    protected $title = 'QuckBlock Tables Migration';
+    protected $title = 'QuickBlock Tables Migration';
 
-    protected $description = 'Migrate QuckBlock "TableName" to "QuickBlocks_TableName"';
+    protected $description = 'Migrate QuickBlock "TableName" to "QuickBlocks_TableName"';
 
     public function run($request)
     {
