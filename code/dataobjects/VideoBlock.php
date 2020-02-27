@@ -22,14 +22,15 @@ use SilverStripe\ORM\FieldType\DBHTMLText;
  */
 class VideoBlock extends QuickBlock
 {
+    private static $table_name = 'QuickBlocks_VideoBlock';
+
     private static $singular_name = 'Video';
     private static $plural_name   = 'Videos';
-    private static $table_name    = 'VideoBlock';
     private static $icon          = 'quickblocks/images/video.png';
 
     private static $db = [
         'Caption' => 'Varchar(255)',
-        'Video' => VideoLink::class
+        'Video'   => VideoLink::class
     ];
 
     private static $has_one = [
@@ -49,7 +50,7 @@ class VideoBlock extends QuickBlock
             $fields->addFieldsToTab('Root.Main', [
                 TextField::create('Caption', 'Caption'),
                 VideoLinkField::create('Video')
-                    ->showPreview(500),
+                              ->showPreview(500),
                 UploadField::create('Thumbnail', 'Override default Thumbnail')
                            ->setFolderName('Uploads/videos')
                            ->setDescription('Will automatically use YouTube thumbnail if this image is not uploaded. Ideal size: 960x540')
@@ -76,5 +77,4 @@ class VideoBlock extends QuickBlock
     }
 
 
-    
 }

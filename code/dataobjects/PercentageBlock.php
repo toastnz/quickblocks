@@ -16,9 +16,10 @@ use SilverStripe\Forms\DropdownField;
 
 class PercentageBlock extends QuickBlock
 {
+    private static $table_name    = 'QuickBlocks_PercentageBlock';
+
     private static $singular_name = 'Percentage';
     private static $plural_name   = 'Percentages';
-    private static $table_name    = 'PercentageBlock';
     private static $icon          = 'quickblocks/images/statistic.png';
 
     private static $db = [

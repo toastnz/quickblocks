@@ -18,9 +18,10 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
  */
 class ColumnBlock extends QuickBlock
 {
+    private static $table_name    = 'QuickBlocks_ColumnBlock';
+
     private static $singular_name = 'Column';
     private static $plural_name   = 'Columns';
-    private static $table_name    = 'ColumnBlock';
     private static $icon          = 'quickblocks/images/text.png';
 
     private static $db = [

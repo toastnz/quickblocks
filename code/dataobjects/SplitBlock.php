@@ -24,9 +24,10 @@ use SilverStripe\ORM\FieldType\DBHTMLText;
  */
 class SplitBlock extends QuickBlock
 {
+    private static $table_name    = 'QuickBlocks_SplitBlock';
+
     private static $singular_name = 'Split Block';
     private static $plural_name   = 'Split Blocks';
-    private static $table_name    = 'SplitBlock';
     private static $icon          = 'quickblocks/images/splitblock.png';
 
     private static $db = [

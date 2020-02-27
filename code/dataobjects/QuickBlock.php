@@ -32,9 +32,10 @@ use SilverStripe\ORM\DataObject;
  */
 class QuickBlock extends DataObject
 {
+    private static $table_name = 'QuickBlocks_QuickBlock';
+
     private static $singular_name = 'Block';
     private static $plural_name = 'Blocks';
-    private static $table_name = 'QuickBlock';
 
     private static $db = [
         'Title' => 'Varchar(255)'

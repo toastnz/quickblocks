@@ -16,16 +16,17 @@ use SilverStripe\Forms\RequiredFields;
  */
 class TestimonialBlock extends QuickBlock
 {
+    private static $table_name = 'QuickBlocks_TestimonialBlock';
+
     private static $singular_name = 'Testimonial';
     private static $plural_name   = 'Testimonials';
-    private static $table_name    = 'TestimonialBlock';
     private static $icon          = 'quickblocks/images/testimonial.png';
 
     private static $db = [
         'Testimonial' => 'Text',
         'Attribution' => 'Varchar(100)',
         'Location'    => 'Varchar(100)',
-        'ShowSlider'      => 'Boolean'
+        'ShowSlider'  => 'Boolean'
     ];
 
     /**

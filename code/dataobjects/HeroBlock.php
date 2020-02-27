@@ -25,9 +25,10 @@ use SilverStripe\Assets\Image;
 
 class HeroBlock extends QuickBlock
 {
+    private static $table_name    = 'QuickBlocks_HeroBlock';
+
     private static $singular_name = 'Hero block';
     private static $plural_name   = 'Hero blocks';
-    private static $table_name    = 'HeroBlock';
     private static $icon          = 'quickblocks/images/hero.png';
 
     private static $db = [

@@ -20,9 +20,10 @@ use SilverStripe\ORM\GroupedList;
  */
 class AccordionBlock extends QuickBlock
 {
+    private static $table_name    = 'QuickBlocks_AccordionBlock';
+
     private static $singular_name = 'Accordion';
     private static $plural_name   = 'Accordions';
-    private static $table_name    = 'AccordionBlock';
     private static $icon          = 'quickblocks/images/accordion.png';
 
     private static $has_many = [

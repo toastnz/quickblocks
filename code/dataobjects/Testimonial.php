@@ -9,6 +9,7 @@ use Toast\QuickBlocks\TestimonialBlock;
 
 class Testimonial extends DataObject
 {
+    private static $table_name = 'QuickBlocks_Testimonial';
 
     private static $db = [
         'SortOrder' => 'Text',

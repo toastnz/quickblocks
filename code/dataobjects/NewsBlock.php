@@ -13,9 +13,10 @@ use SilverStripe\Blog\Model\BlogPost;
 
 class NewsBlock extends QuickBlock
 {
+    private static $table_name    = 'QuickBlocks_NewsBlock';
+
     private static $singular_name = 'News';
     private static $plural_name   = 'News';
-    private static $table_name    = 'NewsBlock';
     private static $icon          = 'quickblocks/images/news.png';
 
     private static $db = [

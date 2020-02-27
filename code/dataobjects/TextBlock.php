@@ -13,9 +13,10 @@ use SilverStripe\Forms\RequiredFields;
  */
 class TextBlock extends QuickBlock
 {
+    private static $table_name = 'QuickBlocks_TextBlock';
+
     private static $singular_name = 'Text';
     private static $plural_name   = 'Text';
-    private static $table_name    = 'TextBlock';
     private static $icon          = 'quickblocks/images/text.png';
 
     private static $db = [

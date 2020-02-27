@@ -21,9 +21,10 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
  */
 class TabbedContentBlock extends QuickBlock
 {
+    private static $table_name = 'QuickBlocks_TabbedContentBlock';
+
     private static $singular_name = 'Tabbed Content';
     private static $plural_name = 'Tabbed Content';
-    private static $table_name = 'TabbedContentBlock';
 
     private static $icon = 'quickblocks/images/utilityblock.png';
 

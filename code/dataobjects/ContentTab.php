@@ -22,10 +22,11 @@ use SilverStripe\Security\Permission;
  */
 class ContentTab extends DataObject
 {
+    private static $table_name = 'QuickBlocks_ContentTab';
+
     private static $singular_name = 'Tab';
     private static $plural_name = 'Tabs';
     private static $default_sort = 'SortOrder';
-    private static $table_name = 'ContentTab';
 
     private static $db = [
         'Title'       => 'Varchar(255)',

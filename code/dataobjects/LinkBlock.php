@@ -13,9 +13,10 @@ use Toast\Model\LinkBlockItem;
 
 class LinkBlock extends QuickBlock
 {
+    private static $table_name    = 'QuickBlocks_LinkBlock';
+
     private static $singular_name = 'Link';
     private static $plural_name   = 'Links';
-    private static $table_name    = 'LinkBlock';
     private static $icon          = 'quickblocks/images/link.png';
 
     private static $db = [
