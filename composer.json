@@ -1,7 +1,7 @@
 {
   "name": "toastnz/quickblocks",
   "description": "Silverstripe content blocks module",
-  "type": "silverstripe-module",
+  "type": "silverstripe-vendormodule",
   "keywords": [
     "silverstripe",
     "content blocks",
