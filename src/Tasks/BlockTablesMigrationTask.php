@@ -16,65 +16,61 @@ class BlockTablesMigrationTask extends BuildTask
 
     public function run($request)
     {
-
-        $tables = [
+        $oldBlockTables = [
             'AccordionBlock',
             'AccordionItem',
-            'ChildLinkBlock',
-            'ColumnBlock',
-            'ColumnBlockItem',
             'ContentTab',
             'DownloadBlock',
-            'GalleryBlock',
-            'GalleryImageItem',
-            'HeroBlock',
             'ImageBlock',
-            'LinkBlock',
-            'LinkBlockItem',
-            'NewsBlock',
-            'NewsBlockItem',
-            'PercentageBlock',
             'QuickBlock',
             'SplitBlock',
             'TabbedContentBlock',
-            'Testimonial',
             'TestimonialBlock',
             'TextBlock',
             'VideoBlock'
         ];
 
-        foreach ($tables as $table) {
+        foreach ($oldBlockTables as $table) {
 
-            $rows = DB::query('SELECT * FROM "' . $table . '"');
+            $tableExists = DB::query("SHOW TABLES LIKE '" . $table . "'");
 
-            foreach ($rows as $row) {
+            if ($tableExists->numRecords() != 0) {
 
-                Debug::dump($row);
-                die();
+                Debug::dump('<div style="padding:5px 10px;background-color:#777;color:#eee;">' . $table . '</div>');
 
-                $newItem = BannerSliderItem::create();
+                $rows = DB::query('SELECT * FROM `' . $table . '`');
 
-                $newItem->setField('ID', $sliderItem['ID']);
-                $newItem->setField('LastEdited', $sliderItem['LastEdited']);
-                $newItem->setField('Created', $sliderItem['Created']);
-                $newItem->setField('Content', $sliderItem['Caption']);
-                $newItem->setField('SortOrder', $sliderItem['SortOrder']);
-                $newItem->setField('YouTubeCode', $sliderItem['YouTubeCode']);
-                $newItem->setField('UseVideo', $sliderItem['UseVideo']);
-                $newItem->setField('VideoButtonText', $sliderItem['VideoButtonText']);
-                $newItem->setField('UseAnimation', $sliderItem['UseAnimation']);
-                $newItem->setField('ImageID', $sliderItem['ImageID']);
-                $newItem->setField('PageID', $sliderItem['PageID']);
+                $x = 1;
 
-                Debug::dump($newItem);
+                foreach ($rows as $row) {
 
-                $newItem->write();
+                    Debug::dump('<div style="padding:5px 10px;background-color:#aaa;color:#eee;">' . $row['ID'] . '</div>');
+                    Debug::dump($row);
+
+                    $className = 'Toast\QuickBlocks\\' . $table;
+
+                    $newItem = $className::create();
+
+                    foreach ($row as $key => $value) {
+                        $newItem->setField($key, $value);
+                    }
+
+                    Debug::dump($newItem->toMap());
+
+                    $newItem->write();
+
+                    $x++;
+                    if ($x > 2) {
+//                        die();
+                    }
+
+                }
+
             }
 
-
-            Debug::dump('Done');
-
         }
+
+        Debug::dump('<div style="padding:5px 10px;background-color:#5ea65e;color:#eee;">Done</div>');
 
     }
 
