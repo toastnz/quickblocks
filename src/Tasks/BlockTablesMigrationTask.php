@@ -18,34 +18,28 @@ class BlockTablesMigrationTask extends BuildTask
     {
         $oldBlockTables = [
             'AccordionBlock',
-            'AccordionBlock_Live',
-            'AccordionBlock_Versions',
             'AccordionItem',
             'ContentTab',
             'DownloadBlock',
-            'DownloadBlock_Live',
-            'DownloadBlock_Versions',
             'ImageBlock',
-            'ImageBlock_Live',
-            'ImageBlock_Versions',
             'QuickBlock',
-            'QuickBlock_Live',
-            'QuickBlock_Versions',
             'SplitBlock',
-            'SplitBlock_Live',
-            'SplitBlock_Versions',
             'TabbedContentBlock',
-            'TabbedContentBlock_Live',
-            'TabbedContentBlock_Versions',
             'TestimonialBlock',
-            'TestimonialBlock_Live',
-            'TestimonialBlock_Versions',
             'TextBlock',
-            'TextBlock_Live',
-            'TextBlock_Versions',
+            'VideoBlock'
+        ];
+
+        $versioned = [
+            'AccordionBlock',
+            'DownloadBlock',
+            'ImageBlock',
+            'QuickBlock',
+            'SplitBlock',
+            'TabbedContentBlock',
+            'TestimonialBlock',
+            'TextBlock',
             'VideoBlock',
-            'VideoBlock_Live',
-            'VideoBlock_Versions'
         ];
 
         foreach ($oldBlockTables as $table) {
@@ -56,32 +50,53 @@ class BlockTablesMigrationTask extends BuildTask
 
                 Debug::dump('<div style="padding:5px 10px;background-color:#777;color:#eee;">' . $table . '</div>');
 
-                $rows = DB::query('SELECT * FROM `' . $table . '`');
+                $sqlQuery = new SQLSelect();
+                $sqlQuery->setFrom($table);
+                $result = $sqlQuery->execute();
+
+                $insert = SQLInsert::create('"SilverShop_' . $table . '"');
 
                 $x = 1;
 
-                foreach ($rows as $row) {
+                foreach ($result as $row) {
 
                     Debug::dump('<div style="padding:5px 10px;background-color:#aaa;color:#eee;">' . $row['ID'] . '</div>');
                     Debug::dump($row);
 
-                    $className = 'Toast\QuickBlocks\\' . $table;
+                    $newData = [];
 
-                    $newItem = $className::create();
+                    $newData['ID'] = $row['ID'];
+                    $newData['EventLocation'] = $row['EventLocation'];
+                    $newData['EventStartDate'] = $row['EventStartDate'];
+                    $newData['EventEndDate'] = $row['EventEndDate'];
+                    $newData['InternalItemID'] = $row['InternalItemID'];
+                    $newData['Model'] = $row['Model'];
+                    $newData['BasePrice'] = $row['BasePrice'];
+                    $newData['Weight'] = $row['Weight'];
+                    $newData['Height'] = $row['Height'];
+                    $newData['Width'] = $row['Width'];
+                    $newData['Depth'] = $row['Depth'];
+                    $newData['Featured'] = $row['Featured'];
+                    $newData['AllowPurchase'] = $row['AllowPurchase'];
+                    $newData['Popularity'] = $row['Popularity'];
+                    $newData['ImageID'] = $row['ImageID'];
+                    $newData['PricingRegionID'] = $row['PricingRegionID'];
 
-                    foreach ($row as $key => $value) {
-                        $newItem->setField($key, $value);
-                    }
+                    Debug::dump('SilverShop_Product_Live');
+                    Debug::dump($newData);
 
-                    Debug::dump($newItem->toMap());
+                    $insert->addRow($newData);
 
-                    $newItem->write();
+                    die();
+                }
 
-                    $x++;
-                    if ($x > 2) {
+                die();
+
+                $insert->execute();
+
+                $x++;
+                if ($x > 2) {
 //                        die();
-                    }
-
                 }
 
             }
