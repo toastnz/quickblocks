@@ -65,32 +65,15 @@ class BlockTablesMigrationTask extends BuildTask
 
                     $newData = [];
 
-                    $newData['ID'] = $row['ID'];
-                    $newData['EventLocation'] = $row['EventLocation'];
-                    $newData['EventStartDate'] = $row['EventStartDate'];
-                    $newData['EventEndDate'] = $row['EventEndDate'];
-                    $newData['InternalItemID'] = $row['InternalItemID'];
-                    $newData['Model'] = $row['Model'];
-                    $newData['BasePrice'] = $row['BasePrice'];
-                    $newData['Weight'] = $row['Weight'];
-                    $newData['Height'] = $row['Height'];
-                    $newData['Width'] = $row['Width'];
-                    $newData['Depth'] = $row['Depth'];
-                    $newData['Featured'] = $row['Featured'];
-                    $newData['AllowPurchase'] = $row['AllowPurchase'];
-                    $newData['Popularity'] = $row['Popularity'];
-                    $newData['ImageID'] = $row['ImageID'];
-                    $newData['PricingRegionID'] = $row['PricingRegionID'];
+                    foreach ($row as $key => $value) {
+                        $newData[$key] = $row[$key];
+                    }
 
                     Debug::dump('SilverShop_Product_Live');
                     Debug::dump($newData);
 
                     $insert->addRow($newData);
-
-                    die();
                 }
-
-                die();
 
                 $insert->execute();
 
