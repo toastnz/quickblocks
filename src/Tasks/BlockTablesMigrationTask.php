@@ -72,6 +72,8 @@ class BlockTablesMigrationTask extends BuildTask
                     Debug::dump('SilverShop_Product_Live');
                     Debug::dump($newData);
 
+                    die();
+
                     $insert->addRow($newData);
                 }
 
