@@ -334,7 +334,7 @@ class QuickBlock extends DataObject
 
         $thisID = $this->ID;
 
-        if ($this->doUnpublish()) {
+        if (!$this->isPublished() || $this->doUnpublish()) {
             $this->delete();
 
             // Remove from join tables
