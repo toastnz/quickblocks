@@ -48,40 +48,14 @@ class BlockTablesMigrationTask extends BuildTask
 
             if ($tableExists->numRecords() != 0) {
 
-                Debug::dump('<div style="padding:5px 10px;background-color:#777;color:#eee;">' . $table . '</div>');
+                $this->createTable($table);
 
-                $sqlQuery = new SQLSelect();
-                $sqlQuery->setFrom($table);
-                $result = $sqlQuery->execute();
-
-                $insert = SQLInsert::create('"SilverShop_' . $table . '"');
-
-                $x = 1;
-
-                foreach ($result as $row) {
-
-                    Debug::dump('<div style="padding:5px 10px;background-color:#aaa;color:#eee;">' . $row['ID'] . '</div>');
-                    Debug::dump($row);
-
-                    $newData = [];
-
-                    foreach ($row as $key => $value) {
-                        $newData[$key] = $row[$key];
-                    }
-
-                    Debug::dump('SilverShop_Product_Live');
-                    Debug::dump($newData);
-
-                    die();
-
-                    $insert->addRow($newData);
-                }
-
-                $insert->execute();
-
-                $x++;
-                if ($x > 2) {
-//                        die();
+                /*
+                 * If the table is versioned
+                 */
+                if (in_array($table, $versioned)) {
+                    $this->createTable($table . '_Live');
+                    $this->createTable($table . '_Versions');
                 }
 
             }
@@ -90,6 +64,36 @@ class BlockTablesMigrationTask extends BuildTask
 
         Debug::dump('<div style="padding:5px 10px;background-color:#5ea65e;color:#eee;">Done</div>');
 
+    }
+
+    public function createTables($table = false) {
+
+        Debug::dump('<div style="padding:5px 10px;background-color:#777;color:#eee;">' . $table . '</div>');
+
+        $sqlQuery = new SQLSelect();
+        $sqlQuery->setFrom($table);
+        $result = $sqlQuery->execute();
+
+        $insert = SQLInsert::create('"QuickBlocks_' . $table . '"');
+
+        foreach ($result as $row) {
+
+            Debug::dump('<div style="padding:5px 10px;background-color:#aaa;color:#eee;">' . $row['ID'] . '</div>');
+            Debug::dump($row);
+
+            $newData = [];
+
+            foreach ($row as $key => $value) {
+                $newData[$key] = $row[$key];
+            }
+
+            Debug::dump('QuickBlocks_' . $table);
+            Debug::dump($newData);
+
+            $insert->addRow($newData);
+        }
+
+        $insert->execute();
     }
 
 }
