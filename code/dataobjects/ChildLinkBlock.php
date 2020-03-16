@@ -14,8 +14,8 @@ use Page;
 
 class ChildLinkBlock extends QuickBlock
 {
-    private static $singular_name = 'Children';
-    private static $plural_name   = 'Children Links';
+    private static $singular_name = 'ChildLink Block';
+    private static $plural_name   = 'ChildLink Blocks';
     private static $table_name    = 'ChildLinkBlock';
     private static $icon          = 'quickblocks/images/link.png';
 

@@ -23,8 +23,8 @@ use SilverStripe\ORM\DataObject;
  */
 class AccordionItem extends DataObject
 {
-    private static $singular_name = 'Item';
-    private static $plural_name = 'Items';
+    private static $singular_name = 'AccordionItem';
+    private static $plural_name = 'AccordionItems';
     private static $default_sort = 'SortOrder';
     private static $table_name = 'AccordionItem';
 

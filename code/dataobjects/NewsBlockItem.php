@@ -14,7 +14,11 @@ use Toast\QuickBlocks\NewsBlock;
 
 class NewsBlockItem extends DataObject
 {
+    private static $singular_name = 'NewsBlock Item';
+    private static $plural_name   = 'NewsBlock Items';
+    private static $default_sort  = 'SortOrder';
     private static $table_name = 'NewsBlockItem';
+
     private static $db         = [
         'SortOrder' => 'Int',
         'Title'     => 'Varchar(100)',

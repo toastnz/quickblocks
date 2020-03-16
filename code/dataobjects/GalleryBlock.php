@@ -23,8 +23,8 @@ use SilverStripe\Forms\CheckboxField;
  */
 class GalleryBlock extends QuickBlock
 {
-    private static $singular_name = 'Gallery';
-    private static $plural_name   = 'Galleries';
+    private static $singular_name = 'Gallery Block';
+    private static $plural_name   = 'Gallery Blocks';
     private static $table_name    = 'GalleryBlock';
     private static $icon          = 'quickblocks/images/gallery.png';
 

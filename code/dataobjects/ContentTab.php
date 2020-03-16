@@ -22,8 +22,8 @@ use SilverStripe\Security\Permission;
  */
 class ContentTab extends DataObject
 {
-    private static $singular_name = 'Tab';
-    private static $plural_name = 'Tabs';
+    private static $singular_name = 'ContentTab';
+    private static $plural_name = 'ContentTabs';
     private static $default_sort = 'SortOrder';
     private static $table_name = 'ContentTab';
 

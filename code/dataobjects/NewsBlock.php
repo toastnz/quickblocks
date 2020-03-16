@@ -13,8 +13,8 @@ use Toast\Model\NewsBlockItem;
 
 class NewsBlock extends QuickBlock
 {
-    private static $singular_name = 'News';
-    private static $plural_name = 'News';
+    private static $singular_name = 'News Block';
+    private static $plural_name = 'New Blocks';
     private static $table_name = 'NewsBlock';
     private static $icon = 'quickblocks/images/news.png';
 

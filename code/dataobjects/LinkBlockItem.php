@@ -14,7 +14,11 @@ use Toast\QuickBlocks\LinkBlock;
 
 class LinkBlockItem extends DataObject
 {
+    private static $singular_name = 'LinkBlock Item';
+    private static $plural_name   = 'LinkBlock Items';
+    private static $default_sort  = 'SortOrder';
     private static $table_name = 'LinkBlockItem';
+
     private static $db         = [
         'SortOrder' => 'Int',
         'Title'     => 'Varchar(100)',

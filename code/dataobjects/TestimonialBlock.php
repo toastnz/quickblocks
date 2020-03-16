@@ -16,8 +16,8 @@ use SilverStripe\Forms\RequiredFields;
  */
 class TestimonialBlock extends QuickBlock
 {
-    private static $singular_name = 'Testimonial';
-    private static $plural_name   = 'Testimonials';
+    private static $singular_name = 'Testimonial Block';
+    private static $plural_name   = 'Testimonial Blocks';
     private static $table_name    = 'TestimonialBlock';
     private static $icon          = 'quickblocks/images/testimonial.png';
 

@@ -22,8 +22,8 @@ use SilverStripe\ORM\DataObject;
  */
 class GalleryImageItem extends DataObject
 {
-    private static $singular_name = 'Gallery Image Item';
-    private static $plural_name   = 'Gallery Image Items';
+    private static $singular_name = 'GalleryImage Item';
+    private static $plural_name   = 'GalleryImage Items';
     private static $default_sort  = 'SortOrder';
     private static $table_name    = 'GalleryImageItem';
 

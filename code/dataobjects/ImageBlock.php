@@ -19,8 +19,8 @@ use SilverStripe\Forms\DropdownField;
  */
 class ImageBlock extends QuickBlock
 {
-    private static $singular_name = 'Image';
-    private static $plural_name   = 'Images';
+    private static $singular_name = 'Image Block';
+    private static $plural_name   = 'Image Blocks';
     private static $table_name    = 'ImageBlock';
     private static $icon          = 'quickblocks/images/image.png';
 

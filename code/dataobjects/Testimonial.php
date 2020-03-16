@@ -9,6 +9,9 @@ use Toast\QuickBlocks\TestimonialBlock;
 
 class Testimonial extends DataObject
 {
+    private static $singular_name = 'Testimonial';
+    private static $plural_name   = 'Testimonials';
+    private static $table_name    = 'Testimonial';
 
     private static $db = [
         'SortOrder' => 'Text',

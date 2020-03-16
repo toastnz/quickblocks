@@ -22,8 +22,8 @@ use SilverStripe\ORM\FieldType\DBHTMLText;
  */
 class VideoBlock extends QuickBlock
 {
-    private static $singular_name = 'Video';
-    private static $plural_name   = 'Videos';
+    private static $singular_name = 'Video Block';
+    private static $plural_name   = 'Video Blocks';
     private static $table_name    = 'VideoBlock';
     private static $icon          = 'quickblocks/images/video.png';
 
