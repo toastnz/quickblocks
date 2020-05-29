@@ -5,7 +5,7 @@
                 <p>
                     <a href="{$DownloadLink}">
                         $SVG('inline-download')
-                        <span><strong>{$Title}</strong>{$FileInfo}</span>
+                        <span><strong>{$Title}</strong>{$FormattedFileInfo}</span>
                     </a>
                 </p>
             <% end_loop %>
