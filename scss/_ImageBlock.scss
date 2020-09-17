@@ -1,0 +1,23 @@
+//------------------------------------------------------------------
+// Image Block
+//------------------------------------------------------------------
+
+@mixin ImageBlock {
+	.imageBlock {
+		&__wrap {
+			&__media {
+				width: 100%;
+				height: auto;
+			}
+		}
+
+		+ .imageBlock,
+		+ .textBlock {
+			margin-top: -3rem;
+
+			@include media($xmd) {
+				margin-top: -8rem;
+			}
+		}
+	}
+}

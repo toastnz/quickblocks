@@ -2,12 +2,15 @@
 
 namespace Toast\QuickBlocks;
 
+use Axllent\FormFields\FieldType\VideoLink;
+use Axllent\FormFields\Forms\VideoLinkField;
 use EdgarIndustries\YouTubeField\YouTubeField;
-use SilverStripe\Assets\Image;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\TextField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Assets\Image;
+use SilverStripe\Dev\Debug;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 
@@ -20,12 +23,13 @@ use SilverStripe\ORM\FieldType\DBHTMLText;
 class VideoBlock extends QuickBlock
 {
     private static $singular_name = 'Video';
-    private static $plural_name = 'Videos';
-    private static $table_name = 'VideoBlock';
+    private static $plural_name   = 'Videos';
+    private static $table_name    = 'VideoBlock';
+    private static $icon          = 'quickblocks/images/video.png';
 
     private static $db = [
-        'Caption'   => 'Varchar(255)',
-        'VideoID'   => 'Varchar(50)'
+        'Caption' => 'Varchar(255)',
+        'Video' => VideoLink::class
     ];
 
     private static $has_one = [
@@ -44,10 +48,11 @@ class VideoBlock extends QuickBlock
         $this->beforeUpdateCMSFields(function ($fields) {
             $fields->addFieldsToTab('Root.Main', [
                 TextField::create('Caption', 'Caption'),
-                YouTubeField::create('VideoID', 'YouTube Video'),
-                UploadField::create('Thumbnail', 'Thumbnail')
-                    ->setFolderName('Uploads/videos')
-                    ->setDescription('Will automatically use YouTube thumbnail if this image is not uploaded. Ideal size: 960x540')
+                VideoLinkField::create('Video')
+                    ->showPreview(500),
+                UploadField::create('Thumbnail', 'Override default Thumbnail')
+                           ->setFolderName('Uploads/videos')
+                           ->setDescription('Will automatically use YouTube thumbnail if this image is not uploaded. Ideal size: 960x540')
             ]);
         });
 
@@ -58,15 +63,18 @@ class VideoBlock extends QuickBlock
 
     public function getCMSValidator()
     {
-        $required = new RequiredFields(['Title', 'VideoID']);
+        $required = new RequiredFields(['Title']);
 
-        $this->extend('updateCMSValidator',$required);
+        $this->extend('updateCMSValidator', $required);
 
         return $required;
     }
 
     public function getContentSummary()
     {
-        return DBField::create_field(DBHTMLText::class, $this->VideoID);
+        return DBField::create_field(DBHTMLText::class, $this->Video);
     }
+
+
+    
 }

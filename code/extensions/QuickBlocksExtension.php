@@ -125,16 +125,8 @@ class QuickBlocksControllerExtension extends Extension
     }
 
 
-    /**
-     * @param SS_HTTPRequest $request
-     * @return SS_HTTPResponse
-     */
     public function download(HTTPRequest $request)
     {
-        /** =========================================
-         * @var File $file
-        ===========================================*/
-
         // check if we have an array of IDs
         if ($request->requestVar('files')) {
             $ids = explode(',', $request->requestVar('files'));
@@ -145,10 +137,7 @@ class QuickBlocksControllerExtension extends Extension
         return null;
     }
 
-    /**
-     * @param array $ids
-     * @return HTTPResponse
-     */
+
     public function getZipResponse($ids)
     {
         $files = File::get()->byIDs($ids);
@@ -156,13 +145,14 @@ class QuickBlocksControllerExtension extends Extension
         if ($files && $files->exists()) {
             if (count($ids) === 1) {
                 $file = $files->first();
-                $path = Controller::join_links(Director::baseFolder(), $file->Link());
+                $path = $file->Link();
 
-                header('Content-Type: ' . _mime_content_type($path));
+                $contents = $file->getString();
+
+                header('Content-Type: ' . $file->getMimeType());
                 header('Content-disposition: attachment; filename=' . $file->Name);
-                header('Content-Length: ' . filesize($path));
-                readfile($path);
-
+                header('Content-Length: ' . strlen($contents));
+                echo $contents;
             } else {
                 $dir = sys_get_temp_dir() . '/archives';
                 if (!file_exists($dir)) {
@@ -188,14 +178,6 @@ class QuickBlocksControllerExtension extends Extension
         return null;
     }
 
-    /**
-     * @link http://davidwalsh.name/create-zip-php
-     *
-     * @param DataList   $files
-     * @param string     $destination
-     * @param bool|false $overwrite
-     * @return bool
-     */
     private function create_zip($files, $destination = '', $overwrite = false)
     {
         //if the zip file already exists and overwrite is false, return false
@@ -208,7 +190,7 @@ class QuickBlocksControllerExtension extends Extension
         //cycle through each file
         foreach ($files->getIterator() as $file) {
             //make sure the file exists
-            if (file_exists(Controller::join_links(Director::baseFolder(), $file->Link()))) {
+            if ($file->exists()) {
                 $valid_files[] = $file;
             }
         }
@@ -227,7 +209,8 @@ class QuickBlocksControllerExtension extends Extension
 
             //add the files
             foreach ($valid_files as $file) {
-                $zip->addFile(Controller::join_links(Director::baseFolder(), $file->Link()), $file->Name);
+                //$zip->addFile(Controller::join_links(Director::baseFolder(), $file->Link()), $file->Name);
+                $zip->addFromString($file->Name, $file->getString());
             }
             $zip->close();
 
@@ -236,6 +219,7 @@ class QuickBlocksControllerExtension extends Extension
             return false;
         }
     }
+
 }
 
 function _mime_content_type($filename)

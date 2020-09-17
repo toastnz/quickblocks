@@ -1,0 +1,112 @@
+//------------------------------------------------------------------
+// Link Block
+//------------------------------------------------------------------
+
+@mixin LinkBlock {
+  .linkBlock {
+    
+    &__wrap {
+
+      &.xmd-up-2 {
+        .alignContent {
+          height: 35rem;
+          @include media($xmd) {
+            padding: $gutterWidth * 3;
+          }
+        }
+      }
+
+      &.xmd-up-3 {
+        .alignContent {
+          height: 25rem;
+          @include media($xmd) {
+            padding: $gutterWidth * 2;
+          }
+        }
+      }
+
+      &.xmd-up-4 {
+        .alignContent {
+          height: 20rem;
+        }
+      }
+
+      &__item {
+        display: block;
+        cursor: pointer;
+        color: $text;
+        margin-bottom: $gutterWidth * 2;
+        
+        @include active {
+
+          .media {
+            &:after {
+              opacity: 0.8;
+            }
+          }
+
+          .hoverContent {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        &__media {
+          position: relative;
+          width: 100%;
+          margin-bottom: $gutterWidth;
+          overflow: hidden;
+          background-color: $off-white;
+          
+          @include cover;
+          @include overlay($secondary, 0);
+
+          &__content {
+            opacity: 0;
+            position: relative;
+            z-index: 1;
+            transform: scale(1.1);
+
+            @include transition((opacity, transform));
+            
+            .alignContent {
+              padding: $gutterWidth;
+              
+              * {
+                color: $white;
+              }
+            }            
+          }
+        }
+
+        &__details {
+          margin-bottom: $gutterWidth;
+        }
+
+        &__link {
+          color: $primary!important;
+          font-size: 1.6rem;
+          @include transition(color);
+        }
+      }
+    }
+    
+    + .linkBlock.contentBlock {
+      margin-top: -5rem;
+
+      @include media($xmd) {
+        margin-top: -10rem;
+      }
+    }
+
+    &.contentBlock {
+      + .linkBlock.contentBlock {
+        margin-top: -5rem;
+
+        @include media($xmd) {
+          margin-top: -10rem;
+        }
+      }
+    }
+  }
+}

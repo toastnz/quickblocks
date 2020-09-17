@@ -8,6 +8,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\FieldType\DBHTMLText;
+use SilverStripe\Forms\DropdownField;
 
 /**
  * Class ImageBlock
@@ -19,11 +20,16 @@ use SilverStripe\ORM\FieldType\DBHTMLText;
 class ImageBlock extends QuickBlock
 {
     private static $singular_name = 'Image';
-    private static $plural_name = 'Images';
-    private static $table_name = 'ImageBlock';
+    private static $plural_name   = 'Images';
+    private static $table_name    = 'ImageBlock';
+    private static $icon          = 'quickblocks/images/image.png';
+
+    private static $db = [
+        'ContentWidth' => 'Boolean'
+    ];
 
     private static $has_one = [
-        'Image' => Image::class
+        'Image' => Image::class,
     ];
 
     private static $owns = [
@@ -38,7 +44,8 @@ class ImageBlock extends QuickBlock
         $this->beforeUpdateCMSFields(function ($fields) {
             $fields->addFieldsToTab('Root.Main', [
                 UploadField::create('Image', 'Image')
-                    ->setFolderName('Uploads/page-images')
+                           ->setFolderName('Uploads/page-images'),
+                DropdownField::create('ContentWidth', 'Width', [0 => 'Full Width', 1 => 'Content Width']),
             ]);
         });
 

@@ -12,3 +12,14 @@ SilverStripe\Assets\File:
     - Toast\QuickBlocks\FileExtension
 Toast\QuickBlocks\QuickBlock:
   better_buttons_enabled: false
+
+
+Toast\QuickBlocks\TestimonialBlock:
+  extensions:
+    - Toast\Extensions\TestimonialBlockExtension
+
+# Used to remove buttons from the DataObject.
+# NOTE: The documented getCMSActions and updateCMSActions do not actually work.
+SilverStripe\Forms\GridField\GridFieldDetailForm_ItemRequest:
+  extensions:
+    CmsActionsExtension: CmsActionsExtension

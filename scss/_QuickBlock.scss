@@ -1,0 +1,17 @@
+//------------------------------------------------------------------
+// Quick Block
+//------------------------------------------------------------------
+
+@mixin QuickBlock {
+	.quickBlock {
+		+ .imageBlock,
+		+ .textBlock,
+		+ .accordionBlock {
+			margin-top: -3rem;
+
+			@include media($xmd) {
+				margin-top: -8rem;
+			}
+		}
+	}
+}

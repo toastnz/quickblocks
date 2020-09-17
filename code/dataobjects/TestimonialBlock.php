@@ -2,6 +2,7 @@
 
 namespace Toast\QuickBlocks;
 
+use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
@@ -16,13 +17,15 @@ use SilverStripe\Forms\RequiredFields;
 class TestimonialBlock extends QuickBlock
 {
     private static $singular_name = 'Testimonial';
-    private static $plural_name = 'Testimonials';
-    private static $table_name = 'TestimonialBlock';
+    private static $plural_name   = 'Testimonials';
+    private static $table_name    = 'TestimonialBlock';
+    private static $icon          = 'quickblocks/images/testimonial.png';
 
     private static $db = [
         'Testimonial' => 'Text',
         'Attribution' => 'Varchar(100)',
-        'Location'    => 'Varchar(100)'
+        'Location'    => 'Varchar(100)',
+        'ShowSlider'      => 'Boolean'
     ];
 
     /**
@@ -34,7 +37,8 @@ class TestimonialBlock extends QuickBlock
             $fields->addFieldsToTab('Root.Main', [
                 TextareaField::create('Testimonial', 'Testimonial'),
                 TextField::create('Attribution', 'Name'),
-                TextField::create('Location', 'Location')
+                TextField::create('Location', 'Location'),
+                CheckboxField::create('ShowSlider', 'Show Slider'),
             ]);
         });
 

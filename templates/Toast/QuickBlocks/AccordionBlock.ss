@@ -1,25 +1,20 @@
-<div class="tabbedContent wysiwyg">
-    <div class="innerWrapSmall">
-
-        <% loop $GroupedItems.GroupedBy('GroupNumber') %>
-            <div class="tabbedContent__triggers flex">
-                <% loop $Children %>
-                    <a href="#" class="tabbedContent__triggers__item [ js-tabbed-content-trigger ] <% if $First && $Up.First %>active<% end_if %>" data-id="{$ID}">
-                        {$DisplayTitle.UpperCase}
-                        <div class="triangle"></div>
+<section class="accordionBlock contentBlock [ js-accordion ]">
+    <div class="accordionBlock__wrap row">
+        <div class="column">
+            <% loop $Items %>
+                <div class="accordionBlock__wrap__item">
+                    <a href="#" class="accordionBlock__wrap__item__heading [ js-accordion--trigger ]">
+                        <h5 class="accordionBlock__wrap__item__heading__title">$Heading</h5>
+                        <div class="plus"></div>
+                        <div class="plus"></div>
                     </a>
-                <% end_loop %>
-            </div>
-
-            <div class="tabbedContent__copy">
-                <% loop $Children %>
-                    <div class="tabbedContent__copy__item [ js-tabbed-content ]" <% if $First && $Up.First %>style="display:block;"<% end_if %> data-id="{$ID}">
-                        {$Content}
+                    <div class="[ js-accordion--target ]">
+                        <div class="accordionBlock__wrap__item__content">
+                            $Content
+                        </div>
                     </div>
-                <% end_loop %>
-            </div>
-
-        <% end_loop %>
-
+                </div>
+            <% end_loop %>
+        </div>
     </div>
-</div>
+</section>
