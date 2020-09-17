@@ -63,7 +63,7 @@ class VideoBlock extends QuickBlock
 
     public function getCMSValidator()
     {
-        $required = new RequiredFields(['Title', 'Video']);
+        $required = new RequiredFields(['Title']);
 
         $this->extend('updateCMSValidator', $required);
 
