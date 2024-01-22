@@ -24,6 +24,7 @@ use SilverStripe\Security\Member;
 use SilverStripe\ORM\DB;
 use SilverStripe\Versioned\Versioned;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\Security\Security;
 
 /**
  * Class QuickBlock
@@ -264,7 +265,7 @@ class QuickBlock extends DataObject
     public function canPublish($member = null)
     {
         if (!$member || !(is_a($member, Member::class)) || is_numeric($member)) {
-            $member = Member::currentUser();
+            $member = Security::getCurrentUser();
         }
 
         if ($member && Permission::checkMember($member, "ADMIN")) {
@@ -358,7 +359,7 @@ class QuickBlock extends DataObject
     public function canArchive($member = null)
     {
         if (!$member) {
-            $member = Member::currentUser();
+            $member = Security::getCurrentUser();
         }
 
         // Standard mechanism for accepting permission changes from extensions
