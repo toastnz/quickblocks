@@ -30,7 +30,7 @@
     "silverstripe/framework": "^5",
     "symbiote/silverstripe-gridfieldextensions": "^4",
     "toastnz/youtubefield": "dev-ss5",
-    "toastnz/linkable": "^2",
+    "toastnz/linkable": "^3",
     "undefinedoffset/sortablegridfield": "^2",
     "axllent/silverstripe-form-fields": "^1"
   }
